@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA1 Chapitre6</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Chapitre6 : Couche 4 (Couche transport)</h1>
+	</header>
+
+	<ol>
+		<section>
+			<h2><li>Introduction</li></h2>
+			<p>
+				Nous avons vu dans les chapitres précédents comment TCP/IP envoie les informations de l’émetteur au destinataire. La couche transport ajoute à ce mécanisme la notion de « qualité de service », à savoir la garantie d’un acheminement fiable des informations au travers du réseau. 
+			</p>
+		</section>
+
+		<section>
+				<h2><li>TCP et UDP</li></h2>
+			<p>
+				La pile de protocoles TCP/IP comprend 2 protocoles de couche 4 : TCP et UDP 
+			</p>
+			<p>
+				TCP est un protocole orienté connexion, c'est-à-dire qu’il associe au transport des informations la notion de qualité en offrant les services suivants :
+				<ul>
+					<li>Fiabilité </li>
+					<li>Division des messages sortants en segments </li>
+					<li>Ré assemblage des messages au niveau du destinataire </li>
+					<li>Ré envoi de toute donnée non reçue</li>
+				</ul>
+			</p>
+			<p>
+				Segments : PDU de couche 4
+			</p>
+			<p>
+				UDP est lui un protocole non orienté connexion, c'est-à-dire qu’il n’offre pas de fonction de contrôle du bon acheminement : 
+				<ul>
+					<li>Aucune vérification logicielle de la livraison des messages</li>
+					<li>Pas de réassemblage des messages entrants </li>
+					<li>Pas d‘accusé de réception</li>
+					<li>Aucun contrôle de flux</li>
+				</ul>
+			</p>
+			<p>
+				Cependant, UDP offre l’avantage de nécessiter moins de bande passante que TCP. Il peut donc être intéressant d’utiliser ce protocole pour l’envoi de messages ne nécessitant pas de contrôle de qualité. 
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image23.PNG" alt="Image non disponible">
+				<figcaption>TCP et UDP dans la couche transport.</figcaption>
+			</figure>
+
+			<p>
+				Le protocole TCP encapsule les informations provenant de la couche supérieure dans des segments dont voici les principales informations : 
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image24.PNG" alt="Image non disponible">
+				<figcaption>Structure d'un datagramme UDP.</figcaption>
+			</figure>
+
+			<br>
+
+			<table>
+				<caption>Tableau qui décrit les champs du datagramme UDP.</caption>
+				<tr><th>Champs</th><th>Descriptions</th></tr>
+				<tr><td>Port sourcePort de destination</td><td>Numéro du port appelant </td></tr>
+				<tr><td>Port de destination</td><td>Numéro du port appelé </td></tr>
+				<tr><td>Numéro de séquence</td><td>Numéro utilisé pour assurer le séquençage correct des données entrantes</td></tr>
+				<tr><td>Nº d'accusé de réception</td><td>Prochain octet TCP attendu </td></tr>
+				<tr><td>Somme de contrôle</td><td>Somme de contrôle calculée des champs d'en-tête et de données </td></tr>
+				<tr><td>Données</td><td>Données du protocole de couche supérieure </td></tr>
+			</table>
+			<p>
+				UDP étant un protocole non orienté connexion, il dispose d’un en-tête de taille réduite par rapport aux en-têtes des segments TCP : 
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image25.PNG" alt="Image non disponible">
+				<figcaption>Structure d'un datagramme TCP.</figcaption>
+			</figure>
+
+			<br>
+
+			<p>
+				Le protocole UDP est conçu pour les applications ne devant pas assembler de séquences de segments. Il laisse aux protocoles de la couche application le soin d’assurer la fiabilité. 
+			</p>
+		</section>
+
+		<section>
+				<h2><li>Méthode de connexion TCP</li></h2>
+			<p>
+				Un service orienté connexion comportent 3 points importants : 
+				<ul>
+					<li>Un chemin unique entre les unités d’origine et de destination est déterminé </li>
+					<li>Les données sont transmises de manière séquentielle et arrivent à destination dans l’ordre</li>
+					<li>La connexion est fermée lorsqu’elle n’est plus nécessaire </li>
+				</ul>
+			</p>
+			<p>
+				Les hôtes TCP établissent une connexion en 3 étapes, appelée aussi « connexion ouverte » : 
+			</p>
+			<p>
+				L’émetteur envoie un paquet avec un numéro de séquence initial (x) avec un bit dans l’en-tête pour indiquer une demande de connexion. 
+			</p>
+			<p>
+				Le destinataire le reçoit, consigne le numéro de séquence initial, répond par un accusé de réception «x+1 » et inclut son propre nº de séquence (y). 
+			</p>
+			<p>
+				L’émetteur reçoit x+1 et renvoie y+1 pour dire au destinataire que la réception s’est bien passée. 
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image26.PNG" alt="Image non disponible">
+				<figcaption>Description de la méthode de connexion TCP.</figcaption>
+			</figure>
+
+		</section>
+
+	</ol>
+
+</body>
+</html>

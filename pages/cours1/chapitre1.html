@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA1 Chapitre1</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Chapitre1 : Introduction aux réseaux</h1>
+	</header>
+
+	<section>
+		<p>
+			A l’origine, un réseau était un rassemblement de personnes ou d’objets. De nos jours on entend par réseau, les réseaux d’entreprises, qui connectent différentes machines afin de pouvoir les faire communiquer entre elles. Que ce soit pour le partage de fichiers ou l’envoi de messages, la plupart des entreprises sont aujourd’hui dotées d’un réseau afin d’être plus efficientes (il est quand même plus simple de transférer un fichier par Internet que de l’envoyer sur CD par la poste). 
+		</p>
+		<p>
+			Au cours de cet essentiel nous allons étudier comment les informations (fichier, données, etc.) circulant sur des réseaux de petite taille (PAN, LAN) ou plus grande taille (MAN, WAN), ainsi que la connectique utilisée. 
+		</p>
+	</section>
+
+	<ol>
+		<section>
+		
+			<h2><li>Connexion à un réseau</h2>
+				<ol>
+					<h3><li>Matériel</li></h3>
+				</ol>
+			</li>
+
+			<p>
+				Un ordinateur est composé de divers éléments. Avant de connecter votre ordinateur sur un réseau, il est nécessaire que vous connaissiez ce qui le compose, afin qu’en cas de panne vous sachiez identifier si cela provient du réseau ou non. De plus, cela vous permettra d’être plus familier avec une machine et pourra sûrement vous aider en cas de panne d’un ordinateur. 
+			</p>
+			<p>
+				Voici la liste des différents composants de votre pc, ainsi que leurs descriptions :
+			</p>
+
+			<table>
+				<caption>Descriptions des différents composants d'un pc.</caption>
+				<tr><th>Liste des composants</th><th>Description </th></tr>
+				<tr><td>Carte mère </td><td>La carte électronique principale dans un ordinateur.  La carte mère contient les bus, le microprocesseur, et des circuits intégrés utilisés pour commander tous les périphériques extérieurs tels que le clavier,  l'affichage graphique, les ports série et les  ports parallèles, ou encore les ports USB ou Firewire. </td></tr>
+				<tr><td>Processeur </td><td>Puce de silicium effectuant tous les calculs arithmétiques et logiques dans un ordinateur. Il gère aussi les flux d’informations dans un ordinateur. </td></tr>
+				<tr><td>RAM (Random Access Memory) </td><td>Mémoire vive permettant de stocker les instructions en attente de traitement, autant que les données temporaires. Une fois l’ordinateur éteint cette mémoire se vide, contrairement au disque dur. </td></tr>
+				<tr><td>Disque Dur </td><td>Aussi appelé HDD (Hard Disk Drive en Anglais). Disque de stockage de données. C’est sur le disque dur que vous enregistrez vos données. Contrairement à la RAM, le disque dur conserve vos données même si l’ordinateur est éteint.</td></tr>
+				<tr><td>Bus </td><td>Canal de communication interne à un ordinateur par lequel transitent les données entre les différents composants. </td></tr>
+				<tr><td>Alimentation</td><td>Composant fournissant l’alimentation nécessaire à votre ordinateur.</td></tr>
+				<tr><td>ROM (Read Only Memory)</td><td>Mémoire accessible uniquement en lecture une fois la mémoire écrite. Ce genre de composant sert à stocker des informations qui ne doivent pas être effacées. </td></tr>
+				<tr><td>Lecteur de CD-ROM</td><td>Dispositif permettant de lire des CD-ROM </td></tr>
+			</table>
+
+			<p>
+				Il existe aussi des composants de fond de panier (backplane en Anglais) qui permettent d’ajouter des extensions à votre carte mère. 
+			</p>
+
+			<table>
+				<caption>Descriptions des composants de fond de panier (backplane).</caption>
+				<tr><th>Liste des composants</th><th>Descriptions </th></tr>
+				<tr><td>Carte Vidéo</td><td>Carte d’extension permettant d’afficher un visuel sur un moniteur </td></tr>
+				<tr><td>Carte Son </td><td>Carte d’extension permettant de manipuler et de produire des sons via des hauts parleurs ou tout autre périphérique de sortie sonore (casque, etc.) </td></tr>
+				<tr><td>Carte Réseau (NIC/ Network Interface Card) </td><td>Carte d’extension permettant de relier physiquement un ordinateur à un réseau (LAN, WAN, etc.) </td></tr>
+				<tr><td>USB (Universal Serial Bus) </td><td>Port de connexion à chaud, vous permettant de brancher votre périphérique même si votre ordinateur est allumé. A noter que les transferts s’effectuent à haute vitesse. </td></tr>
+				<tr><td>Firewire </td><td>Norme concurrente de l’USB permettant aussi de connecter à chaud divers appareils et permettant des transferts à hautes vitesses. </td></tr>
+			</table>
+
+		</section>
+
+		<section>
+			<h2><li>Systèmes de numération</h2>
+				<p>
+					Lorsque les ordinateurs ont été créés, ils étaient fort coûteux du fait du nombre de composants qu’ils nécessitaient, en plus de leurs tailles impressionnantes. 
+				</p>
+				<p>
+					Un ordinateur pourrait donc se résumer à un ensemble de commutateurs électriques pouvant prendre deux états :
+				</p>
+				<ul>
+					<li>En fonction (le courant passe)</li>
+					<li>Hors fonction (le courant ne passe pas) </li>
+				</ul>
+				<p>Pour les différentes tâches qu’ils effectuent de nos jours, les ordinateurs utilisent le système de numérotation binaire. </p>
+
+				<ol>
+					<h3><li>Représentation des données informatiques </li></h3>
+
+					<p>
+						Du fait que les humains fonctionnent avec le système décimal, l'ordinateur doit pouvoir effectuer cette traduction afin de pouvoir traiter les informations des utilisateurs. Ces nombres binaires sont exprimés en « bits », qui constituent la plus petite unité d’information d’un ordinateur.
+					</p>
+					<p>
+						Un groupe de 8 bits correspond à un octet (bytes en anglais), qui représente un caractère de données. Pour un ordinateur, un octet représente également un emplacement de mémoire adressable. 
+					</p>
+					<p>
+ 						Par exemple, la représentation binaire des caractères du clavier et des caractères de contrôle est donnée dans le tableau des codes ASCII (American Standard Code for Information Interchange) dont voici un extrait : 
+					</p>
+					<table>
+						<caption>Extrait du tableau des codes ASCII.</caption>
+						<tr><th>Décimal</th><th>Hexadécimal</th><th>Octal</th><th>Binaire</th><th>Char</th></tr>
+						<tr><td>0</td><td>0</td><td>000</td><td>00000000</td><td>NUL</td></tr>
+						<tr><td>1</td><td>1</td><td>001</td><td>00000001</td><td>SOH</td></tr>
+						<tr><td>2</td><td>2</td><td>002</td><td>00000002</td><td>STX</td></tr>
+						<tr><td>3</td><td>3</td><td>003</td><td>00000003</td><td>ETX</td></tr>
+						<tr><td>4</td><td>4</td><td>004</td><td>00000004</td><td>EOT</td></tr>
+						<tr><td>7</td><td>7</td><td>007</td><td>00000007</td><td>BEL</td></tr>
+					</table>
+					<p>
+						Ce tableau nous présente les équivalences entre différents systèmes de numérotation que nous allons étudier par la suite. Si nous regardons la colonne « binaire », nous voyons que tous les caractères sont exprimés grâce à une combinaison de 8 bits pouvant prendre la valeur 0 ou la valeur 1.
+					</p>
+					<p>
+						Du fait de la taille des informations contenues dans les ordinateurs actuels, différentes unités de mesure ont été mises en place : 
+					</p>
+					<table>
+						<caption>Descriptions différentes unités de mesure.</caption>
+						<tr><th>Unité</th><th>Définition</th><th>Octets</th><th>Bits </th><th>Exemples</th></tr>
+						<tr><td>Bit (b)</td><td>Chiffre binaire 1 ou 0 </td><td>1 bit</td><td>1 bit</td><td>+5 volts ou 0 volts</td></tr>
+						<tr><td>Octet (o)</td><td>8 bits</td><td>1 octet</td><td>8 bits </td><td>01001100 correspond à la lettre L en ASCII </td></tr>
+						<tr><td>Kilo-octet (Ko)</td><td>1 kilo-octet =1024 octets </td><td>1024 octets</td><td>8192 bits </td><td>mail type : 2ko premiers PC : 64Ko de Ram</td></tr>
+						<tr><td>Méga-octet (Mo) </td><td>1 méga-octet =1024 kilo-octets </td><td>1 048 576 octets</td><td>8 388 608 bits </td><td>disquette = 1,44 Mo CD-ROM = 650 Mo </td></tr>
+						<tr><td>Giga-octet (Go)</td><td>1 gigaoctet =1024 méga-octets </td><td>1 048 576 kilo-octets</td><td>Env. 8 milliards de bits </td><td>disque dur type = 4 Go</td></tr>
+						<tr><td>Téraoctet (To) </td><td>1 téraoctet =1024 giga-octets</td><td>1 048 576 mégaoctets </td><td>Env. 8 trillions de bits</td><td>quantité théorique de données transmissibles par une fibre optique en 1 seconde</td></tr>
+					</table>
+
+					<h3><li>Systèmes de numération </li></h3>
+
+					<p>
+						L'homme est habitué dès le plus jeune âge à utiliser un système de numération pour représenter des valeurs. Ce système comporte 10 symboles : 0 1 2 3 4 5 6 7 8 9 et se nomme « système de numération décimal ». 
+					</p>
+					<p>
+						Ce système constitue la base du calcul pour les hommes, principalement parce que ces derniers ont 10 doigts. Nous utiliserons d'ailleurs ce système comme système de référence dans la suite du cours. Cependant, il existe d'autres systèmes de numérotation pouvant représenter des valeurs. 
+					</p>
+					<p>
+						Une valeur est de ce fait une notion abstraite pouvant être exprimée selon différents systèmes : 
+					</p>
+					<p>
+						Un ordinateur, lui, utilise un système de numération basé sur la représentation du passage de courant, 0 (fermé) ou 1 (ouvert), dans un circuit électrique. Il faut se rappeler qu’à l’époque de l’expansion des ordinateurs, les composants à deux états ont participé à simplifier le traitement pour un ordinateur.
+					</p>
+					<p>
+						Autre système, le système hexadécimal, comportant 16 symboles 0 1 2 3 4 5 6 7 8 9 A B C D E F. Les 6 lettres correspondent en décimal à 10 11 12 13 14 15.Ce système est utilisé pour simplifier les valeurs décimales trop grandes. 
+					</p>
+					<p>
+						Il est évident ici de l’utilité de disposer de plusieurs systèmes d’informations. Une fois que l’on est familiarisé avec ces différents systèmes, la valeur A2F54B est plus facile à manipuler ou à mémoriser que son équivalent décimal. 
+					</p>
+
+					<h3><li>Conversions </li></h3>
+					<p>
+						Entre ces bases il existe des méthodes de conversions : 
+					</p>
+					<ul>
+						<li>Décimal > Binaire </li>
+						<li>Décimal > Hexadécimal </li>
+						<li>Binaire > Décimal</li>
+						<li>Hexadécimal > Décimal</li>
+						<li>Binaire > Hexadécimal </li>
+						<li>Hexadécimal > Binaire</li>
+					</ul>
+					<p>
+						Pour convertir du décimal vers une autre base, on utilise cette formule : 
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image1.PNG" alt="Image non disponible">
+						<figcaption>Organigramme conversion du décimal vers une d'autre base.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						On divise notre nombre par la base à laquelle on veut le convertir et on continue tant que ce nombre n’est pas inférieur à la base. Il suffit ensuite de prend les différents restes et de les concaténer du dernier vers le premier (de droite à gauche). 
+					</p>
+					<p>
+						La conversion vers une base décimale se fait en décomposant le nombre en digit (chaque élément de la valeur). Et ensuite on multiplie chaque digit par la puissance de la base en commençant par celui le plus à droite avec une puissance zéro (si le nombre est une valeur hexadécimale alors on multipliera les digits par 160, 161, 162, etc.). C’est donc l’ensemble des valeurs des différents digits ainsi multipliés qui forme la valeur en décimal, comme le montre cette formule :
+					</p>
+
+					<div>
+						&Sigma;<sub>i=0</sub><sup>i=n-1</sup>(base<sup>i</sup> x valeur du digit)
+					</div>
+
+					<p>
+						Enfin, pour convertir du binaire vers l’hexadécimal, on prend un groupe de 4 bits et on les convertit en hexadécimal via les puissances de 2. Pour l’inverse, il suffit de faire exactement la même chose en utilisant la première formule comme si l’on convertissait en base 2, en utilisant des groupes de 4 bits ici aussi. 
+					</p>
+					<table>
+						<caption>Tableau de conversion du binaire vers l’hexadécimal.</caption>
+						<tr><th>Hexadécimal</th><th>Binaire</th><th>Hexadécimal</th><th>Binaire</th></tr>
+						<tr><td>0</td><td>0000</td><td>8</td><td>1000</td></tr>
+						<tr><td>1</td><td>0001</td><td>9</td><td>1001</td></tr>
+						<tr><td>2</td><td>0010</td><td>A</td><td>1010</td></tr>
+						<tr><td>3</td><td>0011</td><td>B</td><td>1011</td></tr>
+						<tr><td>4</td><td>0100</td><td>C</td><td>1100</td></tr>
+						<tr><td>5</td><td>0101</td><td>D</td><td>1101</td></tr>
+						<tr><td>6</td><td>0110</td><td>E</td><td>1110</td></tr>
+						<tr><td>7</td><td>0111</td><td>F</td><td>1111</td></tr>
+					</table>
+
+				</ol>
+		</section>
+
+		<section>
+			<h2><li>Terminologie de base des réseaux </li></h2>
+			<p>
+				Un réseau est par définition un ensemble d’entités communicant entre elles. Nous allons nous intéresser dans le cadre de ce cours à ce que l’on nomme des réseaux de données ou réseaux informatiques. Ces réseaux sont apparus suite à une demande des entreprises qui recherchaient une méthode pour éviter la duplication des imprimantes et une simplification des communications de données entre des équipements informatiques. 
+			</p>
+			<p>
+				La première classification de réseau que nous allons faire s’établit sur la base des distances entre les communicants.
+			</p>
+			<ul>
+				<li>
+					Les réseaux LAN : 
+					<ul>
+						<li>Couvrent une région géographique limitée</li>
+						<li>Permettent un accès multiple aux médias à large bande</li>
+						<li>Ils assurent une connectivité continue aux services locaux (Internet, messagerie, etc.) </li>
+						<li>
+							Ils relient physiquement des unités adjacentes 
+							<ul>
+								<li>Exemple : Une salle de classe</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					Les réseaux WAN :
+					<ul>
+						<li>Couvrent une vaste zone géographique </li>
+						<li>Permettent l’accès par des interfaces séries plus lentes</li>
+						<li>Assurent une connectivité pouvant être continue ou intermittente</li>
+						<li>
+							Relient des unités dispersées à une échelle planétaire 
+							<ul>
+								<li>Exemple : Internet </li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+			<p>
+				Ces types de réseaux sont les plus courants, néanmoins il en existe d’autres, à l’instar des MAN (Metropolitan Area Network), qui connectent un ou plusieurs LANs dans une même région géographique. Ce type de réseau est en émergence du fait du développement des réseaux Wireless. On les trouve souvent en ville, situés dans les endroits publics. 
+			</p>
+			<p>
+				Un autre type de réseau est le SAN (Storage Area Network) qui est une zone de stockage et de transfert de données.
+			</p>
+			<p>
+				Les SANs : 
+				<ul>
+					<li>Utilisent un réseau différent des hôtes afin de ne pas encombrer le trafic (ce type de réseau génère un important trafic).</li>
+					<li>Permettent un taux de transfert nettement plus élevé entre serveurs, afin de permettre une réplication ou un mouvement des données plus aisé.</li>
+					<li>Permettent de dupliquer des données entre serveurs jusqu'à une distance de 10 km. </li>
+					<li>Utilisent diverses technologies qui permettent de ne pas tenir compte du système utilisé.</li>
+				</ul>
+			</p>
+			<p>
+				Un VPN (Virtual Private Network) est un réseau privé qui est construit dans une infrastructure de réseau public tel qu’Internet. Par Internet, un tunnel sécurisé peut être mis en place entre le PC de l'utilisateur et d'un routeur VPN se trouvant au siège social de l'entreprise, afin que celui-ci accède de chez lui au réseau de son entreprise.
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Unités de mesure</li></h2>
+
+			<p>
+				La bande passante d’un réseau représente sa capacité, c'est-à-dire la quantité de données pouvant circuler en une période donnée sur ce réseau. Celle-ci se mesure en bits par seconde. Du fait de la capacité des supports réseau actuels, les différentes conventions suivantes sont utilisées : 
+			</p>
+			<table>
+				<caption>Tableau des différentes bande passantes et leurs unités.</caption>
+				<tr><th>Unité de bande passante</th><th>Abréviation</th><th>Équivalence </th></tr>
+				<tr><td>Bits par seconde</td><td>bits/s</td><td>1 bit/s = unité fondamentale </td></tr>
+				<tr><td>Kilobits par seconde</td><td>Kbits/s</td><td>1kbit/s = 1000 bits/s </td></tr>
+				<tr><td>Mégabits par secondeMbits/s</td><td>Mbits/s</td><td>1Mbit/s = 1 000 000 bits/s </td></tr>
+				<tr><td>Gigabits par seconde</td><td>Gbits/s</td><td>1Gbit/s = 1 000 000 000 bits/s </td></tr>
+			</table>
+			<p>
+				À cette notion de bande s’ajoute celle de débit. Le débit est la bande passante réelle, mesurée à un instant précis de la journée. Ce débit est souvent inférieur à la bande passante, cette dernière représentant le débit maximal du média. Cette différence peut avoir pour raisons : 
+				<ul>
+					<li>des unités d’interconnexion de réseaux et de leur charge </li>
+					<li>du type de données transmises </li>
+					<li>de la topologie du réseau </li>
+					<li>du nombre d’utilisateurs </li>
+					<li>de l’ordinateur, de l’utilisateur et du serveur</li>
+					<li>des coupures d’électricité et autres pannes </li>
+				</ul>
+			</p>
+			<p>
+				De ce fait, le temps de téléchargement d’un fichier peut se mesurer de la manière suivante : 
+				<ul>
+					<li>Temps de téléchargement théorique(s)=Taille du fichier/bande passante</li>
+					<li>Temps de téléchargement réel (s) = Taille du fichier (b) / débit </li>
+				</ul>
+			</p>
+		</section>
+
+	</ol>
+
+</body>
+</html>

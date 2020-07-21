@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA2 Chapitre3</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+	<header>
+		<h1>Chapitre3 : Informations et accès aux autres dispositifs</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>CDP</h2>
+
+				<p>
+					Le protocole CDP (Cisco Discovery Protocol) est un protocole propriétaire Cisco permettant la découverte des voisins. 
+				</p>
+				<p>
+					Il permet d’obtenir des informations sur les dispositifs connectés au routeur local. Ce protocole devient très utile lorsque l’on n’a aucun moyen (visuellement ou par accès de configuration) pour analyser la topologie réseau. 
+				</p>
+
+				<ol>
+					<h3><li>Théorie</li></h3>
+					<p>
+						Le protocole CDP permet principalement de connaître les plateformes et les protocoles utilisés par les dispositifs voisins (c’est-à-dire directement connectés). 
+					</p>
+					<p>
+						Voici les différentes caractéristiques du protocole CDP :
+						<ul>
+							<li>Existe depuis IOS 10.3 </li>
+							<li>Actif par défaut </li>
+							<li>Fonctionne au niveau de la couche 2 (permet donc d’obtenir des informations sur les voisins même si les protocoles de couche 3 sont différents ou non configurés)</li>
+							<li>Trames CDP multicast envoyées toutes les 60 secondes</li>
+						</ul>
+					</p>
+
+					<table>
+						<caption>Description des différentes caractéristiques du protocole CDP</caption>
+						<tr><th>Information</th><th>Description</th></tr>
+						<tr><td>ID de dispositif</td><td>Nom d’hôte et nom de domaine du voisin</td></tr>
+						<tr><td>Liste d’adresses</td><td>Une adresse pour chaque protocole routé du voisin</td></tr>
+						<tr><td>Identifiant de port</td><td>Interface du voisin utilisée pour se connecter au routeur local</td></tr>
+						<tr><td>Liste de capacités</td><td>Fonction du dispositif voisin (routeur, pont, commutateur, etc.)</td></tr>
+						<tr><td>Version d’IOS</td><td>Version d’IOS du voisin</td></tr>
+						<tr><td>Plateforme</td><td>Type de dispositif (Cisco 2620XM, Catalyst 2950, etc.)</td></tr>
+
+					</table>
+
+					<h3><li>Configuration </li></h3>
+
+					<p>
+						La configuration de CDP est très simple, et se résume à ces commandes :
+						<ul>
+							<li>
+								<strong>[no] cdp run</strong>
+								<ul>
+									<li>Mode de configuration globale</li>
+									<li>Active/désactive le protocole CDP pour tout le routeur</li>
+									<li>Actif par défaut</li>
+								</ul>
+							</li>
+
+							<li>
+								<strong>[no] cdp enable</strong>
+								<ul>
+									<li>Mode de configuration d’interface</li>
+									<li>Active/désactive le protocole CDP pour cette interface</li>
+									<li>Actif par défaut sur toutes les interfaces fonctionnelles</li>
+								</ul>
+							</li>
+
+							<li>
+								<strong>cdp timer {temps}</strong>
+								<ul>
+									<li>Mode de configuration globale </li>
+									<li>Spécifie l’intervalle de temps en secondes pour l’émission des trames CDP</li>
+									<li>Temps par défaut : 60 secondes</li>
+								</ul>
+							</li>
+
+							<li>
+								<strong>cdp holdtime {temps} </strong>
+								<ul>
+									<li>Mode de configuration globale</li>
+									<li>Spécifie le temps en secondes avant suppression d’une information non rafraîchie</li>
+									<li>Temps par défaut : 180 secondes</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+					<h3><li>Visualisation et résolution de problèmes</li></h3>
+
+					<p>
+						Voici les commandes utilisées pour afficher les informations obtenues grâce à CDP : 
+						<ul>
+							<li><strong>show cdp :</strong> Affiche les compteurs de temps pour CDP</li>
+							<li><strong>show cdp interface [{type} {numéro}] :</strong> Affiche les interfaces sur lesquelles CDP est activé</li>
+							<li><strong>show cdp entry {nom | *} :</strong> Affiche les informations d’un ou des voisins</li>
+							<li><strong>show cdp neighbors [detail] :</strong> Affiche la liste des voisins CDP ainsi que les informations les concernant</li>
+							<li><strong>show cdp traffic :</strong> Affiche les compteurs de trafic CDP</li>
+							<li><strong>clear cdp counters :</strong> Réinitialise les compteurs de trafic CDP</li>
+							<li><strong>clear cdp table :</strong> Vide la table d’informations CDP</li>
+
+						</ul>
+					</p>
+
+				</ol>
+		</section>
+
+		<section>
+			<h2><li>Telnet</h2>
+
+				<ol>
+					<h3><li>Théorie</li></h3>
+					<p>
+						Telnet est un protocole faisant partie intégrante de la pile de protocole TCP/IP et fonctionnant au niveau de la couche application du modèle OSI. Il offre un moyen d’accès distant aux dispositifs réseaux sous la forme d’un terminal virtuel (VTY). 
+					</p>
+					<p>
+						La communication réseau s’effectue à l’aide du protocole TCP sur le port 23. 
+					</p>
+					<p>
+						Telnet est utilisé à la fois pour l’accès distant pour configuration ainsi qu’à des fins de tests et de résolution de problèmes. Ce dernier point sera étudié dans le chapitre correspondant. 
+					</p>
+
+					<h3><li>Commandes et utilisation</li></h3>
+
+					<p>
+						L’accès Telnet s’effectue au travers d’une ligne VTY. Un tel accès est par conséquent possible que si au moins une ligne VTY est correctement configurée et libre d’accès. 
+					</p>
+					<p>
+						Pour rappel, chaque routeur Cisco dispose d’un total de 5 ou 16 lignes VTY (dépend du modèle et de l’IOS).
+					</p>
+					<p>
+						Les commandes et combinaisons de touches liées à l’utilisation de Telnet sont les suivantes :
+					</p>
+
+					<table>
+						<caption>Tableau des commandes d'accès Telnet s’effectue au travers d’une ligne VTY</caption>
+						<tr><th>telnet {IP | nom} [tcp_port_number]</th><td>Etablir une session Telnet avec l’hôte correspondant à l’IP ou au nom précisé (<strong>tcp_port_number</strong> permet d’expliciter le numéro de port TCP à utiliser) </td></tr>
+						<tr><th>connect {IP | nom}</th><td>Identique à <strong>telnet</strong></td></tr>
+						<tr><th>{IP | nom}</th><td>Identique à <strong>telnet</strong></td></tr>
+						<tr><th>exit</th><td>Fermeture de la session Telnet avec déconnexion (déconnecté par défaut après 10 minutes d’inactivité)</td></tr>
+						<tr><th>disconnect</th><td>Identique à <strong>exit</strong></td></tr>
+						<tr><th>CTRL+MAJ+6 puis X</th><td>Suspendre la session Telnet en cours et la mettre en tâche de fond (reprise avec la touche <strong>Entrée</strong> si une seule session est en tâche de fond, sinon utiliser la commande <strong>resume</strong>)</td></tr>
+						<tr><th>show sessions</th><td>Afficher la liste des sessions en cours</td></tr>
+						<tr><th>resume {numéro}</th><td>Reprend la session Telnet précisée (<strong>numéro</strong> correspond à celui fournit par la commande <strong>show sessions</strong>) </td></tr>
+					</table>
+
+					<br>
+
+					<p>
+						La combinaison de touches CTRL+MAJ+6 ne fonctionne qu’avec un clavier QWERTY. 
+					</p>
+					<p>
+						On peut observer qu’une erreur dans l’écriture d’une ligne de commande quelconque depuis le mode privilégié pourrait faire croire à IOS que l’on tente d’établir une session Telnet vers un hôte ayant pour nom notre commande erronée.
+					</p>
+					<p>
+						Cela aurait pour impact de lancer une résolution DNS, qui pourrait durer jusqu’à expiration du timeout, pour obtenir l’adresse IP de cet hôte fictif. L’une des solutions pour remédier à ce problème est de désactiver le service DNS sur le routeur si on ne l’utilise pas.
+					</p>
+
+				</ol>
+
+		</section>
+
+	</ol>
+
+</body>
+</html>

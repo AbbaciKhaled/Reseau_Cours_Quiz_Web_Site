@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA3 Chapitre1</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+	<header>
+		<h1>Chapitre1 : Routage Classless</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Introduction au routage Classless</li></h2>
+
+			<p>
+				Au début des années 90, Internet subissait une croissance exponentielle annonçant un épuisement des adresses IPv4, notamment celles de classe B.
+			</p>
+			<p>
+				Cette pénurie d’adresse est principalement due au découpage fixe de l'espace d'adressage total IPv4 en classes (classe A, classe B, classe C) qui fige le nombre de réseaux possibles et le nombre d'hôtes maximum par réseau. 
+			</p>
+			<p>
+				En effet, lorsque l’on utilise un <strong>adressage classful</strong>, les masques de sous-réseaux ne sont pas envoyés sur le réseau. Les équipements réseaux utilisent donc des masques de sous-réseaux par défaut qui sont les suivants : 
+				<ul>
+					<li><strong>Classe A :</strong> 255.0.0.0 ou /8</li>
+					<li><strong>Classe B :</strong> 255.255.0.0 ou /16</li>
+					<li><strong>Classe C :</strong> 255.255.255.0 ou /24</li>
+				</ul>
+			</p>
+			<p>
+				Il est dans ce cas impossible de créer des sous-réseaux et de former des groupes d’utilisateur de différentes tailles au sein d’un réseau d’entreprise.  
+			</p>
+			<p>
+				Ce problème est résolu avec l’utilisation d’un <strong>adressage classless</strong> (sans classe) qui permet d’envoyer le masque de sous-réseau utilisé aux autres équipements et de ce fait, de créer des sous-réseaux de taille variable.
+			</p>
+			<p>
+				Le CIDR et le VLSM sont des exemples de procédures utilisant un adressage classless. Bien que complémentaires, celles-ci sont différentes. Le VLSM peut d’ailleurs être vu comme une extension du CIDR au niveau d’une organisation. 
+			</p>
+			<p>
+				Le VLSM permet en effet d’éviter le gaspillage d’adresse au sein d’une organisation en utilisant des masques de taille variable, tandis que le CIDR permet de diminuer significativement le nombre d’entrées des tables de routage en utilisant des agrégations de routes. 
+			</p>
+			<p>
+				Il existe cependant des règles à suivre concernant la création et l’utilisation de sous-réseaux. Ces règles sont régies par les RFC 950 (règle du 2<sup>n</sup>-2) et RFC 1878 (règles du 2<sup>n</sup>-1 et du 2<sup>n</sup>) : 
+				<ul>
+					<li>
+						<strong>Règle du 2<sup>n</sup> - 2 &rarr;</strong> impossible d’utiliser le premier sous-réseau ainsi que le dernier sous-réseau
+					</li>
+					<li>
+						<strong>Règle du 2<sup>n</sup> - 1 &rarr;</strong> impossible d’utiliser le premier sous-réseau 
+					</li>
+					<li>
+						<strong>Règle du 2<sup>n</sup> &rarr;</strong> utilisation de tous les sous-réseaux 
+					</li>
+				</ul>
+			</p>
+			<p>
+				L’utilisation d’une de ces règles par rapport à une autre dépend uniquement des capacités techniques des équipements. De nos jours la majorité des réseaux utilisent la règle du 2n puisqu’elle permet de limiter au maximum le gaspillage d’adresses IP. 
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>CIDR</li></h2>
+
+			<p>
+				L'expansion d'Internet a entraîné l'augmentation de la taille des tables de routage sur de nombreux routeurs, notamment les routeurs des fournisseurs d’accès à Internet.  
+			</p>
+			<p>
+				Pour alléger de manière considérable ces tables de routage, une solution permettant d’agréger plusieurs routes en une seule a dû être mise en place : c’est le principe du CIDR (Classless Inter-Domain Routing).
+			</p>
+			<p>
+				Pour ce faire, une comparaison binaire de l’ensemble des adresses à agréger est nécessaire. Il faut en effet arriver à déterminer les bits de la partie réseau qui sont en commun dans toutes ces adresses et mettre à zéro tous les bits restant. 
+			</p>
+			<p>
+				De cette manière une délimitation entre la partie réseau commune et le reste de l’adresse sera effectuée. Celle-ci permettra de déterminer l’adresse agrégée ainsi que le nouveau masque de sous-réseau à utiliser. 
+			</p>
+			<p>
+				L’exemple suivant illustre l’utilisation d’une agrégation de quatre adresses réseaux en une seule adresse. Il faut en effet agréger les 4 réseaux ci-dessous : 
+				<ul>
+					<li>10.3.4.0 255.255.255.0 (ou /24) </li>
+					<li>10.3.5.0 255.255.255.0 (ou /24) </li>
+					<li>10.3.6.0 255.255.255.0 (ou /24)</li>
+					<li>10.3.7.0 255.255.255.0 (ou /24) </li>
+				</ul>
+			</p>
+			<p>
+				Processus d’agrégation (ou summarization) de routes en une seule : 
+			</p>
+
+			<figure>
+				<img src="../../images/cours3/image1.PNG" alt="Image non disponible">
+				<figcaption>Processus de summarization de routes en une seule.</figcaption>
+			</figure>
+
+			<p>
+				Cependant l'emploi de CIDR n'est possible que si : 
+				<ul>
+					<li>Le protocole de routage utilisé transporte les préfixes étendus dans ses mises à jour.</li>
+					<li>Les routeurs implémentent un algorithme de la correspondance la plus longue. </li>
+					<li>Un plan d'adressage hiérarchique est appliqué pour l'assignation des adresses afin que l'agrégation puisse être effectuée. </li>
+					<li>Les hôtes et les routeurs supportent le routage classless.</li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>VLSM </li></h2>
+
+			<p>
+				L'utilisation du masque de sous-réseau à taille variable (Variable Length Subnet Mask) permet à un réseau classless d'utiliser différents masques de sous-réseaux au sein d’une organisation et d’obtenir par conséquent des sous-réseaux plus appropriés aux besoins. 
+			</p>
+			<p>
+				Cependant, certaines conditions sont requises pour utiliser le VLSM : 
+				<ul>
+					<li>Il est nécessaire d'employer un protocole de routage supportant le VLSM. <strong>RIPv.2</strong>, <strong>OSPF</strong>, <strong>IS-IS</strong>, <strong>EIGRP</strong>, <strong>BGP</strong> ainsi que le <strong>routage statique</strong> supportent VLSM. Les protocoles de routage classless, contrairement aux protocoles de routage classful (RIPv.1, IGRP), transmettent dans leurs mises à jour de routage, le masque de sous-réseau pour chaque route. </li>
+					<li>Les routeurs doivent implémenter un algorithme de la correspondance la plus longue. En effet, les routes qui ont le préfixe le plus élevé sont les plus précises. Les routeurs dans leurs décisions d'acheminement doivent être capables de déterminer la route la plus adaptée aux paquets traités. </li>
+					<li>Un plan d'adressage hiérarchique doit être appliqué pour l'assignation des adresses afin que l'agrégation puisse être effectuée.</li>
+				</ul>
+			</p>
+			<p>
+				VLSM repose sur l’agrégation. C'est-à-dire que plusieurs adresses de sous-réseaux sont résumées en une seule adresse. L’agrégation est simple, l’on retient simplement la partie commune à toutes les adresses des sous-réseaux. 
+			</p>
+			<p>
+				Pour conceptualiser un réseau conforme VLSM, il faut: 
+				<ul>
+					<li>Recenser le nombre total d’utilisateurs sur le réseau (prévoir une marge pour favoriser l’évolutivité du réseau). </li>
+					<li>Choisir la classe d’adresse la plus adaptée à ce nombre. </li>
+					<li>Partir du plus haut de l’organisation (couche principale) et descendre au plus près des utilisateurs (couche accès). </li>
+					<li>Décompter les entités au niveau de chaque couche. Par exemple, les grandes agglomérations, avec pour chaque agglomération, les villes, le nombre de bâtiments dans chaque ville, le nombre d'étages par bâtiment et le nombre d'utilisateur par étage. </li>
+					<li>Pour chacune de ces entités, réserver le nombre de bits nécessaire en prévoyant l’évolutivité du réseau. </li>
+					<li>Calculer le masque de sous-réseau à chaque niveau de l’organisation. </li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Procédure de réalisation</h2>
+
+			<p>
+				Les procédures de réalisation de plan d’adressage avec du VLSM symétrique puis asymétrique sont expliquées. Néanmoins, il faut savoir que le VLSM symétrique n’est qu’une étude de cas scolaire et que le VLSM asymétrique est ce qui est réellement utilisé dans la réalité. 
+			</p>
+
+			<ol>
+				
+				<h3><li>VLSM Symétrique</li></h3>
+
+				<p>
+					Le VLSM symétrique est un plan d’adressage qui fait un découpage récursif du la topologie du réseau de l’entreprise sachant que les différents découpages sont similaires. Exemple : si l’entreprise a deux bâtiments par ville, on devra avoir deux bâtiments dans chaque ville. 
+				</p>
+				<p>
+					Dans cette procédure, on parle de sous réseau uniquement pour les parties les plus proches des utilisateurs. Tous les autres niveaux de la hiérarchie seront considérés comme une adresse agrégée. 
+				</p>
+				<p>
+					<h4>Procédure : </h4>
+					<ul>
+						<strong>Etape 1 : Identifier le besoin : </strong> <br>
+						Recenser les différents niveaux hiérarchiques de l’entreprise et dessiner la topologie.
+					</ul>
+					<ul>
+						<strong>Etape 2 : Au niveau utilisateur : </strong> <br>
+						Connaître la taille du sous-réseau.
+					</ul>
+					<ul>
+						<strong>Etape 3 : Recensement :</strong> <br>
+						Déterminer le nombre de bits nécessaires pour recenser chaque instance du niveau hiérarchique.
+					</ul>
+					<ul>
+						<strong>Etape 4 : Classe d’adresse utilisée : </strong> <br>
+						Déterminer la classe d’adresse ou l’agrégat d’adresses (le choix dépendant du contexte), en additionnant tous les bits nécessaires pour identifier chaque niveau hiérarchique de l’entreprise. 
+					</ul>
+					<ul>
+						<strong>Etape 5 :  </strong> <br>
+						On procède ensuite au découpage de la classe d’adresse de l’entreprise et de l’attribution à chaque instance du niveau hiérarchique. 
+					</ul>
+				</p>
+				<p>
+					Cette procédure est valable quelque soit la méthode d’adressage utilisée (RFC 950 ou 1878) à une différence prêt, si on applique la règle du 2n-1 ou 2n-2, il faudra l’appliquer une seule fois sur toute la topologie au niveau hiérarchique limitant la perte (induit par le nombre de bits de ce niveau hiérarchique). 
+				</p>
+				<p>
+					<h4>Exemple :</h4>
+					
+					<figure>
+						<img src="../../images/cours3/image2.PNG" alt="Image non disponible">
+						<figcaption>Description du VLSM symétrique.</figcaption>
+					</figure>
+
+				</p>
+
+				<h3><li>VLSM Asymétrique</li></h3>
+				<p>
+					Le VLSM Asymétrique, ou plus simplement, VLSM, correspond à une topologie d’entreprise ou les différents niveaux hiérarchiques et les instances ne sont pas similaires (nombre, taille etc.) 
+				</p>
+				<p>
+					<h4>Procédure : </h4>
+					<ul>
+						<li>
+							<strong>Etape 1 : Identifier le besoin : </strong> <br>
+							Dessiner la topologie, identifier les besoins a chaque niveau hiérarchique. 
+						</li>
+						<li>
+							<strong>Etape 2 : Recensement : </strong> <br>
+							Connaître le nombre d’utilisateurs pour chaque sous-réseau (puisqu’ils peuvent être différents à chaque niveau maintenant), ce qui revient à connaître la taille de chaque sous-réseau (ne pas oublier qu’on ne peut pas utiliser la première ni la dernière adresse et qu’il faut une adresse IP pour la passerelle).  Si le nombre d’utilisateur n’est pas connu a chaque niveau de la hiérarchie, on peut suivre un processus descendant (‘top down’) : repartir équitablement le nombre d’utilisateur pour un niveau hiérarchique supérieur vers le niveau directement inférieur. 
+						</li>
+						<li>
+							<strong>Etape 3 : Classe d’adresse utilisée : </strong> <br>
+							Déterminer la classe d’adresse ou l’agrégat d’adresses (le choix dépendant du contexte), en additionnant tous les bits nécessaires pour identifier chaque niveau hiérarchique de l’entreprise. 
+						</li>
+						<li>
+							<strong>Etape 4 : </strong> <br>
+							En suivant un processus remontant récursif maintenant, on va agréger les différents instances d’un niveau pour obtenir l’identifiant réseau du niveau hiérarchique directement supérieur jusqu’a obtenir l’adresse agrégée de toute l’entreprise. 
+						</li>
+					</ul>
+				</p>
+
+				<figure>
+					<img src="../../images/cours3/image3.PNG"alt="Image non disponible">
+					<figcaption>Description du VLSM asymétrique.</figcaption>
+				</figure>
+
+
+			</ol>
+
+		</section>
+
+		<section>
+			<h2><li>Configuration</li></h2>
+
+			<p>
+				Lorsque la règle du 2n-1 est appliquée, il est convenu de ne pas utiliser le premier sous-réseau pour éviter toute confusion. En effet, l'adresse réseau du premier sous-réseau correspond à l'adresse réseau de toute la plage d'adresse. 
+			</p>
+			<p>
+				Pour limiter le gaspillage d’adresse, en utilisant la règle du 2n, il suffit d’utiliser la commande ip subnet-zero qui permet l’utilisation du premier sous-réseau calculé. Cette fonctionnalité est active par défaut depuis la version 12.0 de l’IOS.
+				<ul>
+					<li>
+						<strong>ip subnet-zero </strong>
+						<ul>
+							<li>Mode de configuration globale</li>
+							<li>Permet d'utiliser le premier sous-réseau (2<sup>n</sup>) </li>
+						</ul>
+					</li>
+				</ul> 
+			</p>
+
+			<p>
+				Par ailleurs, la commande ip classless active la prise en charge des informations ne respectant pas le découpage d’adresses en classes. C'est-à-dire qu’elle permet d’activer le support des masques de sous-réseau et d’une route par défaut. Cette commande est active par défaut. 
+				<ul>
+					<li>
+						<strong>ip classless </strong>
+						<ul>
+							<li>Mode de configuration globale </li>
+							<li>Permet d’activer le support des masques de sous-réseau et d’une route par défaut </li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+			<p>
+				Lors de l'emploi du VLSM, il faut avant tout s'assurer du bon calcul des masques de sous-réseaux. Une fois cette étape effectuée nous pouvons configurer les interfaces. 
+				<ul>
+					<li>
+						<strong>interface {type} {numéro} </strong>
+						<ul>
+							<li>Mode de configuration globale </li>
+							<li>Permet de passer dans le mode de configuration d’interface</li>
+						</ul>
+					</li>
+					<li>
+						<strong>ip address {IP} {masque}</strong>
+						<ul>
+							<li>Mode de configuration d’interface </li>
+							<li>Permet d’attribuer une adresse IP à cette interface</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+		</section>
+
+	</ol>
+
+</body>
+</html>

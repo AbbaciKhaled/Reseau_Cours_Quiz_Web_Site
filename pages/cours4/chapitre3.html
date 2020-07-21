@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA4 Chapitre3</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+	<header>
+		<h1>Chapitre3 : Réseaux WAN</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Définitions </li></h2>
+			<p>
+				Caractéristiques principales des réseaux WAN : 
+				<ul>
+					<li>Fonctionnent sur de vastes étendues géographiques.</li>
+					<li>Utilisent les services d’un opérateur Télécom.</li>
+					<li>Transportent différents types de trafic (Voix, données, vidéo).</li>
+					<li>Axés sur les couches physique et liaison de données du modèle OSI.</li>
+				</ul>
+			</p>
+			<p>
+				La boucle locale est la partie située entre le POP du client et le central téléphonique de l’opérateur.  
+			</p>
+			<p>
+				Un réseau WAN, d’un point de vue général, est un ensemble de liaisons reliées aux différents opérateurs, qui sont interconnectés. 
+			</p>
+			<p>
+				Le rôle des opérateurs Télécom est de fournir une communication bout à bout, en utilisant diverses méthodes de commutation (circuits, paquets, cellules), tout en fournissant des services. 
+			</p>
+			<p>
+				Les trois grands types de services fournis par un opérateur Télécom sont : 
+			</p>
+			<p>
+				<strong>Établissement de la communication :  </strong>
+				<ul>
+					<li>Aussi appelé signalisation, ce service permet d’établir ou de mettre fin à la communication entre les utilisateurs du système téléphonique.</li>
+				</ul>
+			</p>
+			<p>
+				<strong>Transit des données : </strong>
+				<ul>
+					<li><strong>Multiplexage temporel :</strong> Principe simple qui permet d’allouer l’intégralité de la bande passante disponible d’une liaison par tranche de temps fixe, affectée à chaque utilisateur. </li>
+					<li><strong>Partage de bande passante :</strong>  Il existe une bande passante totale disponible sur le backbone, et les clients qui y sont rattachés se la partagent.</li>
+				</ul>
+			</p>
+			<p>
+				Le chemin de réseau WAN reliant les ETTD est appelé : 
+				<ul>
+					<li>Liaison.</li>
+					<li>Circuit.</li>
+					<li>Canal.</li>
+					<li>Ligne.</li>
+				</ul>
+			</p>
+			<p>
+				Le but principal de l’ETCD est de servir d’interface entre l’ETTD et la liaison de communication WAN de l’opérateur : 
+			</p>
+			<p>
+				L’ETTD fournit les données de l’utilisateur (Exemple : routeur).<br>
+				L’ETCD convertit le format des données de l’utilisateur en un format acceptable par les unités du service réseau WAN (Exemple : modem, unité CSU/DSU, TA, NT1). 
+			</p>
+			<p>
+				Il existe deux types de circuits :
+				<ul>
+					<li>
+						<strong>Circuit point-à-point :</strong> Circuit physique dédié aux deux extrémités (Exemple : Circuit POTS ou RNIS une fois la commutation de circuits effectuée). 
+					</li>
+					<li>
+						<strong>Circuit virtuel :</strong> Circuit logique passant au travers d’un nuage (Exemple : Frame Relay, X.25). 
+					</li>
+				</ul>
+			</p>
+			<p>
+				Les circuits virtuels se découpent en deux catégories : 
+				<ul>
+					<li>
+						<strong>SVC : </strong>
+						<br>Établi dynamiquement sur demande et fermé en fin de transmission. 
+						<br>Communication en trois phases : Etablissement du circuit, transfert des données et fermeture du circuit. Consomme de la bande passante à cause des différentes phases de la communication. 
+						<br>Coûts liés à la disponibilité (Temps) du circuit réduit. 
+					</li>
+					<li>
+						<strong>PVC : </strong>
+						<br>Établi en permanence. 
+						<br>Est utilisé pour transmettre des débits de données constantes. 
+						<br>Communication en une phase : Transfert des données. 
+						<br>Consommation en bande passante réduite par rapport à un SVC. 
+						<br>Coûts supérieurs en raison de la continuité de service. 
+					</li>
+				</ul>
+			</p>
+			<p>
+				Exemples de lignes WAN et bande passante associée : 
+			</p>
+			<table>
+				<caption>Tableau des lignes WAN et leurs bande passante associée</caption>
+				<tr><th>Type de ligne</th><th>Bande passante</th></tr>
+				<tr><td>T1</td><td>1.544 Mbits/s</td></tr>
+				<tr><td>E1</td><td>2.048 Mbits/s</td></tr>
+				<tr><td>E3</td><td>34.064 Mbits/s</td></tr>
+				<tr><td>T3</td><td>44.736 Mbits/s</td></tr>
+			</table>
+
+		</section>
+
+		<section>
+			<h2><li>Equipements et dispositifs </li></h2>
+
+			<ul>
+				<li>
+					<strong>Routeur :</strong>
+					Dispositif de routage, offrant différents services dont des ports d’interface de réseau LAN et WAN. 
+				</li>
+				<li>
+					<strong>Serveur de communication :</strong>
+					Concentrateur de communications utilisateur entrantes et sortantes. 
+				</li>
+				<li>
+					<strong>Commutateur WAN :</strong>
+					Unité multiport qui assure les commutations du trafic WAN. 
+				</li>
+				<li>
+					<strong>Modem :</strong>
+					Equipement de conversion d’un signal numérique en un signal analogique par l’intermédiaire du principe de modulation/démodulation.
+				</li>
+				<li>
+					<strong>Unité CSU/DSU :</strong>
+					Interface numérique (ou deux interfaces séparées, si les parties CSU et DSU sont séparées) qui adapte l’interface ETTD à celle d’un ETCD. Cette unité est généralement intégrée au routeur.
+				</li>
+			</ul>
+
+			<figure>
+				<img src="../../images/cours4/image8.PNG" alt="Image non disponible">
+				<figcaption>Connexion point-à-point ou à commuation de circuits.</figcaption>
+			</figure>
+
+			<ul>
+				<li>
+					<strong>CPE :</strong>
+					Equipement placé dans les locaux du client, lui appartenant ou étant loué à l’opérateur (Exemple : modem).
+				</li>
+				<li>
+					<strong>Point de démarcation de service :</strong>
+					Démarcation entre la partie client et la partie opérateur (boucle locale). C’est à ce point que la responsabilité de chaque partie (Client et opérateur) s’arrête.
+				</li>
+				<li>
+					<strong>Boucle locale :</strong>
+					Partie reliant le point de démarcation de service au central téléphonique de l’opérateur. 
+				</li>
+				<li>
+					<strong>Commutateur du central téléphonique :</strong>
+					Point de commutation le plus proche du client. 
+				</li>
+				<li>
+					<strong>Réseau interurbain :</strong>
+					Unités et commutateur (appelés lignes réseau) situés dans le nuage de l’opérateur. 
+				</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2><li>Normes WAN</li></h2>
+			<p>
+				Les normes des réseaux WAN décrivent généralement les méthodes d’acheminement de la couche physique ainsi que la configuration exigée pour la couche liaison de donnée, notamment : 
+				<ul>
+					<li>L’adressage.</li>
+					<li>Le contrôle de flux.</li>
+					<li>L’encapsulation.</li>
+				</ul>
+			</p>
+			<p>
+				Les principaux organismes définissant et gérant les normes WAN sont : 
+				<ul>
+					<li>
+						<strong>UIT-T</strong>
+						(Union Internationale des Télécommunications - secteur de normalisation des Télécommunications), anciennement appelée CCITT (Comité Consultatif International Télégraphique et Téléphonique). 
+					</li>
+					<li>
+						<strong>ISO</strong>
+						 (International Standards Organization). 
+					</li>
+					<li>
+						<strong>IETF</strong>
+						(Internet Engineering Task Force).
+					</li>
+					<li>
+						<strong>EIA</strong>
+						(Electrical Industries Association). 
+					</li>
+					<li>
+						<strong>TIA</strong>
+						(Telecommunications Industry Association). 
+					</li>
+				</ul>
+			</p>
+
+			<figure>
+				<img src="../../images/cours4/image9.PNG" alt="Image non disponible">
+				<figcaption>Les normes de la couche physique.</figcaption>
+			</figure>
+
+			<p>
+				La couche physique d’un réseau WAN décrit principalement l’interface entre l’ETTD (unité connectée) et l’ETCD (fournisseur) : 
+				<ul>
+					<li>
+						<strong>EIA/TIA-232 :</strong> Similaire à la norme V.24 et anciennement appelée RS-232. Prévue pour les circuits asymétriques dont la bande passante peut atteindre 64 Kbits/s. 
+
+					</li>
+					<li>
+						<strong>EIA/TIA-449 :</strong> Version plus rapide que l’EIA/TIA-232 (2 Mbits/s). 
+					</li>
+					<li>
+						<strong>EIA/TIA-612/613 :</strong> Décrit l’interface HSSI (pour T3, E3, SDH STM-0, etc.). 
+					</li>
+					<li>
+						<strong>V.24.</strong>
+					</li>
+					<li>
+						<strong>V.35 :</strong> Décrit un protocole synchrone, utilisé pour la communication dans un réseau de paquets. 
+					</li>
+					<li>
+						<strong>X.21 :</strong> Pour les lignes numériques synchrones. 
+					</li>
+					<li>
+						<strong>G.703 :</strong> Connexions utilisant des connecteurs BNC et fonctionnant à des débits E1.
+					</li>
+					<li>
+						<strong>EIA-530 :</strong> Deux mises en œuvres électriques des normes EIA/TIA-449 : 
+						<ul>
+							<li>
+								<strong>RS-422 :</strong> Transmissions symétriques. 
+							</li>
+							<li>
+								<strong>RS-423 :</strong>Transmissions asymétriques. 
+							</li>
+						</ul>
+					</li>
+
+				</ul>
+			</p>
+
+			<figure>
+				<img src="../../images/cours4/image10.PNG" alt="Image non disponible">
+				<figcaption>Processus d'encapsulation (couche 2).</figcaption>
+			</figure>
+
+			<p>
+				La couche liaison de données définit le mode d’encapsulation des données sur les réseaux WAN : 
+				<ul>
+					<li>
+						<strong>Frame Relay : </strong>
+						<ul>
+							<li>Encapsulation simplifiée.</li>
+							<li>Dépourvue de mécanismes de correction des erreurs.</li>
+							<li>Prévu pour des unités numériques haut de gamme.</li>
+							<li>Transmet les données très rapidement par rapport aux autres encapsulations WAN.</li>
+							<li>Il existe deux variantes pour cette encapsulation, à savoir Cisco et IET</li>
+						</ul>
+					</li>
+					<li>
+						<strong>PPP : </strong>
+						<ul>
+							<li>Comprend un champ identifiant le protocole de couche réseau.</li>
+							<li>Vérifie la qualité de la liaison au moment de l’établissement d’une connexion.</li>
+							<li>Gère l’authentification grâce aux protocoles PAP et CHAP. </li>
+						</ul>
+					</li>
+					<li>
+						<strong>RNIS :</strong>
+						Ensemble de services numériques pour la voix et les données sur le réseau commuté classique.
+					</li>
+					<li>
+						<strong>LAPB : </strong>
+						<ul>
+							<li>Encapsulation des paquets à la couche 2 de la pile X.25 sur des réseaux à commutation de paquets.</li>
+							<li>Egalement sur des liaisons point-à-point, si elles ne sont pas fiable ou possèdent un délai inhérent (Exemple : liaison par satellite).</li>
+							<li>Apporte la fiabilité et le contrôle de flux sur une base point-à-point. </li>
+						</ul>
+					</li>
+					<li>
+						<strong>HDLC :</strong>
+						<ul>
+							<li>Peut être incompatible entre fournisseurs car chacun a sa propre mise en œuvre.</li>
+							<li>Prend en charge les configurations point-à-point et multipoints.</li>
+							<li>Dérivé du protocole SDLC.</li>
+							<li>Protocole par défaut pour les interfaces série d’un routeur Cisco. </li>
+							<li>Extrêmement simplifié : Pas de fonctions de fenêtrage ni de contrôle de flux.</li>
+							<li>Champ d’adresse contenant uniquement des 1, avec un code propriétaire à 2 octets indiquant le type de verrouillage de trame du fournisseur. </li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>
+				Le protocole HDLC est recommandé sur une liaison reliant deux équipements utilisant IOS. Dans le cas contraire, il est recommandé d’utiliser le protocole PPP.
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Classement des différents types de liaison WAN</li></h2>
+
+			<figure>
+				<img src="../../images/cours4/image11.PNG" alt="Image non disponible">
+				<figcaption>Arborescence décrivant les différents types de liaison WAN.</figcaption>
+			</figure>
+
+			<p>
+				Les différents types de liaison WAN habituellement disponibles sont : 
+				<ul>
+					<li>
+						<strong>Liaisons dédiées</strong> (aussi appelées liaisons spécialisées ou lignes louées) :
+						<ul>
+							<li>Fournissent un service continu.</li>
+							<li>Il s’agit d’un lien physique dédié qui va directement d’un port du routeur client à un port du routeur de l’opérateur, sans passer par un environnement commuté.</li>
+							<li>Il est nécessaire d’avoir un port par liaison client sur le routeur de l’opérateur.</li>
+							<li>Fournies par des liaisons série synchrone point-à-point.</li>
+							<li>
+								Cette liaison point-à-point est utilisée pour : 
+								<ul>
+									<li>Une liaison physique directe.</li>
+									<li>Des liaisons virtuelles constituées de plusieurs liaisons physiques. </li>
+								</ul>
+							</li>
+							<li>Conviennent aux grands volumes d’information et aux trafics constants. </li>
+						</ul>
+					</li>
+					<li>
+						<strong>Connexions commutées :</strong>
+						<ul>
+							<li>
+								<strong>A commutation de circuits :</strong>
+								<ul>
+									<li>Commutation physique des centraux téléphoniques afin d’obtenir la liaison point-à-point</li>
+								</ul>
+							</li>
+							<li>
+								<strong>A commutation de paquets/cellules : </strong>
+								<ul>
+									<li>Commutation « logique » effectuée au niveau de la couche 2 du modèle OSI. </li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+			<figure>
+				<img src="../../images/cours4/image12.PNG" alt="Image non disponible">
+				<figcaption>Plan décrivant les Connexions commutées.</figcaption>
+			</figure>
+
+			<p>
+				<ul>
+					<li>
+						<strong></strong>
+						<ul>
+							<li>Circuit physique dédié par commutation des centraux téléphoniques.</li>
+							<li>Établi, maintenu et fermé à chaque session.</li>
+							<li>Établi à la demande.</li>
+							<li>Sert aussi de ligne de secours aux circuits haut débit.</li>
+							<li>Offre une bande passante dédiée. </li>
+						</ul>
+					</li>
+					<li>
+						<strong>Commutation de paquets/cellules : </strong>
+						<ul>
+							<li>Utilisation d’un PVC similaire à une liaison point-à-point.</li>
+							<li>Possibilité d’acheminer des trames de taille variable (paquets) ou de taille fixe (cellules).</li>
+							<li>Les unités du réseau partagent une liaison point-à-point unique.</li>
+							<li>Plus souple et utilise mieux la bande passante que les services à commutation de circuits.</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+		</section>
+
+	</ol>
+
+
+
+
+
+
+</body>
+</html>

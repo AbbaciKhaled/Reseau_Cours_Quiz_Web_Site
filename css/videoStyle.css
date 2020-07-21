@@ -1,0 +1,20 @@
+/*paramètre video*/
+video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+/*div du texte assoicé à la video*/
+div{
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+  width: 100%;
+  border:0;
+  padding-left: 2%;
+  padding-right: 2%;
+}

@@ -1,0 +1,91 @@
+*{
+	box-sizing: border-box;	
+}
+
+html{
+	height: 100%;
+}
+
+body{
+  text-align: justify;
+  margin: 0;
+  height: 100%;
+  background-image: url("../images/arriereplan.jpg");
+  background-color: black;
+}
+
+/*style header et footer*/
+header, footer {
+    background-color: black;
+    color:white;
+    padding:1%;
+}
+
+header
+{
+	border-bottom: 1px solid white;
+	opacity: 0.7;
+}
+
+footer
+{
+	border-top: 1px solid white;
+	clear: both;
+	opacity: 0.8;
+}
+
+/*titre principal*/
+header h1
+{
+    text-align: center;
+}
+
+/*barre de menu*/
+nav{
+   float: left;
+   padding: 15px;
+   width: 25%;
+   z-index: 10;
+}
+
+/*style iframe qui contient les pages html*/
+iframe {
+   float: left;
+   width: 75%;
+   height: 78.4%;
+   border: none;
+   border-left: 3px solid rgb(218, 66, 44);
+   padding: 0;
+   margin: 0;
+}
+
+/*pour le style de text sélectionné*/
+::selection {
+  background: rgb(218, 66, 44);
+  color: white;
+}
+
+/*pour le style de scrollbar*/
+::-webkit-scrollbar {
+    background-color:  rgb(218, 66, 44);
+}
+
+::-webkit-scrollbar-track {
+    background: silver; 
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: rgba(218, 66, 44,0.7);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(218, 66, 44);
+}
+
+/*style pour l'image*/
+img{
+	opacity: 0.7;
+	float: right;
+	width: 90px;
+	height: 70px;
+}

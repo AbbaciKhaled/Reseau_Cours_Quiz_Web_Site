@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA2 Chapitre1</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+	<header>
+		<h1>Chapitre1 : Introduction aux routeurs</h1>
+	</header>
+	<ol>
+		<section>
+		
+			<h2><li>Présentation d’un routeur Cisco</h2>
+
+				<ol>
+					<h3><li>Composants internes </li></h3>
+
+					<figure>
+						<img src="../../images/cours2/image1.PNG" alt="Image non disponible">
+						<figcaption>Vue interface d'un routeur Cisco 2620XM.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						La connaissance exacte de l’emplacement de chaque composant interne d’un routeur n’est pas fondamentale. Il peut tout de même être utile de savoir reconnaître les différents slots pour les barrettes de RAM et de Flash au cas où une mise à jour serait à effectuer.
+					</p>
+
+					<figure>
+						<img src="../../images/cours2/image2.PNG" alt="Image non disponible">
+						<figcaption>Shéma des mémoires d'un routeur Cisco.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						Schématiquement, les composants internes qui nous intéressent principalement sont les différentes mémoires utilisées : 
+						<ul>
+							<li><strong>RAM :</strong> C’est la mémoire principale de travail du routeur. Elle contient entre autres le système d’exploitation une fois chargé, le fichier de configuration active, la ou les tables de routage, ainsi que les mémoires tampon utilisées par les interfaces et la pile utilisée par les processus logiciels. Sa taille varie en fonction du modèle de routeur (64 ou 96 Mo sur un 2620XM). Le contenu de cette mémoire est effacé lors de la mise hors tension ou du redémarrage. </li>
+							<li><strong>NVRAM (Non-Volatile RAM) :</strong> Cette mémoire est non volatile, c’est-à-dire que son contenu n’est pas effacé lorsque l’alimentation est coupée. Sa très petite capacité de stockage (32 Ko sur un 2620XM) ne lui permet pas de stocker autre chose que le registre de configuration et le fichier de configuration de sauvegarde. </li>
+							<li><strong>Flash :</strong> C’est la mémoire de stockage principale du routeur. Elle contient l’image du système d’exploitation Cisco IOS (32 Mo sur un 2620XM). Son contenu est conservé lors de la mise hors tension et du redémarrage. </li>
+							<li><strong>ROM :</strong> Elle contient le bootstrap ainsi que la séquence d’amorçage du routeur. Celle-ci est donc uniquement utilisée au démarrage du routeur.</li>
+						</ul>
+					</p>
+
+					<h3><li>Composants externes </li></h3>
+
+					<figcaption>
+						<img src="../../images/cours2/image3.PNG" alt="Image non disponible">
+						<figcaption>Vue arrière d'un routeur Cisco 2620XM.</figcaption>
+					</figcaption>
+
+					<p>
+						Un routeur Cisco peut offrir plusieurs types de connectiques parmi les suivantes :
+						<ul>
+							<li><strong>Port console :</strong></li>
+							<li><strong>Port auxiliaire :</strong> Accès de base pour configuration.</li>
+							<li><strong>Interface(s) LAN</strong> Accès pour configuration au travers d’une ligne analogique et modems interposés. </li>
+							<li><strong>Interface(s) WAN</strong></li>
+							<li><strong>Slot(s) NM</strong> (Network Module)</li>
+							<li><strong>Slot(s) WIC</strong> (WAN Interface Card) </li>
+						</ul>
+					</p>
+
+				</ol>
+		</section>
+
+		<section>
+
+			<h2><li>Branchements</h2>
+
+				<ol>
+					<h3><li>Interfaces LAN et WAN </li></h3>
+					<p>
+						Les interfaces réseaux fournies par un routeur Cisco peuvent être de divers types et sont classifiées en fonction du type de réseau à connecter (LAN ou WAN). 
+					</p>
+					<p>
+						Elles peuvent être fixées au châssis ou livrées sous la forme de cartes (WIC ou NM) pour les routeurs modulaires.
+					</p>
+					<p>
+						Ces interfaces seront utilisées par les protocoles de couche 3 du modèle OSI pour le routage.
+					</p>
+
+					<figure>
+						<img src="../../images/cours2/image4.PNG" alt="Image non disponible">
+						<figcaption>Carte WIC-2A/S</figcaption>
+					</figure>
+
+					<h3><li>Accès pour configuration </li></h3>
+					<p>
+						La configuration d’un routeur se fait par l’intermédiaire de lignes.
+					</p>
+
+					<figure>
+						<img src="../../images/cours2/image5.PNG" alt="Image non disponible">
+						<figcaption>Moyens d'accès pour configuration.</figcaption>
+					</figure>
+
+					<p>
+						Un routeur peut être configuré à partir des sources externes suivantes : 
+						<ul>
+							<li><strong>Ligne console :</strong> Accès primaire, à utiliser si aucun autre accès de configuration n’est disponible. </li>
+							<li><strong>Ligne auxiliaire :</strong> Accès à distance via une liaison RTC et modems interposés. </li>
+							<li><strong>Ligne(s) VTY :</strong>  Accès via un client Telnet (5 ou 16 lignes disponibles par routeur en fonction du modèle). </li>
+							<li><strong>Explorateur Web :</strong>  Accès utilisant le serveur HTTP interne du routeur. </li>
+							<li><strong>Serveur TFTP :</strong> Import/export de fichiers de configuration. </li>
+							<li><strong>Serveur FTP :</strong> Import/export de fichiers de configuration.</li>
+						</ul>
+					</p>
+					<p>
+						La ligne console est l’accès de configuration à utiliser lorsque aucune configuration n’est chargée ou si cette dernière ne permet pas l’accès par un autre moyen (Telnet, etc.). 
+					</p>
+					<p>
+						Il faut connecter le port console du routeur à un port série (RS-232) en utilisant un câble console (rollover). 
+					</p>
+
+					<figure>
+						<img src="../../images/cours2/image6.PNG" alt="Image non disponible">
+						<figcaption>Connection du port console du routeur à un port série (RS-232).</figcaption>
+					</figure>
+
+					<p>
+						Un émulateur de terminaux (exemple : HyperTerminal sous Windows) permet l’accès à l’interface de configuration du routeur.
+					</p>
+					<p>
+						Les paramètres à utiliser sont les suivants :
+						<ul>
+							<li>Vitesse : 9600 bauds </li>
+							<li>Bits de données : 8 </li>
+							<li>Parité : Aucun </li>
+							<li>Bits d’arrêt : 1 </li>
+							<li>Contrôle de flux : Aucun</li>
+						</ul>
+					</p>
+					<p>
+						Sous HyperTerminal, le bouton "Paramètres par défaut" permet de spécifier automatiquement ces paramètres. 
+					</p>
+
+					<figure>
+						<img src="../../images/cours2/image7.PNG" alt="Image non disponible">
+						<figcaption>Pramètres de connexion pour HyperTerminal</figcaption>
+					</figure>
+
+				</ol>
+		</section>
+
+		<section>
+			<h2><li>Système d’exploitation Cisco IOS </h2>
+				<ol>
+					<h3><li>Principes et spécifications</li></h3>
+					<p>
+						IOS (Internetwork Operating System) est le système d’exploitation propriétaire Cisco utilisé sur la plupart des dispositifs Cisco. Ce système d’exploitation offre une CLI (Command Line Interface).
+					</p>
+					<p>
+						Le programme d’exécution des commandes, ou EXEC, est l’un des composants de la plateforme logicielle Cisco IOS. EXEC reçoit et exécute les commandes entrées dans la CLI. 
+					</p>
+					<p>
+						Pour arrêter l’exécution d’une commande, il faut utiliser une des combinaisons de touches suivantes : 
+						<ul>
+							<li>
+								<strong>CTRL+MAJ+6</strong>
+								<ul>
+									<li>Pour toutes les commandes.</li>
+								</ul>
+							</li>
+							<li>
+								<strong>CTRL+C </strong>
+								<ul>
+									<li>Fonctionne avec les commandes show et pour le mode SETUP. </li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+					<p>
+						EXEC transmet des messages de notification sur le terminal ainsi que les messages de déboguage. Par défaut, ces messages arrivent uniquement sur le terminal connecté via la ligne console. Pour activer ou désactiver l’affichage de ces messages, il faut utiliser la commande terminal [no]  monitor depuis le mode utilisateur ou privilégié. 
+					</p>
+					<p>
+						La commande reload permet de redémarrer à chaud le routeur. 
+					</p>
+
+					<h3><li>Modes de commandes </li></h3>
+					<p>
+						Il existe une multitude de modes différents accessibles en CLI sur un routeur Cisco : 
+						<ul>
+							<li><strong>Mode utilisateur :</strong> Mode lecture qui permet à l'utilisateur de consulter des informations sur le routeur, mais ne lui permet pas d'effectuer des modifications. Dans ce mode, on ne dispose que de commandes de visualisation d’état sur le fonctionnement du routeur. C’est dans ce mode que l’on arrive lorsque l’on se connecte au routeur. </li>
+							<li><strong>Mode privilégié :</strong> Mode lecture avec pouvoir. On dispose d’une panoplie complète de commandes pour visualiser l’état de fonctionnement du routeur, ainsi que pour importer/exporter et sauvegarder des fichiers de configurations et des images d’IOS.</li>
+							<li><strong>Mode de configuration globale :</strong> Ce mode permet d’utiliser toutes les commandes de configuration ayant une portée globale à tout le routeur.</li>
+							<li><strong>Modes de configuration spécifiques :</strong> On ne dispose que dans chaque mode spécifique des commandes ayant une portée localisée au composant du routeur spécifié par ce mode. </li>
+							<li><strong>Mode SETUP :</strong>Mode affichant un dialogue interactif, grâce auquel l'utilisateur néophyte peut créer une configuration élémentaire initiale.</li>
+							<li><strong>Mode RXBoot :</strong>  Mode de maintenance permettant notamment de récupérer des mots de passe perdus. </li>
+						</ul>
+					</p>
+					<p>
+						On peut facilement identifier le mode dans lequel on est en repérant l’invite de commande que nous fournit l’interpréteur de commandes EXEC : 
+					</p>
+					<table>
+						<caption>Tableau des différents modes d'exécution.</caption>
+						<tr><th>Mode</th><th>Invite de commande </th></tr>
+						<tr><td>Utilisateur</td><td>Router ></td></tr>
+						<tr><td>Privilégié </td><td>Router #</td></tr>
+						<tr><td>Configuration globale</td><td>Router (config) # </td></tr>
+						<tr><td>Interface</td><td>Router (config-if) # </td></tr>
+						<tr><td>Ligne</td><td>Router (config-line) # </td></tr>
+						<tr><td>Routage</td><td>Router (config-router) #</td></tr>
+					</table>
+					<p>
+						Nous allons maintenant voir les commandes et les combinaisons de touches permettant de naviguer dans ces différents modes d’IOS :
+					</p>
+
+					<figure>
+						<img src="../../images/cours2/image8.PNG" alt="Image non disponible">
+						<figcaption>Hiérarchie et navigation dans les modes d'IOS. </figcaption>
+					</figure>
+
+					<p>
+						Les commandes à utiliser pour passer dans un mode de configuration spécifique sont les suivantes : 
+						<ul>
+							<li>
+								<strong>line {type} {numéro} </strong>
+								<ul>
+									<li>Mode de configuration globale</li>
+									<li>Permet de passer dans le mode de configuration d’une ligne </li>
+								</ul>
+							</li>
+							<li>
+								<strong>interface {type} {numéro} </strong>
+								<ul>
+									<li>Mode de configuration globale </li>
+									<li>Permet de passer dans le mode de configuration d’interface </li>
+								</ul>
+							</li>
+							<li>
+								<strong>router {protocole} [option] </strong>
+								<ul>
+									<li>Mode de configuration globale</li>
+									<li>Permet de passer dans le mode de configuration du routeur</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+					<h3><li>Système d’aide</li></h3>
+					<p>
+						Le principe d’aide pour les commandes sur la plateforme logicielle Cisco IOS est très simple et est constitué de trois choses : 
+						<ul>
+							<li><strong>Le caractère ? :</strong>Ce caractère peut être utilisé de 3 façons différentes. Seul, ce caractère indique au routeur de nous fournir une liste complète des commandes accessibles depuis le mode dans lequel on se trouve. Collé à une chaîne de caractères, il fournit la liste des mots clé commençant par cette chaîne. Enfin, après un mot clé, il fournit la liste des options pour ce dernier. </li>
+							<li><strong>Le caractère ^ :</strong>Celui-ci nous indique à quel endroit se trouve une erreur dans une commande erronée. Dans ce cas, il suffit juste de retaper la commande jusqu’à ce caractère, puis d’utiliser le caractère ? pour obtenir la liste des possibilités pour cette commande.</li>
+							<li><strong>La touche de tabulation :</strong>Cette touche est très couramment utilisée en environnement IOS car, à l’instar de certains Shell UNIX, elle effectue une complétion maximale par rapport aux différentes possibilités.</li>
+						</ul>
+					</p>
+
+					<h3><li>Commandes d’édition avancée</li></h3>
+					<p>
+						L’interface utilisateur offre un mode d’édition avancée nous permettant de modifier une commande au cours de la frappe. Voici un tableau résumant ces combinaisons de touche :
+					</p>
+					<table>
+						<caption>Tableau des commandes d’édition avancée.</caption>
+						<tr><th>Commande</th><th>Description</th></tr>
+						<tr><td>CTRL+A</td><td>Revient au début de la ligne de commande </td></tr>
+						<tr><td>ECHAP+B</td><td>Recule d’un mot</td></tr>
+						<tr><td>CTRL+B ou ←</td><td>Recule d’un caractère </td></tr>
+						<tr><td>CTRL+E</td><td>Va à la fin de la ligne de commande </td></tr>
+						<tr><td>CTRL+F ou →</td><td>Avance d’un caractère </td></tr>
+						<tr><td>ECHAP+F</td><td>Avance d’un mot</td></tr>
+						<tr><td>terminal [no] editing</td><td>Active/désactive les commandes d’édition avancée</td></tr>
+					</table>
+					<p>
+						Il existe un autre point à voir. Il ne s’agit pas d’une commande en lui-même, mais plutôt d’un petit système d’information pratique. Il s’agit du caractère $ qui peut apparaître en début ou en fin de ligne d’écran lorsque la commande en elle-même fait plus d’une ligne écran. Ceci indique donc qu’une partie de la ligne de commande est masquée.
+					</p>
+
+					<h3><li>Historique des commandes </li></h3>
+					<p>
+						L'interface utilisateur fournit un historique des commandes entrées. Cette fonction est particulièrement utile pour rappeler des commandes ou des entrées longues ou complexes. La fonction d'historique des commandes vous permet d'accomplir les tâches suivantes : 
+						<ul>
+							<li>Réglage de la capacité du tampon d’historique des commandes </li>
+							<li>Rappel des commandes </li>
+							<li>Désactivation de la fonction d’historique des commandes </li>
+						</ul>
+					</p>
+					<p>
+						Par défaut, la fonction d'historique des commandes est active et le système enregistre 10 lignes de commandes dans son tampon. 
+					</p>
+					<p>
+						Ce tableau nous indique les différentes commandes d’historique que nous avons à notre disposition : 
+					</p>
+
+					<table>
+						<caption>Tableau des commandes d’historique</caption>
+						<tr><th>Commande</th><th>Description</th></tr>
+						<tr><td>CTRL+P ou ↑</td><td>Rappel de la commande précédente CTRL+N ou ↓</td></tr>
+						<tr><td>CTRL+N ou ↓</td><td>Rappel de la commande suivanteshow history</td></tr>
+						<tr><td>show history</td><td>Affiche la liste des commandes en mémoire </td></tr>
+						<tr><td>terminal history size {taille}</td><td>Définit la taille de la mémoire de commandes (valeur maximale de 256) </td></tr>
+						<tr><td>terminal [no] history</td><td>Active/désactive les fonctions d’historique </td></tr>
+					</table>
+					<p>
+						Les trois dernières commandes sont utilisables dans les modes utilisateur et privilégié uniquement. 
+					</p>
+
+					<h3><li>Fichiers de configuration</li></h3>
+					<p>
+						Les deux fichiers de configuration d’un routeur Cisco sont les fichiers de configuration active (dans la RAM) et de sauvegarde (dans la NVRAM). Ils régissent respectivement la configuration en cours d’utilisation par le routeur et la configuration utilisée lors du démarrage du routeur. 
+					</p>
+					<p>
+						Les informations contenues dans un fichier de configuration sont les suivantes :
+						<ul>
+							<li>Des informations génériques concernant la version d’IOS avec laquelle le fichier de configuration est prévu pour fonctionner.</li>
+							<li>Le nom du routeur ainsi que le mot de passe du mode privilégié. </li>
+							<li>Les entrées statiques de résolution de noms. </li>
+							<li>Chaque interface avec sa configuration spécifique.</li>
+							<li>Toutes les informations de routage. </li>
+							<li>Chaque ligne et sa configuration spécifique.</li>
+						</ul>
+					</p>
+				</ol>
+		</section>
+	</ol>
+
+</body>
+</html>

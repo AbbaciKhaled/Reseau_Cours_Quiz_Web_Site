@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA1 Chapitre4</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Chapitre4 : Couche 2 (Technologies Ethernet)</h1>
+	</header>
+
+	<ol>
+		<section>
+				<h2><li>Introduction aux technologies LAN</li></h2>
+			<p>
+				Un LAN (Local Area Network) est un réseau local, il a donc une taille géographiquement limitée (quelques milliers de mètres maximum).
+			</p>
+			<p>
+				Un LAN permet un accès multiple aux médias à large bande tout en assurant une connectivité continue aux services locaux (ressources et accès Internet partagés, messagerie, etc.). Son but est de relier physiquement des terminaux réseaux proches (stations de travail, serveurs, imprimantes, etc.) par une liaison physique. 
+			</p>
+			<p>
+				Ils sont caractérisés par un haut débit et un faible pourcentage d’erreurs dues à l’atténuation. Ils relient les différents périphériques, terminaux et stations de travail entre eux. 
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Introduction à Ethernet</h2>
+				<p>
+					Ethernet est  la technologie de base des réseaux LAN la plus utilisée actuellement. Le principe repose sur le fait que toutes les machines sont reliées à une même ligne de communication. L’institut IEEE l’a normalisé et adapté dans son modèle IEEE 802.3. Ces deux technologies sont très similaires (elles diffèrent sur un champ de trame seulement). 
+				</p>
+
+				<ol>
+					<h3><li>Ethernet et le modèle OSI</li></h3>
+					<p>
+						La technologie Ethernet opère au niveau de la couche physique et de la couche liaison de données (la couche MAC seulement). 
+					</p>
+					<p>
+						Lorsque plusieurs terminaux communiquent par le biais d’un média partagé, les données passent le plus souvent par un répéteur (accessoirement multi ports). Toutes les stations connectées à ce même média « voient » donc ce trafic. Elles communiquent entre elles également par ce même média. Des collisions se créent alors, car elles utilisent ce média en concurrence. On peut donc assimiler un domaine de collision à un environnement partagé. 
+					</p>
+					<h3><li>Spécifications et normes</li></h3>
+					<p>
+						Chaque désignation de technologie utilise une normalisation qui permet d’identifier ses caractéristiques. Celles-ci sont de la forme : vitesse en Mbps – type de signal – type de câble. (ex : 100 Base TX) 
+						<ul>
+							<li>Deux types de signalisation existent : Baseband (transmission numérique) ou Broadband (utilisation de porteuse : transmission par ondes par exemple).</li>
+							<li>Le type de câble utilisé : cuivre à paires torsadées non blindé (Unshielded Twisted Pairs), ou de type fibre optique (Fiber). </li>
+							<li>On exprime aussi sa capacité à supporter le Full Duplex par un X. (à l’exception du 10 Base T qui supporte tout de même le mode Full Duplex). </li>
+						</ul>
+					</p>
+					<p>
+						L’IEEE a définit des normes pour les différentes technologies Ethernet : 
+					</p>
+					<table>
+						<caption>Les normes définit par L’IEEE pour les différentes technologies Ethernet.</caption>
+						<tr><th>Norme</th><th>Appellation</th><th>Débit</th><th>Média utilisé</th></tr>
+						<tr><td>802.3</td><td>Ethernet</td><td>10 Mbps</td><td>Coaxial / UTP / fibre optique</td></tr>
+						<tr><td>802.3u</td><td>Fast Ethernet</td><td>100 Mbps</td><td>UTP / Fibre optique </td></tr>
+						<tr><td>802.3z</td><td>Gigabit Ethernet</td><td>1000 Mbps</td><td>Fibre optique</td></tr>
+						<tr><td>802.3ab</td><td>Gigabit Ethernet</td><td>1000 Mbps</td><td>Câble UTP</td></tr>
+						<tr><td>802.3ae</td><td>10 Gigabit Ethernet</td><td>10 000 Mbps</td><td>Fibre Optique</td></tr>
+					</table>
+
+					<h3><li>Trames Ethernet et IEEE 802.3</li></h3>
+
+					<figure>
+						<img src="../../images/cours1/image19.PNG" alt="Image non disponible">
+						<figcaption>Trame Ethernet et Trame IEEE 802.3</figcaption>
+					</figure>
+
+					<br>
+
+					<ul>
+						<li>Préambule : composé de 1 et de 0 en alternance, annonce si la trame est de type Ethernet ou 802.3.</li>
+						<li>Début de trame : IEEE 802.3 : l'octet séparateur se termine par 2 bits à 1 consécutifs, servant à synchroniser les portions de réception des trames de toutes les stations.</li>
+						<li>Champ d’adresse de destination : peut être  de type unicast, multicast ou broadcast.</li>
+						<li>Champ d'adresse d'origine : toujours de type unicast. </li>
+						<li>Type (Ethernet) : précise le type de protocole de couche supérieure qui reçoit les données.</li>
+						<li>
+							Longueur (802.3) : indique le nombre d'octets de données qui suit le champ. 
+							<ul>
+								<li>C’est sur cette partie que diffèrent les trames 802.3 et Ethernet : la valeur du champ permet de déterminer le type de trame : 802.3 ou Ethernet.</li>
+								<li>La trame est de type 802.3 si la valeur hexadécimale du champ est strictement inférieure à 0X600 ; La trame est de type Ethernet si la valeur hexadécimale du champ est égale à 0X600. </li>
+							</ul>
+						</li>
+						<li>
+							Données : 
+							<ul>
+								<li>Ethernet : une fois le traitement de couche 1 et 2 terminé, les données sont transmises au protocole de la couche supérieure indiqué dans le champ type. On peut avoir recours à des octets de remplissage s'il n'y a pas assez de données pour remplir les 64 octets minimaux de la trame.</li>
+								<li>IEEE 802.3 : une fois le traitement de couche 1 et 2 terminé, les données sont transmises au protocole de la couche supérieure indiqué dans le champ donnée de la trame. On peut ici aussi avoir recours au remplissage. </li>
+							</ul>
+						</li>
+						<li>FCS : Séquence de contrôle de trame. Cette séquence contient un code de redondance cyclique  permettant à l’unité réceptrice de vérifier l’intégrité des données transmises.</li>
+					</ul>
+				</ol>
+		</section>
+
+		<section>
+			<h2><li>Fonctionnement d’Ethernet</h2>
+				<ol>
+					<h3><li>MAC</li></h3>
+					<p>
+						Le principe utilisé pour partager l’accès à des ressources communes est appelé MAC pour Media Access Control (à ne pas confondre avec l’adresse MAC).
+					</p>
+					<p>
+						Dans un environnement où plusieurs hôtes se partagent un média unique de communication, un problème de priorité doit être résolu. Le problème est le même que dans une situation courante : lors d’une discussion à l’intérieur d’un groupe de personnes, une seule personne parle à la fois si elle veut être comprise par son ou ses interlocuteurs. 
+					</p>
+					<p>
+						Dans un environnement Ethernet, c’est au niveau de la sous-couche MAC que l’on va utiliser un processus de détection des collisions : plusieurs hôtes émettent en même temps sur le même média.  Ethernet et 802.3 utilisent un principe d’accès au média non déterministe : CSMA/CD (Carrier Sense Multiple Access with Collision Detection).
+					</p>
+					<p>
+						Les hôtes se partagent donc le média. Si l’un d’eux désire émettre, il vérifie au préalable que personne n’est en train de le faire, puis commence à émettre (CSMA).
+					</p>
+					<p>
+						Si cependant 2 hôtes émettent en même temps, il se produit alors une collision. La première station qui détecte une collision envoie alors un signal de bourrage, se traduisant par un arrêt d’émission de tous les hôtes. Les paquets concernés sont alors détruits. 
+					</p>
+					<p>
+						Chaque hôte calcule alors une valeur aléatoire définissant la durée avant de recommencer à émettre, puis le mécanisme de CSMA se remet en fonction. 
+					</p>
+
+					<h3><li>Erreurs possibles</li></h3>
+					<p>
+						Pendant une transmission de données, de nombreux facteurs peuvent entraîner une corruption de celleci. 
+						<br>
+						Le but est de détecter ces erreurs correctement pour déterminer quelles trames doivent être retransmises afin de récupérer des données intègres. 
+					</p>
+					<p>
+						Collisions 
+						<br>
+						Dans un environnement partagé, la première corruption rencontrée est de type collision. Lorsque deux hôtes ou plus émettent un signal au même instant sur le média, il se produit un survoltage qui ne signifie plus rien en terme de données. Ces collisions ne se produisent que dans un environnement Half-Duplex. (car dans un environnement Full-Duplex, chaque paire torsadée n’est utilisée qu’entre deux hôtes dans un seul sens de transmission.). L’algorithme CSMA/CD permet de détecter ces collisions et de les éviter.  
+					</p>
+					<p>
+						Il existe trois types de collision : 
+						<ul>
+							<li>Collision locale</li>
+							<li>Collision distante</li>
+							<li>Collision de retard</li>
+						</ul>
+					</p>
+					<p>
+						La collision locale est de type survoltage, comme vu dans l’exemple précédent. 
+					</p>
+					<p>
+						Une collision distante résulte d’une trame ayant une longueur inférieure au minimum ou d’un FCS incorrect. Elle est souvent rencontrée à une certaine distance d’environnement répété (hub ou répéteur) mais n’a pas de problème de survoltage. Il peut s’agir de fragments de collision non détruits par un équipement de type répéteur par exemple. 
+					</p>
+					<p>
+						Une collision de retard n’est pas détectée par la couche liaison de données. En effet, elle est caractérisée par une erreur dans les données à partir du 64ème octet. Contrairement aux deux autres types de collision, une collision de retard ne déclenche pas une réémission directe de la trame (car elle n’a pas été détectée par la couche de liaison). La station réceptrice analyse d’abord cette trame avec une couche supérieure (qui détecte l’erreur dans la trame) puis demande un renvoi de cette trame.
+					</p>
+					<p>
+						Trames longues 
+						<br>
+						Ce type d’erreur est un simple dépassement de la taille maximale d’une trame.
+						<br>
+						La taille du champ « Données » (variable) d’une trame ne doit pas excéder 1500 octets. Une trame a donc une taille maximale de 1526 octets. Une trame de taille supérieure est donc considérée comme fausse. 
+					</p>
+					<p>
+						Trames courtes 
+						<br>
+						Comme pour les trames longues, l’erreur se situe au niveau du champ « données » qui doit avoir une taille minimale de 46 octets (ou 64 pour IEEE 802.3). Les trames courtes se caractérisent donc par une taille inférieure à 72 octets (ou 90 octets pour IEEE 802.3) mais avec un FCS valide : sinon elle serait considérée comme un fragment de trame, détruit lui aussi. 
+					</p>
+					<p>
+						Autres types d’erreur
+						<br>
+						D’autres erreurs peuvent survenir du fait de la mauvaise qualité du média (ou d’interférences extérieures) :
+						<ul>
+							<li>FCS incorrect : le résultat du FCS est faux quant aux données transmises </li>
+							<li>le champ longueur ne concorde pas avec la taille du champ « données »</li>
+							<li>longueur de champ incorrecte : le préambule ne fait pas 7 octets, … </li>
+						</ul>
+					</p>
+					<p>
+						Une fois qu’une erreur de ce type est détectée, la couche supérieure (de la station réceptrice) va demander un renvoi de cette trame à la station émettrice, jusqu’à obtenir une trame valide. 
+					</p>
+				</ol>
+		</section>
+	</ol>
+
+</body>
+</html>

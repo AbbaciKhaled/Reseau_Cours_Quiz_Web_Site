@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA2 Chapitre4</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+	<header>
+		<h1>Chapitre4 : Routage</h1>
+	</header>
+
+	<ol>
+		<section>
+			<h2><li>Principes fondamentaux </li></h2>
+
+			<p>
+				La couche réseau fournit un acheminement de bout en bout et au mieux des paquets à travers les réseaux interconnectés. Ceci est effectué par 2 fonctions distinctes : 
+				<ul>
+					<li>
+						<strong>Fonction de routage</strong>
+					</li>
+					<li>
+						<strong>Fonction de commutation</strong>
+					</li>
+				</ul>
+			</p>
+			<p>
+				La fonction de routage utilise la table de routage du protocole routé utilisé par le paquet à faire transiter pour déterminer le meilleur chemin à emprunter pour atteindre le réseau de destination. La métrique est utilisée pour offrir une mesure de qualité des différents chemins. 
+			</p>
+			<p>
+				La fonction de commutation permet à un routeur d'accepter un paquet d’une file d’attente d'entrée et de le transmettre à une file d’attente de sortie. 
+			</p>
+			<p>
+				Le but de ces deux fonctions est donc complètement différent et entièrement complémentaire. 
+			</p>
+			<p>
+				Il existe plusieurs méthodes permettant d’optimiser la relation entre les fonctions de routage et de commutation. Ces méthodes permettent l’accélération de la transmission des paquets au travers d’un routeur en mettant en mémoire cache, les décisions de routage déjà prises. Il existe les méthodes suivantes : 
+				<ul>
+					<li>Fast Switching </li>
+					<li>Silicon Switching</li>
+					<li>Autonomous Switching </li>
+					<li>CEF (Cisco Express Forwarding) </li>
+				</ul>
+			</p>
+			<p>
+				Par défaut, un routeur Cisco utilise le Fast Switching, qui permet de mettre en mémoire cache les décisions de routage pour chaque destination. Pour cela, la première décision est effectuée normalement, en passant successivement par les fonctions de routage et de commutation. A ce moment là, on place en mémoire cache la décision de routage (l’interface de sortie) ainsi que l’en-tête de trame qui fut généré pour la trame de sortie.
+			</p>
+			<p>
+				Les paquets suivants pour cette même destination se verront alors automatiquement traités de la même manière que le premier, en utilisant la même interface de sortie ainsi que le même en-tête de trame. Cela permet donc d’économiser le temps de parcours de la table de routage ainsi que le temps de création de l’en-tête pour la nouvelle trame. 
+			</p>
+			<p>
+				Sauf exceptions, ces méthodes ont un inconvénient majeur, à savoir que seule la première décision de routage est mise en mémoire cache. Cela signifie que le partage de charge entre plusieurs liens pour une même destination devient impossible. Il faut donc choisir entre rapidité de transmission par le routeur et répartition de charge. 
+			</p>
+			<p>
+				La commande suivante peut être utilisée : 
+				<ul>
+					<li>
+						<strong>[no] ip route-cache </strong>
+						<ul>
+							<li>Mode de configuration d’interface</li>
+							<li>Active/désactive le Fast Switching sur l’interface courante</li>
+							<li>Actif par défaut</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+			<figure>
+				<img src="../../images/cours2/image10.PNG" alt="Image non disponible">
+				<figcaption>Destination dans un réseau différent de celui de la source.</figcaption>
+			</figure>
+
+			<p>
+				Le processus de transmission des paquets se déroule comme suit :
+				<ul>
+					<li>L’hôte source détermine si la destination est locale (même réseau ou sous-réseau) ou distante grâce au couple IP/masque de sous-réseau. Elle calcule ainsi l’adresse IP de sous-réseau de la destination ainsi que la sienne.</li>
+					<li>Si les adresses IP de sous-réseau sont les mêmes, alors la source émet la trame avec l’adresse de couche 2 de la destination. L’émission est ainsi directe.</li>
+					<li>Par contre, si les adresses IP de sous-réseau sont différentes, alors la source encapsule la trame avec l’adresse de couche 2 de sa passerelle par défaut puis l’envoie.</li>
+					<li>La passerelle par défaut, à savoir généralement un routeur, reçoit cette trame. Ce routeur va déterminer le chemin à emprunter afin d’atteindre le réseau de destination. Ceci se fait grâce aux informations de couche 3 fournies par le paquet ainsi que par l’analyse d’une table de routage.</li>
+				</ul>
+			</p>
+			<p>
+				Il se pose ensuite deux cas :
+				<ul>
+					<li>Le routeur actuel est le routeur final, c’est-à-dire qu’il est directement connecté au réseau de destination. Dans ce cas précis, on place les adresses de couche 2 de l’interface du routeur comme adresse source, et celle de la destination dans le champ adresse de destination. La trame est alors envoyée sur le réseau de destination. </li>
+					<li>Le routeur actuel est un routeur intermédiaire sur le chemin, c’est-à-dire qu’il va falloir passer obligatoirement par un autre routeur afin d’atteindre le réseau de destination. La trame va donc être encapsulée avec l’adresse de couche 2 de l’interface de ce routeur, et celle du prochain saut dans le champ adresse de destination. </li>
+				</ul>
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Routage statique et dynamique</li></h2>
+
+			<p>
+				Il existe deux types de routage :
+				<ul>
+					<li>
+						<strong>Statique :</strong> Tout est géré manuellement par un administrateur réseau qui enregistre toutes les informations dans la configuration d'un routeur. Il doit mettre à jour manuellement les entrées de route statique chaque fois qu'une modification de la topologie le nécessite. 
+					</li>
+					<li>
+						<strong>Dynamique :</strong> Une fois qu'un administrateur réseau a entré les commandes de configuration pour lancer le routage dynamique, les informations relatives aux routes sont mises à jour automatiquement, par un processus de routage.
+					</li>
+				</ul>
+			</p>
+			<p>
+				Le routage statique offre plusieurs applications utiles : 
+				<ul>
+					<li>Le routage dynamique a tendance à révéler toutes les informations connues d'un réseau, alors que vous souhaiteriez masquer certaines informations pour des raisons de sécurité. Le routage statique vous permet de spécifier les informations que vous souhaitez révéler à propos de réseaux restreints. </li>
+					<li>Lorsqu'un réseau n'est accessible que par un seul chemin, une route statique vers ce réseau peut s'avérer suffisante. Ce type de réseau est appelé <strong>réseau d'extrémité</strong>. La configuration d'une route statique vers un réseau d'extrémité permet d'éviter la surcharge liée au routage dynamique. </li>
+					<li>Il évite d’avoir une perte en bande passante due aux mises à jour envoyées par les protocoles de routage. </li>
+				</ul>
+			</p>
+			<p>
+				Le routage dynamique possède comme avantage principal de s’adapter automatiquement aux modifications topologiques. 
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Convergence, boucles de routage et solutions </li></h2>
+
+			<p>
+				La convergence est le fait que tous les dispositifs réseau ont la même vue de la topologie du réseau. Le temps de convergence est donc le temps pendant lequel les dispositifs réseaux n’ont pas la même vue de celui-ci. 
+			</p>
+			<p>
+				Lorsque tous les routeurs d'un réseau utilisent les mêmes informations, le réseau est convergent. Une convergence rapide est recommandée pour un réseau, car elle réduit la période au cours de laquelle les routeurs prennent des décisions de routage incorrectes ou inefficaces. 
+			</p>
+			<p>
+				Des boucles de routage peuvent se produire si la convergence lente d'un réseau avec une nouvelle configuration entraîne des entrées de routage incohérentes. Les paquets tournent sans cesse sur une boucle bien que le réseau de destination soit en panne. 
+			</p>
+			<p>
+				Pour tenter de contrer les boucles de routages, il existe :
+				<ul>
+					<li>Métrique de mesure infinie (Finite State Metric)</li>
+					<li>Split Horizon</li>
+					<li>Route Poisoning</li>
+					<li>Mises à jour déclanchées (Triggered Updates)</li>
+					<li>Compteurs de retenue (Holddown Timers)</li>
+				</ul>
+			</p>
+			<p>
+				Ces cinq méthodes sont uniquement utilisées par les protocoles de routage à vecteur de distance, afin d’essayer de contrer les plausibles boucles de routage. 
+			</p>
+			<p>
+				On ne se préoccupe que de la table de routage avec ces cinq solutions, car le problème des paquets en eux-mêmes est réglé automatiquement grâce au principe de TTL (Time To Live). 
+			</p>
+			<p>
+				Une métrique de mesure infinie peut s'avérer nécessaire. Le principe est de définir l'infini en tant que nombre maximum spécifique. Ce nombre se réfère à une métrique de routage. Grâce à cette méthode, le protocole de routage permet à la boucle de routage d'exister jusqu'à ce que la métrique dépasse la valeur maximale autorisée. Le réseau en panne est considéré comme inaccessible lorsque la valeur métrique atteint la valeur maximale. 
+			</p>
+
+			<figure>
+				<img src="../../images/cours2/image11.PNG" alt="Image non disponible">
+				<figcaption>Modifications topologiques avec et sans Split Horizon.</figcaption>
+			</figure>
+
+			<p>
+				Le principe du Split Horizon est simple. Aucune information de mise à jour ne sera renvoyée par le chemin par lequel on a appris la modification de topologie. Ceci permet d’éviter de renvoyer à la source des informations erronées. 
+			</p>
+			<p>
+				Ceci implique donc que l’information se propage toujours du plus près du réseau de destination au plus éloigné, sans jamais revenir en arrière. 
+			</p>
+			<p>
+				Le Route Poisoning, aussi appelé Poison Reverse, est utilisé lorsqu’un réseau devient inaccessible. Au lieu de n’avertir que les routes existantes dans la table de routage aux voisins, le Route Poisoning inclut aussi les routes devenues inaccessibles en leur octroyant une métrique infinie. 
+			</p>
+			<p>
+				Ceci permet d’informer directement les voisins qu’un réseau est devenu inaccessible au lieu d’attendre l’expiration de leur compteur d’invalidité (Invalid Timer). 
+			</p>
+
+			<figure>
+				<img src="../../images/cours2/image12.PNG" alt="Image non disponible">
+				<figcaption>Avec ou sans Route Poisoning et avec Split Horizon.</figcaption>
+			</figure>
+
+			<p>
+				Combiné au Split Horizon, le Route Poisoning n’exclut pas les routes concernées par la règle du Split Horizon mais leur attribue une métrique infinie. 
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Routage à vecteur de distance</li></h2>
+
+			<p>
+				L’algorithme de routage à vecteur de distance possède une vision de la topologie du réseau qui est basée sur celle de ses voisins. En effet, les mises à jour de routage envoyées par les protocoles de routage à vecteur de distance contiennent directement la table de routage du routeur émetteur. 
+			</p>
+			<p>
+				Le récepteur n’a donc pour seul travail que de récupérer ces informations, de garder les entrées pertinentes et de modifier les métriques.
+			</p>
+			<p>
+				La métrique locale pour une entrée dans la table de routage a pour valeur le résultat de l’addition entre la métrique incluse dans la mise à jour reçue par un voisin et de la valeur de la métrique vers ce voisin.
+			</p>
+
+			<figure>
+				<img src="../../images/cours2/image13.PNG" alt="Image non disponible">
+				<figcaption>Description du routage à état de liens(avec table de routage).</figcaption>
+			</figure>
+
+			<p>
+				De plus, les mises à jour possèdent des caractéristiques précises : 
+				<ul>
+					<li>Elles sont envoyées périodiquement</li>
+					<li>Elles contiennent directement toutes les entrées de la table de routage de l’émetteur (sauf les entrées supprimées par Split Horizon) </li>
+					<li>Elles sont émises en broadcast (sauf exceptions telles qu’avec RIPv2 et EIGRP)</li>
+				</ul>
+			</p>
+			<p>
+				La sélection du meilleur chemin, qui sera inclus dans la table de routage, se fait en utilisant l’algorithme de Bellman Ford. Ce dernier se base sur le nombre de sauts pour calculer les métriques. Une exception existe pour les protocoles de routage à vecteur de distance propriétaires, tels que IGRP et EIGRP de Cisco. 
+			</p>
+			<p>
+				Les protocoles de routage à vecteur de distance les plus connus sont :
+				<ul>
+					<li>RIPv1 </li>
+					<li>RIPv2</li>
+					<li>Cisco IGRP</li>
+					<li>Cisco EIGRP (vecteur de distance évolué, ou hybride symétrique)</li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Routage à état de liens </li></h2>
+
+			<p>
+				Cet algorithme exploite le principe du plus court chemin d’abord (Shortest Path First). Ce principe est basé sur l’utilisation : 
+				<ul>
+					<li>D’une table de données topologiques </li>
+					<li>De l’algorithme de Dijsktra </li>
+					<li>D’un arbre du plus court chemin d’abord (SPF Tree) </li>
+				</ul>
+			</p>
+			<p>
+				Les mises à jour de routage des protocoles à état des liens possèdent de grandes différences comparées à celles des protocoles à vecteur de distance : 
+				<ul>
+					<li>Elles sont uniquement envoyées lors de modifications topologiques (Triggered Updates).</li>
+					<li>Elles contiennent des informations topologiques (Link State Advertisements).</li>
+					<li>Elles sont incrémentielles.</li>
+					<li>Elles sont incrémentielles. </li>
+				</ul>
+			</p>
+			<p>
+				La propagation d’informations topologiques permet de ne pas baser ses décisions de routage sur une vision du réseau donnée par les voisins ainsi que d’être plus efficace au niveau de la pertinence de l’information. En effet, l’état d’un seul lien peut affecter plusieurs routes. Les ressources utilisées sont alors plus orientées processeur que bande passante sur le réseau. 
+			</p>
+			<p>
+				Les protocoles de routage à état de liens développent des relations de voisinage avec les routeurs adjacents. Ces relations sont maintenues en permanence via l’émission réception de messages. L’intérêt principal est de connaître l’existence d’un voisin avec qui converser ainsi que son état et, par conséquent, l’état des routes passant par lui. 
+			</p>
+			<p>
+				Le routage à état de liens se base donc sur l’utilisation de trois tables distinctes (au contraire des protocoles à vecteur de distance qui ne gèrent que la table de routage) : 
+			</p>
+
+			<figure>
+				<img src="../../images/cours2/image14.PNG" alt="Image non disponible">
+				<figcaption>Tables utilisées par un protocole de routage à état de liens.</figcaption>
+			</figure>
+
+			<p>
+				Le routage à état de liens est lié à deux exigences : 
+				<ul>
+					<li>
+						<strong>Ressource calculatoire :</strong> Un protocole de routage à état de liens requière une puissance CPU importante pour l’algorithme du plus court chemin d’abord, afin de transformer sa base de données topologiques en un arbre du plus court chemin d’abord, puis pour traiter cet arbre pour en déduire la table de routage. 
+					</li>
+					<li>
+						<strong>Ressource mémoire :</strong> Une grande quantité de mémoire RAM est utilisée par un protocole de routage à état de liens car il faut stocker les tables de voisinage ainsi que de topologie en plus de la classique table de routage. 
+					</li>
+				</ul>
+			</p>
+			<p>
+				Les protocoles de routage à état de liens les plus connus sont : 
+				<ul>
+					<li>OSPF</li>
+					<li>IS-IS</li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Systèmes autonomes, protocoles de routage intérieurs et extérieurs</li></h2>
+
+			<p>
+				Un système autonome (AS) est, par définition, l’ensemble des dispositifs interconnectés régis par la même administration. Cela permet de délimiter la responsabilité du routage à un ensemble défini.
+			</p>
+			<p>
+				Ces AS sont identifiés par un numéro qui est chiffré sur 16 bits. Ce numéro est unique dans le monde et permet d’identifier une organisation aux yeux du reste du monde informatique. Il est attribué par le NIC (Network Information Center). 
+			</p>
+			<p>
+				Pour les protocoles de routage imposant l’indication d’un numéro d’AS et se trouvant dans un réseau privé, ce numéro de système autonome peut être choisi arbitrairement dans la plage de valeurs allant de 64512 à 65535. 
+			</p>
+			<p>
+				Cette notion de système autonome crée donc une nouvelle distinction entre les protocoles de routage :
+				<ul>
+					<li>
+						<strong>Protocoles de routage intérieurs (IGP) :</strong> Protocoles ayant pour mission principale le routage à l’intérieur d’un système autonome.  
+					</li>
+					<li>
+						<strong>Protocoles de routage extérieurs (EGP) :</strong> Protocoles permettant le routage entre les systèmes autonomes.
+					</li>
+				</ul>
+			</p>
+			<p>
+				Les protocoles de routage intérieurs voient un système autonome comme un seul et unique protocole de routage. De ce point de vue, si plusieurs protocoles de routage existent dans un même système autonome, chaque protocole considérera le protocole adjacent comme externe. 
+			</p>
+			<p>
+				Les protocoles de routage sont donc classifiés ainsi :
+			</p>
+			<table>
+				<caption>Protocoles IGP et EGP</caption>
+				<tr><th>Classification</th><th>Protocoles</th></tr>
+				<tr><td>IGP</td><td>RIP, IGRP, EIGRP, OSPF et IS-IS</td></tr>
+				<tr><td>EGP</td><td>EGP et BGP</td></tr>
+			</table>
+			<p>
+				Typiquement, la convergence d’un réseau est restreinte au système autonome. Le temps de convergence dépend donc du protocole utilisé dans le système autonome. 
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Configuration par défaut, routage statique et visualisation d’état</li></h2>
+
+			<p>
+				Par défaut, seul le routage pour le protocole IP est activé sur un routeur Cisco. Le routage s’effectue automatiquement entre les réseaux directement connectés au routeur, sans avoir à utiliser des routes statiques ou un protocole de routage quelconque.
+			</p>
+			<p>
+				Les commandes permettant de configuration le routage de base sont les suivantes : 
+				<ul>
+					<li>
+						<strong>{protocole} routing </strong>
+						<li>Mode de configuration globale</li>
+						<li>Permet d’activer/désactiver le routage pour un protocole routé particulier</li>
+						<li>Le paramètre protocole correspond au mot clé du protocole voulu (IP, IPX, IPv6, etc.)</li>
+					</li>
+
+					<li>
+						<strong>ip classless </strong>
+						<li>Mode de configuration globale</li>
+						<li>Active le routage Classless sur le routeur</li>
+						<li>Actif par défaut</li>
+						<li>Permet l’utilisation d’information de routage Classless, telles que les routes par défaut </li>
+					</li>
+
+					<li>
+						<strong>ip route {préfixe} {masque} {prochain saut | interface} [distance administrative]</strong>
+						<li>Mode de configuration globale</li>
+						<li>Crée une route statique sur le routeur</li>
+						<li>La distance administrative permet la création d’une route statique flottante (valeur par défaut = 1) </li>
+					</li>
+				</ul>
+			</p>
+
+			<figure>
+				<img src="../../images/cours2/image15.PNG" alt="Image non disponible">
+				<figcaption>Création d'une route statique.</figcaption>
+			</figure>
+
+			<p>
+				Il est possible de créer une route statique par défaut. Pour cela, il suffit d’utiliser le pseudo réseau ayant pour préfixe 0.0.0.0 et pour masque de sous-réseau 0.0.0.0. Cette route statique sera considérée par le routeur comme un réseau candidat par défaut dans la table de routage. 
+			</p>
+			<p>
+				Les routes statiques sont prioritaires à n’importe quel protocole de routage, à cause de la distance administrative par défaut (égale à 1). Cette distance peut être modifiée afin de rendre une route statique moins préférable à une entrée fournie par un protocole de routage. 
+			</p>
+			<p>
+				Pour cela, il faut expliciter pour la route statique une distance administrative plus grande que celle du protocole de routage. 
+			</p>
+			<p>
+				On crée ainsi une route statique flottante, qui est une route alternative à une autre en cas de défaillance de la première. Une route statique flottante doit être pour la même destination qu’une entrée fournie par un protocole de routage. 
+			</p>
+
+			<figure>
+				<img src="../../images/cours2/image16.PNG" alt="Image non disponible">
+				<figcaption>Utilisation du route dynamique et du route statique.</figcaption>
+			</figure>
+
+			<p>
+				Cette route statique flottante n’apparaît dans la table de routage que lorsque l’entrée fournie par le protocole de routage n’est plus valide. 
+			</p>
+			<p>
+				Les commandes utilisées pour la visualisation d’état sont : 
+				<ul>
+					<li>
+						<strong>show ip protocols :</strong> Affiche la liste des protocoles de routage configurés sur le routeur ainsi que les informations générales les concernant (interfaces participant à chaque processus de routage, réseaux avertis, compteurs, etc.).
+					</li>
+					<li>
+						<strong>show ip route :</strong> Affiche la table de routage IP. 
+					</li>
+					<li>
+						<strong>clear ip route [{préfixe} | *] :</strong> Supprime une ou plusieurs routes de la table de routage.
+					</li>
+				</ul>
+			</p>
+
+		</section>
+
+	</ol>
+
+</body>
+</html>

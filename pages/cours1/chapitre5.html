@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA1 Chapitre5</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Chapitre5 : Couche 3 (Protocole IP)</h1>
+	</header>
+
+	<ol>
+		<section>
+				<h2><li>Protocoles routables</li></h2>
+			<p>
+				Protocole : Ensemble formel de règles et de conventions qui régit l’échange d’informations entre des unités.
+			</p>
+			<p>
+				Un protocole routable définit la notion d’adressage hiérarchique : un hôte est défini par une adresse unique sur un segment de réseau unique. 
+			</p>
+			<p>
+				Un protocole de routage (à ne pas confondre avec protocole routable), grâce à la structure du protocole routé, a toutes les informations nécessaires pour envoyer un paquet sur le segment spécifié à l’hôte spécifié. 
+			</p>
+			<p>
+				Un protocole non orienté connexion ne définit pas de chemin unique pour acheminer les paquets d’un hôte source vers un hôte de destination. Les paquets peuvent alors emprunter des chemins différents suivant la topologie réseau existante entre ces deux hôtes. Cela implique une durée de trajet différente pour chaque paquet et donc un ordre d’arrivée différent de celui d’émission. L’hôte de destination ne peut pas réordonner les paquets.  
+				<br>
+				Le protocole IP est un protocole non orienté connexion. 
+			</p>
+			<p>
+				Un protocole orienté connexion définit un chemin unique entre l’hôte source et l’hôte de destination. Les paquets empruntent alors le même chemin et arrivent donc dans le même ordre. Pour ce faire, l’hôte source établit en premier lieu une connexion avec l’hôte de destination. Une fois cette connexion établie, chaque paquet est envoyé par ce seul chemin. On appelle ce processus « commutation de circuits ».
+				<br>
+				Le protocole TCP est un protocole orienté connexion. 
+			</p>
+			<p>
+				Protocole routé : c'est un protocole de communication de couche 3. Il définit le format des paquets, et notamment la manière de désigner le destinataire du paquet. Un protocole routé peut être routable ou non routable. 
+				<ul>
+					<li>Routable : les messages envoyés à l'aide de ce protocole peuvent sortir de leur réseau (via un routeur). En effet, le format du paquet comprend une distinction entre la partie hôte et la partie réseau.</li>
+					<li>Non routable : les messages envoyés à l'aide de ce protocole ne peuvent pas sortir de leur réseau. En effet, le format du paquet ne comprend pas de mécanisme permettant à un élément réseau de faire suivre ces paquets au travers de différents réseaux. </li>
+				</ul>
+			</p>
+			<p>
+				La liste des protocoles routés suivante présente les protocoles les plus connus :
+			</p>
+			<table>
+				<caption>Tableau des protocole routé.</caption>
+				<tr><th>Nom du protocole routé</th><th>Protocole routable ?</th></tr>
+				<tr><td>IP</td><td>Oui</td></tr>
+				<tr><td>IPX</td><td>Oui</td></tr>
+				<tr><td>Appletalk</td><td>Oui</td></tr>
+				<tr><td>CLNP</td><td>Oui</td></tr>
+				<tr><td>NetBEUI</td><td>Non</td></tr>
+				<tr><td>SNA</td><td>Non</td></tr>
+			</table>
+		</section>
+
+		<section>
+				<h2><li>Protocole IP</li></h2>
+			<p>
+				Les informations provenant de la couche 4 sont encapsulées dans le PDU de couche 3 : le paquet, dont voici les principaux éléments : 
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image20.PNG" alt="Image non disponible">
+				<figcaption>Exemple de paquet IP.</figcaption>
+			</figure>
+
+			<br>
+
+			<table>
+				<caption>Tableau qui décrit les champs du paquet IP.</caption>
+				<tr><th>Champs</th><th>Description </th></tr>
+				<tr><td>Version</td><td>indique la version de protocole IP utilisée (4 bits). </td></tr>
+				<tr><td>Longueur totale</td><td>Précise la longueur du paquet IP en entier, y compris les données et l'entête, en octets (16 bits).</td></tr>
+				<tr><td>Durée de vie</td><td>Un compteur qui décroît graduellement, par incréments, jusqu’à zéro. À ce moment, le datagramme est supprimé, ce qui empêche les paquets d'être continuellement en boucle (8 bits). </td></tr>
+				<tr><td>Somme de contrôle</td><td>Assure l'intégrité de l'en-tête IP (16 bits).</td></tr>
+				<tr><td>Adresse d’origine</td><td>Indique le nœud émetteur (32 bits). </td></tr>
+				<tr><td>Adresse de destination</td><td>Indique le nœud récepteur (32 bits).</td></tr>
+				<tr><td>Données </td><td>Cet élément contient des informations de couche supérieure (longueur variable, maximum 64 Ko).</td></tr>
+				<tr><td>Remplissage </td><td>Des zéros sont ajoutés à ce champ pour s'assurer que l'en-tête IP soit toujours un multiple de 32 bits. </td></tr>
+			</table>
+			<p>
+				Comme nous l'avons vu, une adresse IP est une adresse 32 bits notée sous forme de 4 nombres décimaux séparés par des points. On distingue en fait deux parties dans l'adresse IP : 
+				<ul>
+					<li>Une partie désignant le réseau (on l'appelle netID) </li>
+					<li>Une partie désignant les hôtes (on l'appelle host-ID) </li>
+				</ul>
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image21.PNG" alt="Image non disponible">
+				<figcaption>Exemple d'adresse IP.</figcaption>
+			</figure>
+
+			<p>
+				Les hôtes situés sur un réseau ne peuvent communiquer qu’avec des hôtes situés sur le même réseau, même si  des stations se trouvent sur le même segment. C’est ce même numéro qui permet au routeur d’acheminer le paquet au destinataire.
+			</p>
+			<p>
+				L’organisme chargé d’attribuer les adresses IP publiques est l’InterNIC (Internet Network Information Center). 
+			</p>
+			<p>
+				On appelle « Bits de poids fort », les premiers bits de l’octet le plus à gauche. Les adresses IP sont réparties en plusieurs classes, en fonction des bits qui les composent : 
+			</p>
+			<table>
+				<caption>Tableau des classes d'adressage IP.</caption>
+				<tr><th>Classe</th><th>Bits de poids fort</th><th>Plage</th><th>Masque par défaut</th></tr>
+				<tr><td>A</td><td>0</td><td>1 à 126</td><td>255.0.0.0 </td></tr>
+				<tr><td>B</td><td>10</td><td>128 à 191</td><td>255.255.0.0 </td></tr>
+				<tr><td>C</td><td>110</td><td>192 à 223</td><td>255.255.255.0 </td></tr>
+				<tr><td>D</td><td>1110</td><td>224 à 239</td><td>Aucun </td></tr>
+				<tr><td>E</td><td>1111</td><td>240 à 255</td><td>Aucun </td></tr>
+			</table>
+			<p>
+				Dans la classe A, il existe 2 adresses réservées, la plage 0.0.0.0 qui est inutilisable car non reconnue sur les réseaux, ainsi que la plage 127.0.0.0 qui est réservée pour la boucle locale
+			</p>
+			<p>
+				Dans toute adresse IP, il existe 2 parties, la partie réseau et la partie hôte. Ces parties sont délimitées grâce au masque de sous réseau associé.  
+				<br>
+				Les bits à 1 représentant la partie réseau et les bits à 0 la partie hôte. Par exemple la partie réseau d’une classe C sera les 3 premiers octets et la partie hôte le dernier octet.
+			</p>
+			<p>
+				Il existe 2 adresses IP particulières et réservées dans un réseau, la toute première adresse IP appelée adresse réseau qui caractérise le réseau lui-même et la toute dernière de la plage est l’adresse de broadcast qui est définie par une adresse IP pouvant atteindre toutes les machines du réseau. 
+				<br>
+				Pour une adresse réseau, tous les bits de la partie hôte seront à 0. 
+				<br>
+				Pour une adresse broadcast, tous les bits de la partie hôte seront à 1. 
+			</p>
+			<p>
+				Il arrive fréquemment dans une entreprise qu'un seul ordinateur soit relié à Internet, c'est par son intermédiaire que les autres ordinateurs du réseau accèdent à Internet (on parle généralement de passerelle).  
+			</p>
+			<p>
+				Dans ce cas, seul l'ordinateur relié à Internet a besoin de réserver une adresse IP auprès de l'InterNIC. On caractérise cette adresse d’adresse publique. Toutefois, les autres ordinateurs ont tout de même besoin d'une adresse IP pour pouvoir communiquer ensemble de façon interne. Ce sont des adresses privées. 
+			</p>
+			<p>
+				Ainsi, l'InterNIC a réservé trois plages d'adresses dans chaque classe pour permettre d'affecter une adresse IP aux ordinateurs d'un réseau local relié à Internet sans risquer de créer de conflits d'adresses IP sur le réseau public. Il s'agit des plages d’adresse suivantes : 
+				<ul>
+					<li>10.0.0.1 à 10.255.255.254</li>
+					<li>172.16.0.1 à 172.31.255.254</li>
+					<li>192.168.0.1 à 192.168.255.254</li>
+				</ul>
+			</p>
+		</section>
+
+		<section>
+				<h2><li>Gestion des adresses IP</li></h2>
+			<p>
+				On distingue 2 méthodes d’attribution d’adresses IP pour les hôtes : 
+				<ul>
+					<li>Statique : chaque équipement est configuré manuellement avec une adresse unique </li>
+					<li>
+						Dynamique : On utilise des protocoles qui attribuent des IP aux hôtes
+						<ul>
+							<li>RARP : Protocole associant les adresses MAC aux adresses IP. Il permet à des stations sans disque dur local connaissant leur adresse MAC de se voir attribuer une IP.</li>
+							<li>BOOTP : Ce protocole permet à un équipement de récupérer son adresse IP au démarrage. L’émetteur envoi un message de broadcast (255.255.255.255) reçu par le serveur qui répond lui aussi par un broadcast contenant l’adresse MAC de l’émetteur ainsi qu’une IP. </li>
+							<li>DHCP : Remplaçant de BOOTP, il permet l’obtention dynamique d’IP. Lorsqu’un ordinateur entre en ligne, il communique avec le serveur qui choisit une adresse et un masque de sous réseau et l’attribue à l’hôte. Il permet de plus d’obtenir des serveurs DNS, la passerelle par défaut ainsi qu’optionnellement les adresses des serveurs WINS. </li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image22.PNG" alt="Image non disponible">
+				<figcaption>Méthodes d’obtention d'adresses IP.</figcaption>
+			</figure>
+
+			<ul>
+				<li><strong>Le protocole ARP</strong> </li>
+				<p>
+					Le protocole ARP permet d’identifier l’adresse physique d’un hôte (adresse MAC unique) à partir de son adresse IP. ARP signifie Address Resolution Protocol. 
+				</p>
+				<p>
+					Chaque machine connectée au réseau possède une adresse physique de 48 bits. Ce numéro unique est en fait encodé dans chaque carte réseau dès la fabrication de celle-ci en usine (adresse MAC). Toutefois, la communication sur un réseau ne se fait pas directement à partir de ce numéro car cette adresse n’est pas hiérarchique. On ne peut donc pas déterminer l’appartenance d’un hôte à un réseau à partir de cette adresse. Pour cela on utilise une adresse dite logique : l’adresse IP. 
+				</p>
+				<p>
+					Ainsi, pour faire correspondre les adresses physiques aux adresses logiques, le protocole ARP interroge les machines du réseau pour connaître leur adresse physique, puis crée une table de correspondance entre les adresses logiques et les adresses physiques dans une mémoire cache. 
+				</p>
+				<p>
+					Lorsqu'une machine doit communiquer avec une autre, elle consulte la table de correspondance. Si jamais l'adresse demandée ne se trouve pas dans la table, le protocole ARP émet une requête sur le réseau. L'ensemble des machines du réseau va comparer cette adresse logique à la leur. 
+				</p>
+				<p>
+					Si l'une d'entre-elles s'identifie à cette adresse, la machine va répondre à l’émetteur qui va stocker le couple d'adresses dans la table de correspondance et la communication sera possible. 
+				</p>
+				<li><strong>Le protocole RARP</strong></li>
+				<p>
+					Le protocole RARP (Reverse Address Resolution Protocol) permet de connaître l'adresse IP d’un hôte, à partir de son adresse physique. Lorsqu'une machine ne connaît que l’adresse physique d’un dispositif, elle peut émettre une requête RARP afin d’avoir son adresse IP. 
+				</p>
+				<li><strong> Le protocole ICMP </strong></li>
+				<p>
+					Le protocole ICMP (Internet Control Message Protocol) est un protocole qui permet de gérer les informations relatives aux erreurs générées au sein d’un réseau IP. Etant donné le peu de contrôles que le protocole IP réalise, il permet, non pas de corriger ces erreurs, mais de faire part de ces erreurs. Ainsi, le protocole ICMP est utilisé par tous les routeurs, qui l'utilisent pour reporter une erreur (appelé Delivery Problem).  
+					<br>
+					Un exemple typique d’utilisation du protocole ICMP est la commande ping. Lors de l’exécution de cette commande, des informations précises peuvent être obtenues : le temps mis par un paquet pour atteindre une adresse, ou bien un éventuel problème de routage pour atteindre un hôte.
+				</p>
+			</ul>
+		</section>
+	</ol>
+
+</body>
+</html>

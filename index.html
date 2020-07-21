@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Projet WEB</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/mise en page.css"/>
+	<link rel="stylesheet" href="css/menu.css"/>
+	<script src="js/menu.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Réseau Informatique</h1>
+	</header>
+
+
+	<nav>
+		<h2>Menu</h2>
+		<ul>
+			<li id="liAcceuil"><a href="pages/pageAcceuil.html" target="frameTarget" id="sm0" onclick="afficherCacherSousMenu('sm0')">Acceuil</a></li>
+			<li><a href="#" id="m1" onclick="afficherCacherSousMenu('sm1')">Introduction aux réseaux</a>
+				<ul id="sm1">
+					<li><a href="pages/cours1/chapitre1.html" target="frameTarget" onclick="CacherSousMenu('sm1')">Introduction aux réseaux</a></li>
+					<li><a href="pages/cours1/chapitre2.html" target="frameTarget" onclick="CacherSousMenu('sm1')">Modèles OSI et TCP/IP</a></li>
+					<li><a href="pages/cours1/chapitre3.html" target="frameTarget" onclick="CacherSousMenu('sm1')">Médias et équipements réseau</a></li>
+					<li><a href="pages/cours1/chapitre4.html" target="frameTarget" onclick="CacherSousMenu('sm1')">Couche Technologies Ethernet</a></li>
+					<li><a href="pages/cours1/chapitre5.html" target="frameTarget" onclick="CacherSousMenu('sm1')">Couche Protocole IP</a></li>
+					<li><a href="pages/cours1/chapitre6.html" target="frameTarget" onclick="CacherSousMenu('sm1')">Couche Couche transport</a></li>
+					<li><a href="pages/cours1/quizCours1.html" target="frameTarget" onclick="CacherSousMenu('sm1')">Quiz</a></li>
+				</ul>
+			</li>
+			<li><a href="#" id="m2" onclick="afficherCacherSousMenu('sm2')">Routage Basique</a>
+				<ul id="sm2">
+					<li><a href="pages/cours2/chapitre1.html" target="frameTarget" onclick="CacherSousMenu('sm2')">Introduction aux routeurs</a></li>
+					<li><a href="pages/cours2/chapitre2.html" target="frameTarget" onclick="CacherSousMenu('sm2')">Configuration d’un routeur</a></li>
+					<li><a href="pages/cours2/chapitre3.html" target="frameTarget" onclick="CacherSousMenu('sm2')">Accès aux autres dispositifs</a></li>
+					<li><a href="pages/cours2/chapitre4.html" target="frameTarget" onclick="CacherSousMenu('sm2')">Routage</a></li>
+					<li><a href="pages/cours2/quizCours2.html" target="frameTarget" onclick="CacherSousMenu('sm2')">Quiz</a></li>
+				</ul>
+			</li>
+			<li><a href="#" id="m3" onclick="afficherCacherSousMenu('sm3')">Routage intermédiaire</a>
+				<ul id="sm3">
+					<li><a href="pages/cours3/chapitre1.html" target="frameTarget" onclick="CacherSousMenu('sm3')">Routage Classless</a></li>
+					<li><a href="pages/cours3/chapitre2.html" target="frameTarget" onclick="CacherSousMenu('sm3')">Protocole RIPv2</a></li>
+					<li><a href="pages/cours3/chapitre3.html" target="frameTarget" onclick="CacherSousMenu('sm3')">Design de LAN</a></li>
+					<li><a href="pages/cours3/chapitre4.html" target="frameTarget" onclick="CacherSousMenu('sm3')">Commutation</a></li>
+					<li><a href="pages/cours3/quizCours3.html" target="frameTarget" onclick="CacherSousMenu('sm3')">Quiz</a></li>
+				</ul>
+			</li>
+			<li><a href="#" id="m4" onclick="afficherCacherSousMenu('sm4')">Technologies WAN</a></a>
+				<ul id="sm4">
+					<li><a href="pages/cours4/chapitre1.html" target="frameTarget" onclick="CacherSousMenu('sm4')">NAT et PAT</a></li>
+					<li><a href="pages/cours4/chapitre2.html" target="frameTarget" onclick="CacherSousMenu('sm4')">Protocole DHCP</a></li>
+					<li><a href="pages/cours4/chapitre3.html" target="frameTarget" onclick="CacherSousMenu('sm4')">Réseaux WAN</a></li>
+					<li><a href="pages/cours4/chapitre4.html" target="frameTarget" onclick="CacherSousMenu('sm4')">Conception WAN</a></li>
+					<li><a href="pages/cours4/quizCours4.html" target="frameTarget" onclick="CacherSousMenu('sm4')">Quiz</a></li>
+				</ul>
+			</li>
+			<li><a href="pages/quizFinal.html" target="frameTarget" id="sm5" onclick="afficherCacherSousMenu('sm5')">Quiz Final</a></li>
+		</ul>
+	</nav>
+	<iframe src="pages/pageAcceuil.html" name="frameTarget" id="frameTarget">
+		
+	</iframe>
+
+
+
+	<footer>
+		<img src="images/usthbLogo.png" alt="logo usthb">
+		Ce site web a été réalisé par : ABBACI Khaled & BAKHTA Ayoub
+		<br>Master 1 IL Section A Groupe 2
+		<br>USTHB 2018/2019
+	</footer>
+</body>
+</html>

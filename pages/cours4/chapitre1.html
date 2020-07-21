@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA4 Chapitre1</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+	<header>
+		<h1>Chapitre1 : NAT et PAT </h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Adressage privé et public</li></h2>
+
+			<p>
+				La très forte croissance et popularité d’Internet dans le début des années 90 ont menée très rapidement à la saturation des adresses pouvant être fournies par le protocole IP version 4. C’est entre autres pourquoi le système d’adressage privé a été élaboré, de manière à ralentir l’inévitable, à savoir l’épuisement de toutes les adresses IPv4.
+			</p>
+			<p>
+				Les plages d’adresses privées définies par la RFC 1918 sont les suivantes : 
+			</p>
+			<table>
+				<caption>Tableau des classes d'adresses et leurs plages.</caption>
+				<tr><th>Classe d’adresses</th><th>Plage d’adresses privées</th><th>CIDR correspondant</th></tr>
+				<tr><td>A</td><td>De 10.0.0.0 à 10.255.255.255</td><td>10.0.0.0/8</td></tr>
+				<tr><td>B</td><td>De 172.16.0.0 à 172.31.255.255 </td><td>172.16.0.0/12</td></tr>
+				<tr><td>C</td><td>De 192.168.0.0 à 192.168.255.255</td><td>192.168.0.0/16</td></tr>
+			</table>
+			<p>
+				Ces plages d’adresses privées utilisées conjointement à la translation d’adresses, permettent à plusieurs réseaux d’utiliser les mêmes adresses. La translation d’adresse prend alors tout son intérêt en translatant, ou remplaçant, les adresses privées en une ou plusieurs adresses publiques afin de transiter sur Internet. 
+			</p>
+			<p>
+				Ceci crée donc plusieurs « cellules » d’adresses privées pouvant être identiques pour différents réseaux, sachant que chaque cellule ne serait accessible depuis Internet que par la ou les adresses publiques attribuées à chaque entreprise. 
+			</p>
+			<p>
+				Les adresses privées étant réservée à un usage interne, ces adresses ne peuvent pas être utilisées directement sur Internet. C’est pourquoi les routeurs de bordure des FAI sont configurés pour empêcher le routage de ces adresses.
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Translation d’adresses</h2>
+				<p>
+					La translation d’adresse est un processus générique permettant la substitution d’une adresse par une autre, et permet ainsi de masquer les adresses privées des réseaux locaux derrière une adresse publique.
+				</p>
+				<p>
+					Ce processus existe sous deux variantes : 
+					<ul>
+						<li>
+							<strong>NAT</strong> (Network Address Translation) 
+							<ul>
+								<li>Statique </li>
+								<li>Dynamique </li>
+							</ul>
+						</li>
+						<li>
+							<strong>PAT</strong> (Port Address Translation)
+						</li>
+					</ul>
+				</p>
+
+				<ol>
+					<h3><li>Principe du NAT </li></h3>
+					<p>
+						Le NAT a été fait pour économiser des adresses IP en permettant la translation d’adresses IP privées (RFC1918), internes a une entité (une entreprise, une école etc.) en une ou plusieurs adresses IP publiques routable sur Internet. 
+					</p>
+					<p>
+						Remarque : l’adresse IP utilisée pour la translation n’est pas forcement une adresse IP public et peut être à nouveau une adresse IP privée qui, à son tour, pourra être translatée. 
+					</p>
+					<p>
+						Cette translation d’adresse est effectuée principalement sur les routeurs de bordure d’une entreprise connectée à Internet. Le réseau utilisant les adresses IP privées est ainsi appelé le réseau interne (inside), tandis que la partie du réseau utilisant des adresses IP publiques (Internet) est appelé le réseau externe (outside). 
+					</p>
+					<p>
+						Quand un utilisateur du réseau interne (inside) souhaite communiquer avec un hôte du réseau externe (outside), le routeur reçoit le paquet avec l’adresse IP privée et réécrit le paquet en changeant l’adresse IP source avec l’adresse IP public du routeur (c’est l’opération de translation).  
+					</p>
+					<p>
+						Le routeur consulte ensuite sa table de routage pour acheminer le paquet jusqu'à la bonne destination. Le destinataire recevra le paquet avec comme source l’adresse IP public du routeur et non l’adresse IP privée de l’hôte qui envoie le paquet dans le réseau interne. 
+					</p>
+					<p>
+						Au-delà des appellations « inside » et « outside », Cisco défini 4 types d’adresses pour le NAT : 
+						<ul>
+							<li>
+								<strong>Inside local address </strong>
+								<ul>
+									<li>Adresse IP attribuée à un hôte dans le LAN.</li>
+								</ul>
+							</li>
+							<li>
+								<strong>Inside global address</strong>
+								<ul>
+									<li>Adresse(s) IP attribuée(s) par le FAI reconnue(s) par l’Internet pour représenter le LAN.</li>
+								</ul>
+							</li>
+							<li>
+								<strong>Outside local address</strong>
+								<ul>
+									<li>Adresse IP d’un hôte du réseau externe telle qu’elle est connue par les utilisateurs du réseau interne. La plupart du temps, celle-ci est identique à l’ « outside global address ».</li>
+								</ul>
+							</li>
+							<li>
+								<strong>Outside global address</strong>
+								<ul>
+									<li>Adresse IP attribuée à un hôte dans le réseau externe.</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+					<figure>
+						<img src="../../images/cours4/image1.PNG" alt="Image non disponible">
+						<figcaption>Principe du fonctionnement du NAT.</figcaption>
+					</figure>
+
+					<p>
+						Le NAT peut être utilisé dans plusieurs cas, cependant il peut être configuré de deux manières différentes statiquement ou dynamiquement. 
+						<ul>
+							<li>
+								<strong>Le NAT statique</strong> translate une adresse IP privée avec toujours la même adresse IP public. S’il y a 4 utilisateurs nécessitant une translation d’adresse, il faudra donc utiliser 4 adresses IP publiques.
+							</li>
+							<li>
+								<strong>Le NAT dynamique</strong> translate une adresse privée avec une adresse IP publique appartenant à un pool d’adresses. L’adresse IP publique utilisée pour la translation n’est donc pas toujours la même. S’il n’y a pas assez d’adresses IP publiques disponibles les utilisateurs devront attendre qu’une adresse se libère pour pouvoir être translaté.  
+							</li>
+						</ul>
+					</p>
+					<p>
+						L’avantage du NAT, en plus de la grande économie d’adresses IP, est de ne pas avoir à refaire tout l’adressage IP lorsque l’on change de fournisseur d’accès internet. 
+					</p>
+					<p>
+						Cette technologie apporte également de la sécurité au sein du réseau interne puisque les machines qui s’y trouvent ne sont pas accessibles depuis l’extérieur.
+					</p>
+
+
+					<h3><li>Principe du PAT </li></h3>
+					<p>
+						<strong>Le PAT</strong> (Port Address Translation) ou Overloading permet d’attribuer une seule adresse IP publique pour la translation de plusieurs adresses IP privées. Chaque utilisateur est différencié grâce à un numéro de port unique qui lui est attribué lorsqu’il souhaite communiquer. 
+					</p>
+					<p>
+						Etant donné qu’il existe 65536 ports différents, un routeur pourrait translater jusqu’à 65536 adresses IP privées différentes. Cependant en réalité, un équipement ne peut gérer en moyenne que la translation d’environ 4000 ports par adresse IP publique.
+					</p>
+				</ol>
+
+		</section>
+
+		<section>
+			<h2><li>Configuration</h2>
+				<ol>
+					
+					<h3><li>Commandes</li></h3>
+					<ul>
+						<li>
+							<strong>ip nat inside</strong>
+							<ul>
+								<li>Mode de configuration d’interface</li>
+								<li>Spécifie l’interface inside.</li>
+								<li>Complémentaire des autres commandes NAT</li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip nat outside </strong>
+							<ul>
+								<li>Mode de configuration d’interface</li>
+								<li>Spécifie l’interface outside</li>
+								<li>Complémentaire des autres commandes NAT</li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip nat inside source static {local-ip} {global –ip}</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Etablie une translation statique entre une ‘Inside local address’ et une ‘Inside global address’</li>
+							</ul>
+						</li>
+						<li>
+							<strong>access-list {numéro} permit  {prefix} {wildcard_mask}</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Spécifie le ou les réseaux autorisés à être translaté</li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip nat inside source list {numéro} pool {nom_du_pool}</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Définie le pool qui va être translaté </li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip nat pool {nom_du_pool} {première-ip} {dernière-ip} netmask {masque_de_sous-reseau}</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Spécifie le pool d’adresses IP : toutes les adresses IP entre première-ip et dernière-ip</li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip nat inside source list {numéro} interface type {numéro} overload </strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Configuration du PAT sur l’interface outside </li>
+							</ul>
+						</li>
+						<li>
+							<strong>clear ip nat translation</strong>
+							<ul>
+								<li>Mode privilégié</li>
+								<li>Configuration du PAT sur l’interface outside</li>
+							</ul>
+						</li>
+
+					</ul>
+
+					<h3><li>Procédure de configuration</li></h3>
+					<p>
+						Spécifier les interfaces outside et inside (ip nat outside / inside)
+						<ul>
+							<li>
+								NAT statique :
+								<ul>
+									<li>Spécifier chaque adresse une par une (ip nat inside source static ip1 ip2)</li>
+								</ul>
+							</li>
+							<li>
+								NAT dynamique : 
+								<ul>
+									<li>Spécifier le bloc privé</li>
+									<li>Spécifier le pool public</li>
+									<li>Activer le NAT avec le bloc privé et le pool public en argument.</li>
+								</ul>
+							</li>
+							<li>
+								PAT :
+								<ul>
+									<li>Spécifier le bloc privé</li>
+									<li>Activer le NAT sur l’interface outside avec le bloc privé en argument.</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+					<h3><li> Vérification</li></h3>
+					<ul>
+						<li>
+							show ip nat translations 
+							<ul>
+								<li>Mode privilégié</li>
+								<li>Affiche des informations sur chaque translation en cours en particulier le temps depuis lequel elle est active.</li>
+							</ul>
+						</li>
+						<li>
+							show ip nat statistics
+							<ul>
+								<li>Mode privilégié</li>
+								<li>Configuration du PAT sur l’interface outside </li>
+							</ul>
+						</li>
+						<li>
+							show running-config
+							<ul>
+								<li>Mode privilégié</li>
+								<li>Affiche la configuration du routeur.</li>
+							</ul>
+						</li>
+						<li>
+							debug ip nat
+							<ul>
+								<li>Mode privilégié</li>
+								<li>Affiche en temps réel toute les paquets translatés.</li>
+							</ul>
+						</li>
+					</ul>
+
+				</ol>
+		</section>
+
+	</ol>
+
+
+
+</body>
+</html>

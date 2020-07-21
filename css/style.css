@@ -1,0 +1,110 @@
+*{
+  box-sizing: border-box; 
+}
+
+/*pour le style de text sélectionné*/
+::selection {
+  background: rgb(218, 66, 44);
+  color: white;
+}
+
+/*pour le style de scrollbar*/
+::-webkit-scrollbar {
+    width: 0.8em;
+    background-color:  rgb(218, 66, 44);
+}
+
+::-webkit-scrollbar-track {
+    background: silver; 
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: rgba(218, 66, 44,0.7);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(218, 66, 44);
+}
+
+body{
+	text-align: justify; /*text justifié*/
+	background-color: rgba(255,255,255,0.9);
+}
+
+/*les différents niveaux des titres*/
+h1 {
+	color:rgb(218, 66, 44);
+    text-align:center;
+}
+
+h2 {
+	color:rgb(218, 66, 44);
+}
+
+h3 {
+	color:rgb(218, 66, 44);
+}
+
+/*bordure et style des tableaux et cellules*/
+table
+{
+	border-collapse: collapse;
+    border-color: rgb(218, 66, 44);
+    text-align: center;
+    margin: auto;
+}
+
+td,th
+{
+	border: 2px solid rgb(218, 66, 44);
+	vertical-align: center; /*les cellules des tableaux seront centrés*/
+}
+
+/*les images seront centrés et auront une bordure*/
+img{
+	width: 50%;
+	height: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	border-color: rgb(218, 66, 44);
+	border-width: medium;
+	border-style: solid;
+	opacity: 0.7;
+}
+
+/*les images auront une légende au dessous et centré*/
+figcaption{
+	color: rgb(218, 66, 44);
+	text-align: center;
+}
+
+/*les tableaux auront un titre au dessous*/
+caption{
+	color: rgb(218, 66, 44);
+	caption-side: bottom;
+}
+
+/*les éléments des listes à puces non ordonnée auront des disque plein*/
+ul li{
+	list-style-type: disc;
+}
+
+/*les éléments des listes à puces non ordonnée imbriqués dans une autre liste non ordonnée auront des cercles*/
+ul li ul li{
+	list-style-type: circle;
+}
+
+/*les éléments des listes à puces non ordonnée imbriqués dans deux autres listes non ordonnées auront des carrés*/
+ul li ul li ul li{
+	list-style-type: square;
+}
+
+/*style uniquement pour le body de la page d'acceuil*/
+body#acceuil{
+	color: white;
+	background-color: rgba(0,0,0,0.7);
+	font-size: 2em;
+    font-family: "Comic Sans MS",cursive,sans-serif;
+    font-style: italic;
+    opacity: 0.9;
+}

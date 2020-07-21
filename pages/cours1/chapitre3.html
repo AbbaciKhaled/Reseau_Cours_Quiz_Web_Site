@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA1 Chapitre3</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Chapitre3 : Couche 1 (Médias et équipements réseau)</h1>
+	</header>
+
+	<ol>
+		<section>
+			<h2><li>Les notions de base sur les signaux et le bruit dans les systèmes de communication </h2>
+				<ol>
+					<h3><li>Comparaison des signaux analogique et numériques</li></h3>
+					<p>Lors de l’envoi de données sur un réseau, celles-ci transitent par des liaisons physiques, il convient donc d’observer comment sont-elles représentés dans ces liaisons. 
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image4.PNG" alt="Image non disponible">
+						<figcaption>Représentation d'un signal numérique et d'un signal analogique.</figcaption>
+					</figure>
+
+					<br>
+				
+				<p>
+					Signal : tension électrique souhaitée, modèle d’impulsions lumineuses ou encore onde électromagnétique modulée. Il permet d’acheminer les données dans le média.  
+				</p>
+				<p>
+					Le signal numérique dispose d’un graphique de tension que l’on va définir comme « sautillant », il se rapproche d’une onde carrée ou la tension passe quasi instantanément d’un état de basse tension à un état de haute tension.
+				</p>
+				<p>
+					Le signal analogique présente les caractéristiques suivantes :
+					<ul>
+						<li>Il oscille </li>
+						<li>Son graphique de tension varie constamment en fonction du temps et peut être représenté par une sinusoïde </li>
+						<li>Il est utilisé pour les télécommunications depuis le début</li>
+						<ul>
+							<li>Exemple : téléphone et radio</li>
+						</ul>
+					</ul>
+				</p>
+				<p>
+					Les deux caractéristiques importantes d’une onde sont son amplitude (A), c’est-à-dire sa hauteur et sa longueur, ainsi que sa période. La fréquence de l’onde peut être calculée avec cette formule : f = 1/T. 
+				</p>
+				<h3><li>La représentation d'un bit dans un média physique</li></h3>
+				<p>
+					Un bloc d'information est un élément binaire, connu sous le nom de bit ou impulsion. Un bit, dans un milieu électrique, est un signal correspondant à un 0 binaire ou à un 1 binaire. Cela peut être aussi simple que 0 (zéro) volts pour un 0 en binaire, et +5 volts pour un 1 binaire, ou un codage plus complexe.  
+				</p>
+				<p>
+					La mise à la terre de référence est un concept important concernant tous les médias de gestion réseau qui emploient des tensions pour diffuser des messages. C’est une masse électrique permettant d’établir une tension zéro dans un graphique de signalisation.
+				</p>
+
+				<h3><li>Les facteurs pouvant affecter un bit</li></h3>
+				</ol>
+
+				<p>
+					Il existe différents facteurs pouvant affecter le signal et de ce fait les bits transportés sur le média :
+				</p>
+				<p>
+					La propagation de signaux réseau : 
+					<br>
+					Le terme de propagation fait référence au temps que met un bit, c'est-à-dire une impulsion, à se déplacer dans le média. Il est impératif que la propagation soit homogène dans le réseau. 
+				</p>
+				<p>
+					L’atténuation du signal réseau : 
+ 					<br>
+					Perte de la force du signal. Ce problème est limitable par un bon choix des médias réseau utilisés 
+				</p>
+				<p>
+					<strong>La réflexion réseau : </strong>
+					<br>
+					Retour d’énergie causée par le passage des impulsions dans le média. Si ce retour est trop fort, il peut perturber le signal des impulsions suivantes. Le système binaire, et donc à 2 états, peut être perturbé par ces énergies supplémentaires se déplaçant dans le média.
+				</p>
+				<img src="../../images/cours1/image5.PNG" alt="Image non disponible">
+				<p>
+					<strong>Le bruit : </strong>
+					<br>Ajout indésirable à un signal. Des sources d’énergie situées à proximité du média fournissent un supplément d’énergie venant perturber le signal. 
+ 
+					<br>Diaphonie : bruit ajouté au signal d’origine d’un conducteur par l’action du champ magnétique provenant d’un autre conducteur 
+
+					<br>
+
+					<img src="../../images/cours1/image6.PNG" alt="Image non disponible">
+ 
+					<br>
+					<strong>Paradiaphonie :</strong> diaphonie causée par un conducteur interne au câble 
+ 
+					<br>Le bruit peut être causé par des sources d’alimentations externes, des variations thermiques, des interférences électromagnétiques ou encore des interférences de radio fréquences.
+				</p>
+				<p>
+					<strong>La dispersion : </strong>
+					<br>Étalement des impulsions dans le temps. Si la dispersion est trop forte, le signal d’un bit peut recouper le signal du précédent ou du suivant. La durée d’une impulsion est fixe, la dispersion correspond à une modification de cette durée au fur et à mesure que le signal se propage dans le média.
+				</p>
+				<p>
+					<strong>La gigue :</strong> 
+					<br>Les systèmes numériques sont synchronisés, tout est réglé par des impulsions d’horloge. Si les horloges de la source et du destinataire ne sont pas synchronisées, on obtient alors « une gigue de synchronisation ».
+				</p>
+
+				<img src="../../images/cours1/image7.PNG" alt="Image non disponible">
+
+				<p>
+					<strong>La latence : </strong>
+					<br>Retard de transmission. Principalement du au déplacement du signal dans le média et à la présence de composants électroniques entre la source et la destination.
+				</p>
+				<img src="../../images/cours1/image8.PNG" alt="Image non disponible">
+				<p>
+					<strong>Les collisions : </strong>
+					<br>Se produit lorsque 2 ordinateurs utilisant le même segment de réseau émettent en même temps. Les impulsions se mélangent, détruisant alors les données. 
+				</p>
+				<img src="../../images/cours1/image9.PNG" alt="Image non disponible">
+				<p>
+					Dès qu’un bit accède au média, il est sujet à tous ces paramètres pouvant perturber la transmission. Dans la mesure où le but n’est pas de transmettre un bit, mais des quantités gigantesques (parfois 1 milliard de bits à la seconde) ; ces paramètres ne sont pas à négliger, car le moindre défaut peut avoir des conséquences importantes sur la qualité de la transmission. 
+				</p>
+				<p>
+					Il faut aussi savoir qu’une liaison entre 2 équipements A et B peut être : 
+					<ul>
+						<li>Simple (unidirectionnelle) : A est toujours l'émetteur et B le récepteur. C'est ce que l'on trouve par exemple entre un banc de mesure et un ordinateur recueillant les données mesurées. </li>
+						<li>Half-duplex (bidirectionnelle à l'alternat) : Le rôle de A et B peut changer, la communication change de sens à tour de rôle (principe talkies-walkies).</li>
+						<li>Full-duplex (bidirectionnelle simultanée) : A et B peuvent émettre et recevoir en même temps (comme dans le cas du téléphone). </li>
+					</ul>
+				</p>
+		</section>
+
+		<section>
+			<h2><li>Médias de cuivres</h2>
+
+				<ol>
+					<h3><li>Le câble à paires torsadées non blindées</li></h3>
+
+					<p>
+						Le câble UTP est composé de 4 paires de fils torsadées 2 à 2, chacune de ses paires étant isolées des autres. Ce câble compte uniquement sur l'effet d'annulation produit par les paires torsadées pour limiter la dégradation du signal causée par une perturbation électromagnétique et une interférence radioélectrique. 
+					</p>
+					<p>
+						Annulation : Afin de réduire au maximum la diaphonie entre les paires d'un câble à paires torsadées non blindées, le nombre de torsades des paires de fils doit respecter exactement le nombre de torsades permises par mètre de câble. 
+					</p>
+					<p>
+						Lorsque le câble à paires torsadées non blindées est utilisé comme média de réseau, il comporte quatre paires de fils de cuivre. La paire torsadée non blindée utilisée comme média de réseau a une impédance de 100 ohms. Ceci la différencie des autres types de câblage à paires torsadées comme ceux utilisés pour le câblage téléphonique. 
+					</p>
+					<p>
+						Comme le câble à paires torsadées non blindées à un diamètre extérieur de 0,43 mm et un coût relativement faible, sa petite taille peut s'avérer avantageuse lors d'une installation. 
+					</p>
+					<p>
+						<strong>Avantages :</strong>
+						<ul>
+							<li>Simple à installer</li>
+							<li>Peu coûteux </li>
+							<li>Petit diamètre (pour installation dans des conduits existants)</li>
+						</ul>
+					</p>
+					<p>
+						<strong>Inconvénient : </strong>
+						<ul>
+							Sensible aux interférences
+						</ul>
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image10.PNG" alt="Image non disponible">
+						<figcaption>Câble UTP.</figcaption>
+					</figure>
+
+					<br>
+
+					<h3><li>Le câble à paires torsadées  blindées</li></h3>
+
+					<p>
+						Le câble à paires torsadées et blindées, ou STP, ajoute aux spécifications de l’UTP une méthode de blindage, d'annulation et de torsion de câbles. Comme le précise les spécifications pour les installations de réseau Ethernet, des câbles à paires torsadées blindées de 100 ohms correctement installés offrent une résistance à l'interférence électromagnétique, ainsi qu’à l'interférence de radiofréquences, sans toutefois augmenter sensiblement la taille ou le poids du câble.
+					</p>
+					<p>
+						Le câble à paires torsadées blindées présente tous les avantages et désavantages du câble à paires torsadées non blindées en assurant cependant une plus grande protection contre toute interférence externe au prix certes d’un diamètre plus élevé. 
+					</p>
+					<p>
+						Le blindage de ce type de câble doit être mis à la terre lors de son installation, si cela n’est pas effectué correctement, de nombreux problèmes peuvent survenir, car le blindage agit comme une antenne en absorbant les signaux électriques des autres fils du câble et des parasites électriques externes au câble.
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image11.PNG" alt="Image non disponible">
+						<figcaption>Câble STP.</figcaption>
+					</figure>
+
+					<br>
+
+					<h3><li>Le câble coaxial</li></h3>
+					<p>
+						Un câble coaxial est constitué d’un fil de cuivre entouré d’un isolant flexible, lui-même entouré d’une torsade de cuivre ou d’un ruban métallique qui agit comme le second fil du circuit et comme protecteur du conducteur intérieur. Cette deuxième couche ou protection peut aider à réduire les interférences externes. Une gaine de câble enveloppe ce blindage. 
+					</p>
+					<p>
+						Le câble coaxial offre de nombreux avantages du fait de sa capacité à s’étendre sur une plus grande distance et de son coût parmi les plus faibles. C’est une technologie utilisée depuis de nombreuses années pour tous les types de communications de données. 
+					</p>
+					<p>
+						Le câble coaxial existe en plusieurs variantes :
+						<ul>
+							<li>Thicknet : Epais et raide à cause de son blindage, il est recommandé pour l'installation de câble fédérateur. Sa gaine est jaune. </li>
+							<li>Thinnet : D’un diamètre plus réduit, il est plus pratique dans des installations comprenant des courbes. De plus, il est plus économique, mais dispose d’un blindage moins conséquent. </li>
+							<li>Cheapernet : Version économique et de faible diamètre du câble coaxial.</li>
+						</ul>
+					</p>
+
+
+					<figure>
+						<img src="../../images/cours1/image12.PNG" alt="Image non disponible">
+						<figcaption>Câble Thinnet et Câble Thicknet.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						Il importe d'apporter une attention particulière à la mise à la terre. On doit assurer une solide connexion électrique aux deux extrémités du câble. Manquer à ce principe entraîne des parasites électriques qui causent une interférence au niveau de la transmission du signal du média réseau.  
+					</p>
+
+					<h3><li>Les connecteurs RJ-45</li></h3>
+					<p>
+						Le raccordement 10BaseT standard (le connecteur de point d'extrémité sans prise) est le RJ-45. Il réduit les parasites, la réflexion et les problèmes de stabilité mécanique et ressemble à une prise téléphonique, sauf qu'il compte huit conducteurs au lieu de quatre. 
+					</p>
+					<p>
+						Il s'agit d'un composant réseau passif, car il sert uniquement au passage du courant entre les quatre paires torsadées de câbles torsadés de catégorie 5 et les broches du connecteur RJ-45. 
+					</p>
+					<p>
+						Les connecteurs RJ-45 s'insèrent dans les réceptacles ou les prises RJ-45. Les prises mâles RJ-45 ont huit connecteurs qui s'enclenchent avec la prise RJ-45.De l'autre côté de la prise RJ-45, il y a un bloc où les fils sont séparés et fixés dans des fentes avec l'aide d'un outil semblable à une fourche. Ceci offre un passage de courant en cuivre aux bits. 
+					</p>
+					<p>
+						Voici un tableau récapitulant les différents types de câbles ainsi que leur débit : 
+					</p>
+					<tr><th>Technologie</th> <th>Type de câble</th> <th>Débit théorique</th> <th>Longueur Max</th> <th>Connecteur</th> <th>Coût</th></tr>
+					<tr><td>10 Base 2 (Thinnet)</td><td>Coaxial</td><td>10 Mbits/s</td><td>200 m</td><td>BNC</td><td>Peu cher</td></tr>
+					<tr><td>10 Base 5 (Thinnet)</td><td>Coaxial</td><td>10 Mbits/s</td><td>200 m</td><td>BNC</td><td>Peu cher</td></tr>
+					<tr><td>10 Base T</td><td>UTP cat 5</td><td>10 Mbits/s</td><td>100 m</td><td>RJ45 </td><td>Bon marché</td></tr>
+					<tr><td>100 Base TX</td><td>UTP cat 5</td><td>100 Mbits/s</td><td>100 m</td><td>RJ45 </td><td>Bon marché</td></tr>
+					<tr><td>10 Base FL</td><td>Fibre optique</td><td>10 Mbits/s</td><td>2000 m</td><td>SC</td><td>Elevé</td></tr>
+					<tr><td>100 Base FX</td><td>Fibre optique</td><td>100 Mbits/s</td><td>400 m</td><td>SC</td><td>Elevé</td></tr>
+				</ol>
+		</section>
+
+		<section>
+			<h2><li>Médias optiques </h2>
+
+				<ol>
+					<h3><li>Phénomènes physiques :</li></h3>
+
+					<p>
+						Spectre électromagnétique
+						<br>
+						Les ondes radio, l’infrarouge, les rayons lumineux visibles, ainsi que les rayons gamma et X sont tous des types d’énergie électromagnétique. Cette énergie est créée lorsqu’une source change répétitivement en intensité. Les émissions amplifiées et diminuées créent des ondes, des vibrations qui se déplacent comme des vagues créées par un caillou jeté dans l’eau.  
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image13.PNG" alt="Image non disponible">
+						<figcaption>Propagation d'ondes électromagnétiques.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						La distance entre les ondes est appelée la longueur d’onde et est désignée par λ. Elle dépend de la fréquence d’altérations de charge. Plus la fréquence d’émission est grande, plus petite est la distance entre les summums (maximums) d’ondes. 
+					</p>
+					<p>
+						Les ondes électromagnétiques partagent des propriétés similaires. Entre autres, elles se propagent toutes à la vitesse de la lumière c (299 792 458 m /s) quand elles traversent le vide. Quant à un autre environnement, tel que l’air, l’eau ou le verre, leur vitesse v est atténuée. 
+					</p>
+					<p>
+						Lorsqu’on regroupe les ondes électromagnétiques commençant par celles qui ont la plus petite longueur jusqu’aux ondes qui ont la plus grande longueur, on obtient le spectre électromagnétique. Les ondes de longueur entre 400 nm et 700 nm constituent la lumière visible. La lumière d’une longueur d’onde supérieure est appelée la lumière infrarouge. Les longueurs couramment utilisées pour le transport d’informations dans la fibre optique sont précisément les longueurs de l’infrarouge : 850 nm, 1310 nm et 1550 nm. 
+					</p>
+					<p>
+						Réflexion 
+						<br>
+						Un rayon passant dans un milieu 1, qui rencontre sur son chemin un autre milieu 2 est appelé rayon incident. Une fois arrivé sur la surface de l’autre milieu, le rayon incident se réfléchit. Selon la loi de réflexion, l’angle incident θ1 est égal à l’angle réfléchi θ2. 
+ 
+						Réflexion d’un rayon où θ1 = θ2
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image14.PNG" alt="Image non disponible">
+						<figcaption>Réflexion d'un rayon.</figcaption>
+					</figure>					
+
+					<br>
+
+					<p>
+						Réfraction 
+						<br>
+						Supposons qu’un rayon incident traverse un milieu transparent, par exemple l’air, et arrive sur la surface d’un autre milieu, également transparent, soit l’eau. Au lieu de se réfléchir complètement, il est possible que le rayon incident traverse la surface qui sépare les deux milieux (le dioptre), ainsi en pénétrant dans l’eau. Lorsque le rayon traverse la surface, son angle s’approche vers la normale. On peut observer ce cas sur le schéma ci-dessous où l’angle θ1 est supérieur à θ3. Ce phénomène est appelé la réfraction et l’on dit pour le rayon traversé qu’il est réfracté. 
+					</p>
+					<p>
+						Pour qu’un rayon soit réfléchi sans être réfracté, il faut que son angle d’incidence soit plus grand que l’angle critique des deux milieux.
+					</p>
+					<p>
+						Il est important de connaître le facteur qui détermine l’importance de déviation subi par le rayon réfracté. Ce coefficient, nommé l’indice de réfraction, est le rapport entre la vitesse de la lumière dans le vide et dans le milieu : n = c / v. 
+					</p>
+					<p>
+						Il faut également retenir que l’indice de réfraction dépend de la longueur d’onde λ. Cela veut dire que deux rayons ayant deux différentes longueurs d’ondes ne se comportent pas de la même façon dans un milieu M, à savoir que l’une se déplace plus vite que l’autre. C’est d’ailleurs pour cette raison que l’on a choisi la lumière infrarouge et non pas une autre pour le transport d’informations dans la fibre optique.
+					</p>
+					<p>
+						La réflexion interne totale 
+						<br>
+						Dans une fibre optique, les données sont transmises de façon similaire à une transmission réalisée dans un fil électrique : s’il y a de la lumière, l’information traduite en bit 1, sinon en bit 0. L’objectif est évidemment que le rayon, le porteur de l’information, arrive bien de la source jusqu’à  destination et sans être affaibli. Pour ce faire, le rayon doit être guidé dans la fibre sans réfraction, il doit se propager en faisant la réflexion interne totale.
+					</p>
+					<p>
+						Les deux conditions principales pour réaliser la réflexion interne totale sont : 
+						<ul>
+							<li>l’indice de réfraction n<sub>0</sub> du cœur de la fibre doit être supérieur à l’indice de réfraction de la gaine n<sub>1</sub>.</li>
+							<li>le rayon entrant doit se situer dans le cône d’acceptance.</li>
+						</ul>
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image15.PNG" alt="Image non disponible">
+						<figcaption>Réflexion enterne globale.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						Sur l’image au dessus l’on voit que le premier rayon entrant est en dehors du cône, avec un angle supérieur à θ0. Remarquez sur la première partie agrandie que le rayon est effectivement réfracté et rappelez-vous que dans ce cas, l’angle d’incidence α est bien inférieur à l’angle critique. 
+					</p>
+					<p>
+						Le deuxième rayon, quant à lui, passe bien par le cône, son angle d’incidence β est supérieur à l’angle critique, et il se propage par la réflexion totale interne tout au long de la fibre. C’est un rayon guidé. 
+					</p>
+
+					<h3><li>Composants optiques </li></h3>
+					<p>
+						Fibre optique 
+						<br>
+						Une fibre optique transmet des données dans un sens seulement. Aussi pour que deux entités communiquent en full duplex, un câble optique doit contenir deux fibres optiques : l’une pour transmission et l’autre pour réception. Un câble peut contenir de 2 jusqu'à 48 fibres. Les fibres réunies ensemble dans un câble ne créent pas de bruit, car elles ne portent pas d’impulsions électriques qui pourraient induire des interférences électromagnétiques. Donc elles n’ont pas besoin d’une protection par blindage, comme les fils en cuivre. 
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image16.PNG" alt="Image non disponible">
+						<figcaption>Full duplex avec deux fibres optiques.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						
+ 						Un câble à fibres optiques est soutenu avec des fils de renforcement en plastique, tel que  le Kevlar. Ceci rend un câble plus résistant, assurant ainsi que les fibres optiques ne s’abîment pas lorsqu’elles sont pliées. 
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image17.PNG" alt="Image non disponible">
+						<figcaption>Câble optique.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						La lumière est guidée dans le centre de la fibre, appelé cœur. Le cœur est constitué en majorité de silicium dioxyde (silice), enrichi avec d’autres éléments. Il est entouré par la gaine optique. La gaine est également faite de silice, mais son indice de réfraction est bien inférieur à celui du cœur. Cela permet justement à la lumière de se réfléchir. La gaine optique est protégée par une enveloppe, fabriquée fréquemment en plastique.
+					</p>
+
+					<figure>
+						<img src="../../images/cours1/image18.PNG" alt="Image non disponible">
+						<figcaption>Deux fibres optiques : monomode et multimode.</figcaption>
+					</figure>
+
+					<br>
+
+					<p>
+						Le chemin fait par un rayon est aussi appelé un mode. Lorsqu’une fibre optique transmet un seul rayon, elle est appelée fibre monomode. La fibre qui transmet plusieurs rayons, elle est appelée fibre multimode. Pour transmettre plusieurs rayons, avec des chemins différents, le cœur de la fibre multimode doit être plus grand que celui de la fibre monomode.  
+					</p>
+					<p>
+						Les sources qui diffusent la lumière dans la fibre ne sont pas les même pour les fibres monomode et multimode. En effet, une fibre multimode utilise la LED (Light Emitting Diode), en français « DEL », Diode Electroluminescente, alors qu’une fibre monomode utilise le laser, qui est en général plus cher. Un laser émet des rayons de longueur plus longue que celle des rayons émis par une LED. De ce fait, la longueur maximale de la fibre multimode est 2000 m. Tandis que la longueur maximale de la fibre monomode est 3000 m. Les fibres monomode sont plus coûteuses et leur utilisation est fréquemment destinée aux liaisons WAN, entre différents bâtiments. Les fibres multimode sont moins chères et plus utilisées dans l’entreprise.
+					</p>
+				</ol>
+		</section>
+
+		<section>
+			<h2><li>Médias sans fil</li></h2>
+			<p>
+				Les réseaux sans fils ou WLAN (pour Wireless WAN), réussissent à conjuguer tous les avantages d’un réseau filaire traditionnel comme Ethernet mais sans la limitation des câbles. La mobilité est maintenant l’attrait principal pour les entreprises, la possibilité d’étendre son réseau LAN existant selon les besoins de l’organisation. 
+			</p>
+			<p>
+				Un WLAN à également besoin, tout comme un LAN, d’un média. Au lieu de câbles à paires torsadées, les WLANs utilisent des fréquences radio à 2,4 GHz et 5 GHz. 
+			</p>
+			<p>
+				On parle de "réseaux sans fils"  mais la plupart du temps, ces réseaux sont intégrés aux LANs traditionnels, juste considérés comme une extension à l’existant. Aujourd’hui, grâce à des normalisations de l’IEEE et du "Wi-Fi Alliance", les équipements sans fils sont standardisés et compatibles, ce qui explique l’engouement croissant pour ce type de réseau de moins en moins coûteux. 
+			</p>
+			<p>
+				Il faut savoir que la première version d’un réseau sans fil offrait un débit de l’ordre de 1 à 2 Mbps. Grâce à la mobilité rendue possible, cette technologie fut rapidement mise en place. 
+			</p>
+			<p>
+				En effet, tout d’abord pour faciliter certains métiers comme la gestion des stocks dans les entrepôts, rapidement les réseaux sans fils se sont étendus à d’autres secteurs comme dans les hôpitaux, les écoles et universités. Standardiser cette technologie devenait nécessaire, un groupe de travail a donc été mis en place en 1991 par plusieurs constructeurs, le WECA (Wireless Ethernet Compatibility Alliance), plus tard, ce nom changera pour le Wi-Fi (Wireless Fidelity). 
+			</p>
+			<p>
+				En Juin 1997, L’IEEE publie les standards 802.11 pour les réseaux locaux sans fils. 
+			</p>
+			<p>
+				Les réseaux sans fils peuvent fonctionner à deux bandes de fréquences, selon la technologie utilisée. Soit aux alentours de 2400 Mhz (2,4 Ghz) pour le 802.11b et 802.11g soit aux alentours de 5000 Mhz pour le 802.11a. s
+			</p>
+			<p>
+				La bande la plus utilisée pour le moment est l’ISM (Industrial Scientific and Medical) cela correspond à la bande des 2,4 GHz avec une largeur de bande de 83,5 MHz. Soit des fréquences allant de 2,4 GHz à 2,4835 GHz. 
+			</p>
+		</section>
+	</ol>
+
+</body>
+</html>

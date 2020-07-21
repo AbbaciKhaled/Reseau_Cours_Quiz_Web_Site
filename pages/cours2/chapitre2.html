@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA2 Chapitre2</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+	<header>
+		<h1>Chapitre2 : Configuration de base d’un routeur</h1>
+	</header>
+
+	<ol>
+		<section>
+
+			<h2><li>Commandes de visualisation d’état</li></h2>
+			<p>
+				IOS propose une panoplie importante de commandes permettant la visualisation de l’état. Ces commandes commencent toutes par le mot clé show. Les commandes de visualisation d’état à connaître en premier lieu sont les suivantes : 
+				<ul>
+					<li><strong>show running-config :</strong>  Affiche le fichier de la configuration active.</li>
+					<li><strong>show startup-config :</strong> Affiche le fichier de la configuration de sauvegarde.</li>
+					<li><strong>show version :</strong> Affiche la configuration matérielle système, la version d’IOS, le nom et la source de l'image IOS d'amorçage, ainsi que la valeur du registre de configuration. </li>
+					<li><strong>show processes :</strong> Affiche des informations sur les processus actifs.</li>
+					<li><strong>show memory :</strong> Affiche des statistiques sur la mémoire du routeur, y compris sur la mémoire disponible.</li>
+					<li><strong>show stacks :</strong> Contrôle l'utilisation de la pile par les processus et les routines. </li>
+					<li><strong>show buffers :</strong> Fournit des statistiques sur les mémoires tampon des interfaces du routeur. </li>
+					<li><strong>show arp :</strong> Affiche les entrées ARP connues. </li>
+					<li><strong>clear arp :</strong> Vide les entrées dynamiques de la table ARP. </li>
+					<li><strong>show hosts :</strong> Affiche la table de résolution de noms. </li>
+					<li><strong>show flash :</strong> Affiche des informations sur la mémoire Flash, telles que la quantité d’espace libre et le nom des fichiers présents dans cette mémoire. </li>
+					<li><strong>show interfaces [{type} {numéro}] :</strong> Affiche les informations de configuration ainsi que des statistiques de trafic pour chaque interface configurée sur le routeur (couches 2 et 3). </li>
+					<li><strong>show controllers [{type} {numéro}] :</strong> Affiche les informations de couche 1 des interfaces.</li>
+					<li><strong>show ip interface [{type} {numéro}] [brief] :</strong> Affiche les informations IP pour les interfaces.</li>
+					<li><strong>clear counters [{type} {numéro}] :</strong> Permet de mettre à zéro toutes les statistiques des interfaces du routeur. </li>
+					<li><strong>show ip route :</strong> Affiche la table de routage IP.</li>
+					<li><strong>show protocols : </strong> Affiche le nom et l’état de tous les protocoles configurés  de couche 3. </li>
+					<li><strong>show ip protocols :</strong>  Affiche les valeurs des compteurs de routage et les informations de réseau associées à l'ensemble du routeur. Cette commande nous indique les différents réseaux avec lesquels le protocole de routage est configuré pour communiquer, ainsi que la distance administrative de ce dernier. </li>
+					<li><strong>show sessions :</strong> Affiche la liste des sessions en cours. </li>
+					<li><strong>show users :</strong> Affiche la liste des utilisateurs actuellement connectés au routeur.</li>
+					<li><strong>show clock :</strong> Affiche la date et l’heure actuelle. </li>
+					<li><strong>show history :</strong> Affiche la liste des commandes en mémoire.</li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+
+			<h2><li>Date et heure </li></h2>
+			<p>
+				Comme pour tout système informatique, la date et l’heure peuvent être configurés. Ceci peut s’avérer utile lorsque l’on utilise les fonctions de log ou de débogage, en fournissant la date et l’heure exacte des évènements survenus.
+			</p>
+			<p>
+				Les commandes utilisées pour le système de date et d’heure sont les suivantes : 
+				<ul>
+					<li>
+						<strong>show clock </strong>
+						<ul>
+							<li>Affiche la date et l’heure du système </li>
+						</ul>
+					</li>
+				</ul>
+
+				<ul>
+					<li>
+						<strong>clock set {hh:mm:ss} {jour} {mois} {année} </strong>
+						<ul>
+							<li>Mode privilégié </li>
+							<li>Permet de configurer l’heure sur le routeur </li>
+							<li><strong>hh:mm:ss</strong> correspond à l’heure (de 0 à 23), aux minutes et aux secondes.</li>
+							<li><strong>jour</strong> est un nombre (de 1 à 31). </li>
+							<li><strong>mois</strong> est le nom du mois. </li>
+							<li><strong>année</strong> est l’année avec 4 chiffres. </li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+			<p>
+				Cette configuration est manuelle, et est nécessaire à chaque redémarrage du routeur. Il est possible d’utiliser le protocole NTP (Network Time Protocol), afin de maintenir synchronisé le routeur avec un serveur de temps. 
+			</p>
+
+		</section>
+
+		<section>
+			
+			<h2><li>Nom d’hôte et résolution de noms</li></h2>
+
+			<p>
+				Les noms d’hôtes sont très utiles. En effet, ils permettent d’identifier un hôte avec un nom facile à retenir plutôt que d’utiliser des adresses de couches réseau. Pour pouvoir utiliser ces noms d’hôtes, il faut un système de résolution de noms, sachant que cette résolution de noms a une portée locale. 
+			</p>
+			<p>
+				Les noms d’hôtes et les résolutions de noms ne sont pas transmis de routeur à routeur. Cela signifie qu’il faut configurer la résolution de noms sur tous les dispositifs réseau sur lesquels on souhaite utiliser des noms d’hôtes pour la communication réseau. 
+			</p>
+			<p>
+				Il est possible de configurer : 
+				<ul>
+					<li>Le nom d’hôte du routeur </li>
+					<li>La résolution de noms statique</li>
+					<li>La résolution de noms dynamique grâce au protocole DNS </li>
+				</ul>
+			</p>
+
+			<p>
+				Les commandes à utiliser sont les suivantes : 
+				<ul>
+					<li>
+						<strong>hostname {nom} </strong>
+						<ul>
+							<li>Mode de configuration globale</li>
+							<li>Attribution du nom d’hôte du routeur </li>
+							<li>Ce nom est affiché par l’invite de commandes</li>
+							<li>La valeur par défaut est "Router" </li>
+						</ul>
+					</li>
+
+					<li>
+						<strong>ip host {nom} [tcp_port_number] {IP1} [{IP2}…] </strong>
+						<ul>
+							<li>Mode de configuration globale </li>
+							<li>Création d’une entrée statique de résolution de noms dans la table d’hôtes </li>
+							<li><strong>tcp_port_number</strong> permet de spécifier le port TCP à utiliser avec cet hôte pour un accès Telnet </li>
+							<li>Il est possible de spécifier plusieurs adresses IP pour un seul hôte. Dans ce cas, seule la commande <strong>telnet</strong> utilisera les adresses autres que la première si les précédentes ne répondent pas</li>
+						</ul>
+					</li>
+
+					<li>
+						<strong>[no] ip domain-lookup</strong>
+						<ul>
+							<li>Mode de configuration globale </li>
+							<li>Active/désactive la résolution dynamique de noms (DNS) </li>
+						</ul>
+					</li>
+
+					<li>
+						<strong>ip name-server {DNS1} [{DNS2}…]</strong>
+						<ul>
+							<li>Mode de configuration globale </li>
+							<li>Permet de spécifier le ou les serveurs DNS avec lesquels nous effectuerons les résolutions d’adresses</li>
+							<li>On peut préciser jusqu’à 6 serveurs DNS différents </li>
+						</ul>
+					</li>
+
+					<li>
+						<strong>ip domain-name {préfixe} </strong>
+						<ul>
+							<li>Mode de configuration globale </li>
+							<li>Précise le préfixe DNS par défaut à utiliser pour la résolution d’adresses dynamique</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+			<p>
+				La commande show hosts permet d’afficher la table des correspondances entre les noms d’hôte et leur(s) adresse(s) de couche 3. Les champs de cette table sont les suivants :
+			</p>
+
+			<table>
+				<caption>Table des champs des correspondances entre les noms d’hôte et leur(s) adresse(s).</caption>
+				<tr><th>Information</th><th>Description</th></tr>
+				<tr><td>Host</td><td>Noms des machines connues</td></tr>
+				<tr><td>Flag</td><td>Description de la méthode utilisée pour apprendre les informations et pour juger de leur pertinence actuelle </td></tr>
+				<tr><td>perm</td><td>Configuré manuellement dans une table d’hôtes</td></tr>
+				<tr><td>temp</td><td>Acquis par le biais d’un serveur DNS </td></tr>
+				<tr><td>OK</td><td>Entrée valide</td></tr>
+				<tr><td>EX</td><td>Entrée obsolète, expirée</td></tr>
+				<tr><td>Age</td><td>Temps (en heures) écoulé depuis que le logiciel a appris l’entrée </td></tr>
+				<tr><td>Type</td><td>Champ identifiant le protocole de couche 3 </td></tr>
+				<tr><td>Address(es)</td><td>Adresses logiques associées au nom de machine </td></tr>
+			</table>
+
+		</section>
+
+		<section>
+			
+			<h2><li>Descriptions et bannière de connexion</li></h2>
+
+			<p>
+				Les descriptions d’interface et la bannière de connexion sont très utiles pour fournir des informations quant à l’utilité ou la fonction de chaque routeur et de chacune de ces interfaces. 
+			</p>
+			<p>
+				La bannière de connexion s’affiche lors de la connexion d’un terminal à une ligne et permet de transmettre un message aux utilisateurs du routeur. Ceci peut être utile pour les avertir d’un arrêt imminent du routeur ou pour faire passer un message publicitaire. 
+			</p>
+			<p>
+				Pour définir cette bannière, il faut utiliser la commande :
+				<ul>
+					<li>
+						<strong>banner motd {caractère d’encapsulation} {message} {caractère d’encapsulation} </strong>
+						<ul>
+							<li>Mode de configuration globale </li>
+							<li>Le message doit être encapsulé entre un caractère quelconque qui ne doit pas exister dans le message. </li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>
+				Enfin, on peut indiquer une description pour chaque interface du routeur. Ceci est très utile pour ceux qui seraient censés travailler sur ce routeur et qui ne connaissent pas forcément à quoi peut être attribué une interface. Pour cela, il faut utiliser la commande :
+				<ul>
+					<li>
+						<strong>description {texte}</strong>
+						<ul>
+							<li>Mode de configuration d’interface </li>
+							<li>Le texte de description ne peut pas excéder 80 caractères sur les anciens modèles (exemple : Routeur 2500) ou 240 caractères sur les modèles plus récent (exemple : Routeur 2600).</li>
+							<li>Cette description est visible en utilisant la commande <strong>show interfaces</strong></li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			
+			<h2><li>Mots de passe </h2>
+
+			<p>
+				On peut protéger notre système à l’aide de mots de passe pour en restreindre l’accès. Une protection par mot de passe peut être installée pour chaque ligne ainsi que sur l’accès au mode privilégié. 
+			</p>
+			<p>
+				Pour configurer une protection par mot de passe sur une ligne, il faut utiliser les commandes suivantes :
+				<ul>
+					<li>
+						<strong>line {console | aux | vty} {{numéro} | {premier} {dernier}} </strong>
+						<ul>
+							<li>Mode de configuration globale</li>
+							<li>Mode de configuration globale</li>
+							<li>Il est possible d’accéder à plusieurs lignes en même temps. Pour cela, il suffit de préciser non pas le numéro mais la plage de numéros. Par exemple, pour accéder directement dans le mode de configuration des 5 lignes VTY, il suffit d’utiliser la commande <strong>line vty 0 4</strong></li>
+						</ul>
+					</li>
+
+					<li>
+						<strong>password {mot de passe}</strong>
+						<ul>
+							<li>Mode de configuration de ligne</li>
+							<li>Permet de spécifier le mot de passe pour la ligne courante</li>
+							<li>Le mot de passe est écrit par défaut en clair dans le fichier de configuration</li>
+						</ul>
+					</li>
+
+					<li>
+						<strong>login</strong>
+						<ul>
+							<li>Mode de configuration de ligne </li>
+							<li>Précise qu’aucun login ne sera demandé lors de la connexion </li>
+							<li>Cette commande ne peut être utilisée que si un mot de passe est déjà configuré sur la ligne</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>
+				Les mots de passe pour les lignes console et auxiliaire ne sont pris en compte qu’après le redémarrage du routeur. Les lignes auxiliaire et VTY ne sont pas opérationnelles si elles n’ont pas de mot de passe configuré. Cela signifie qu’aucun accès autre que par la ligne console n’est faisable sans configuration préalable. 
+			</p>
+			<p>
+				On peut aussi restreindre l’accès au mode privilégié en utilisant au moins une de ces commandes : 
+				<ul>
+					<li>
+						<strong>enable password {mot de passe}</strong>
+						<ul>
+							<li>Mode de configuration globale</li>
+							<li>Le mot de passe est écrit en clair dans le fichier de configuration</li>
+						</ul>
+					</li>
+
+					<li>
+						<strong>enable secret {mot de passe}</strong>
+						<ul>
+							<li>Mode de configuration globale</li>
+							<li>Le mot de passe est crypté dans le fichier de configuration en utilisant l’algorithme MD5</li>
+							<li>Cette commande est prioritaire par rapport à enable password si elles sont toutes deux configurées</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>
+				Malheureusement, tous les mots de passe, à l’exception du enable secret, sont écrits en clair dans le fichier de configuration. Ceci implique une plausible faille de sécurité (sauvegarde d’un fichier de configuration sur un serveur TFTP non sécurisé, etc.). 
+			</p>
+			<p>
+				Pour y remédier, il faut utiliser la commande service password-encryption depuis le mode de configuration globale. Cette commande permet de crypter tous les mots de passe écrits en clair dans le fichier de configuration en utilisant un algorithme propriétaire Cisco. 
+			</p>
+
+		</section>
+
+		<section>
+			
+			<h2><li>Serveur HTTP</li></h2>
+
+			<p>
+				IOS fournit un serveur HTTP. Ce serveur fournit un moyen d’accès pour configuration. 
+			</p>
+
+			<p>
+				La commande à utiliser pour contrôler l’état de ce serveur HTTP est : 
+				<ul>
+					<li>
+						<strong>[no] ip http server</strong>
+						<ul>
+							<li>Mode de configuration globale </li>
+							<li>Active/désactive le serveur HTTP interne du routeur</li>
+							<li>Actif par défaut</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+
+			<p>
+				Pour accéder au service HTTP fournit par le routeur, il faut utiliser un explorateur Web et y accéder en indiquant l’adresse IP d’une interface. 
+			</p>
+			<p>
+				Lors de la connexion, la page Web demande un nom d’utilisateur et un mot de passe. Les valeurs par défaut ne correspondent à aucun nom d’utilisateur et au mot de passe du mode privilégié. 
+			</p>
+			<p>
+				Ce serveur HTTP faisant l’objet de beaucoup d’exploits et de failles de sécurité, il est recommandé de le désactiver lorsque l’on n’en a plus/pas besoin. 
+			</p>
+
+		</section>
+
+		<section>
+			
+			<h2><li>Configuration des interfaces</li></h2>
+
+			<p>
+				Les interfaces sont utilisées par les routeurs pour transférer les paquets de données entre différents réseaux de couche 3.
+			</p>
+
+			<p>
+				Ces interfaces peuvent être de différents types. Dans ce cours, nous étudierons uniquement les interfaces suivantes :
+				<ul>
+					<li>Loopback</li>
+					<li>Ethernet</li>
+					<li>Serial</li>
+				</ul>
+			</p>
+
+			<p>
+				La commande show interfaces permet l’affichage de l’état des interfaces du routeur. On peut déterminer :
+				<ul>
+					<li>L’adresse IP et le masque de sous-réseau</li>
+					<li>L’adresse de couche 2 </li>
+					<li>L’encapsulation utilisée </li>
+					<li>Les statistiques sur le trafic transitant au travers de chaque interface</li>
+					<li>L’état de l’interface, qui correspond à ceci :</li>
+				</ul>
+			</p>
+
+			<table>
+				<caption>Comparaison Interface (couche 1) et Line protocol (couche 2).</caption>
+				<tr><th>Interface (couche 1)</th><th>Line protocol (couche 2) </th></tr>
+				<tr><td>Administratively down (shutdown)</td><td>Down (problème de couche 2)</td></tr>
+				<tr><td>Down (problème de câble)</td><td>Up (réception des "keepalive") </td></tr>
+				<tr><td>Up (média fonctionnel)</td></tr>
+			</table>
+
+			<ol>
+				<h3><li>Interfaces Loopback </li></h3>
+				<p>
+					Les interfaces Loopback sont généralement utilisées pour simuler des interfaces réelles.
+				</p>
+				<p>
+					Pour leur configuration, on dispose des commandes suivantes :
+					<ul>
+						<li>
+							<strong>interface loopback {numéro} </strong>
+							<ul>
+								<li>Mode de configuration globale </li>
+								<li>Permet de passer dans le mode de configuration d’interface </li>
+							</ul>
+						</li>
+
+						<li>
+							<strong>ip address {IP} {masque} [secondary]</strong>
+							<ul>
+								<li>Mode de configuration d’interface </li>
+								<li>Permet d’attribuer une adresse IP à cette interface</li>
+								<li>Le paramètre secondary précise qu’il s’agit d’une adresse IP secondaire</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+
+				<h3><li>Interfaces Ethernet/IEEE 802.3 </li></h3>
+				<p>
+					Les interfaces de type Ethernet/IEEE 802.3 peuvent être de type :
+					<ul>
+						<li>Ethernet (IEEE 802.3)</li>
+						<li>Fast Ethernet (IEEE 802.3u)</li>
+						<li>Gigabit Ethernet (IEEE 802.3ab ou IEEE 802.3z)</li>
+						<li>10-Gigabit Ethernet (IEEE 802.3ae)</li>
+					</ul>
+				</p>
+				<p>
+					Les interfaces Gigabit ou 10-Gigabit ne seront pas étudiées dans ce cours.
+				</p>
+
+				<p>
+					La configuration basique de ces interfaces est très simple, et se résume à ces commandes :
+					<ul>
+						<li>
+							<strong>interface {Ethernet | FastEthernet} {numéro | slot/numéro}</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Permet de passer dans le mode de configuration d’interface</li>
+							</ul>
+						</li>
+
+						<li>
+							<strong>ip address {IP} {masque} [secondary]</strong>
+							<ul>
+								<li>Mode de configuration d’interface</li>
+								<li>Permet d’attribuer une adresse IP à cette interface</li>
+								<li>Le paramètre secondary précise qu’il s’agit d’une adresse IP secondaire</li>
+							</ul>
+						</li>
+
+						<li>
+							<strong>[no] keepalive </strong>
+							<ul>
+								<li>Mode de configuration d’interface </li>
+								<li>Active/désactive les "keep alive" sur l’interface</li>
+								<li>Utile pour rendre une interface opérationnelle sans avoir à brancher un média </li>
+							</ul>
+						</li>
+
+						<li>
+							<strong>[no] shutdown</strong>
+							<ul>
+								<li>Mode de configuration d’interface </li>
+								<li>Active/désactive administrativement l’interface</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+
+				<h3><li>Interfaces série</li></h3>
+
+				<p>
+					Les interfaces série sont classifiées en fonction de leur mode de transmission qui peut être :
+					<ul>
+						<li>Synchrone</li>
+						<li>Asynchrone</li>
+						<li>Synchrone/asynchrone (par défaut en mode synchrone)</li>
+					</ul>
+				</p>
+
+				<p>
+					Elles sont le plus souvent présentes sous la forme de cartes WIC à insérer dans des slots de routeurs modulaires. 
+				</p>
+
+				<p>
+					Les commandes utilisées par ces interfaces sont les suivantes :
+
+					<ul>
+						<li>
+							<strong>interface {serial | async} {numéro | slot/numéro}</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Permet de passer dans le mode de configuration d’interface</li>
+								<li>Le mot clé async n’est utilisable que pour les interfaces de type asynchrone</li>
+							</ul>
+						</li>
+
+						<li>
+							<strong></strong>
+							<ul>
+								<li>Mode de configuration d’interface</li>
+								<li>Spécifie la vitesse de fonctionnement de la liaison WAN</li>
+								<li>A faire uniquement sur une interface ETCD</li>
+								<li>Le paramètre vitesse est exprimé en bits par seconde</li>
+							</ul>
+						</li>
+
+						<li>
+							<strong>ip address {IP} {masque} [secondary]</strong>
+							<ul>
+								<li>Mode de configuration d’interface</li>
+								<li>Permet d’attribuer une adresse IP à cette interface </li>
+								<li>Le paramètre secondary précise qu’il s’agit d’une adresse IP secondaire </li>
+							</ul>
+						</li>
+
+						<li>
+							<strong>[no] shutdown </strong>
+							<ul>
+								<li>Mode de configuration d’interface</li>
+								<li>Active/désactive administrativement l’interface</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+
+			</ol>
+
+		</section>
+
+	</ol>
+
+</body>
+</html>

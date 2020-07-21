@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA4 Chapitre4</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+	<header>
+		<h1>Chapitre4 : Conception WAN</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Communication dans un WAN </li></h2>
+			<p>
+				La communication WAN est généralement appelée « service », car elle à un coût par rapport au temps d’utilisation (Facture forfaitaire ou basée sur la consommation) contrairement à la communication LAN (Uniquement les frais d’installation du matériel), et se caractérise habituellement par : 
+				<ul>
+					<li>Un débit relativement faible (par rapport aux réseaux LAN).</li>
+					<li>Des délais importants (liés aux distances).</li>
+					<li>Un taux d’erreurs généralement élevé (Réseaux WAN plus soumis aux interférences extérieures). </li>
+				</ul>
+			</p>
+			<p>
+				Le choix d’un service WAN dépend principalement des critères suivants : 
+				<ul>
+					<li>Optimisation de la bande passante.</li>
+					<li>Réduction des coûts.</li>
+					<li>Optimisation de l’efficacité du service. </li>
+				</ul>
+			</p>
+			<p>
+				Les besoins liés aux services WAN sont parmi les facteurs suivants : 
+				<ul>
+					<li>Augmentation de l’utilisation des réseaux (Applications client/serveur, multimédia, etc.).</li>
+					<li>Évolution permanente des exigences relatives aux logiciels (Qualité, etc.).</li>
+					<li>Nombre de connexions à distance en constante augmentation (Utilisateurs éloignés ou mobiles, sites répartis dans le monde, communication avec les clients et les fournisseurs, etc.).</li>
+					<li>Croissance des intranets et extranets d’entreprise (bande passante).</li>
+					<li>Utilisation de plus en plus importante des serveurs d’entreprise. </li>
+				</ul>
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Premières étapes de la conception WAN </li></h2>
+			<p>
+				Les deux principaux objectifs de la conception et de la mise en œuvre d’un WAN sont :
+				<ul>
+					<li>Disponibilité des applications (Accès aux applications = efficacité du réseau).</li>
+					<li>Coût (Utilisation rentable des ressources). </li>
+				</ul>
+			</p>
+			<p>
+				Ces deux critères sont fondamentalement contradictoires. Il est donc nécessaire d’observer une pondération entre la relative importance de la disponibilité des ressources et les prix de revient globaux. 
+			</p>
+			<p>
+				La première étape de la conception d’un réseau WAN est de recueillir des informations :
+				<ul>
+					<li>Données sur la structure et les processus de l’entreprise.</li>
+					<li>Déterminer les personnes susceptibles de nous aider à concevoir le réseau.</li>
+					<li>
+						Identifier les besoins des utilisateurs (concernant la disponibilité des applications) :
+						<ul>
+							<li>Temps de réponse.</li>
+							<li>Débit.</li>
+							<li>Fiabilité. </li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>
+				Les différentes méthodes d’évaluation des besoins des utilisateurs sont : 
+				<ul>
+					<li>
+						<strong>Les profils des utilisateurs :</strong>
+						Définition des besoins des divers groupes d’utilisateurs. 
+					</li>
+					<li>
+						<strong>Des entretiens, groupes de discussion et sondages : </strong>
+						Etablissement d’une base de référence.
+					</li>
+					<li>
+						<strong>Des entretiens aux groupes d’utilisateurs clés : </strong>
+						Méthode de collecte de renseignements par échantillonnage. 
+					</li>
+					<li>
+						<strong>Tests du facteur humain : </strong>
+						Test en laboratoire avec un groupe représentatif d’utilisateurs. C’est la méthode d’évaluation la plus coûteuse et significative. 
+					</li>
+				</ul>
+			</p>
+			<p>
+				Cette analyse des besoins des utilisateurs a pour but de déterminer : 
+				<ul>
+					<li>Le type de trafic passé.</li>
+					<li>Le niveau du trafic.</li>
+					<li>Le temps de réponse des systèmes hôtes.</li>
+					<li>La durée d’exécution des transferts de fichiers.</li>
+					<li>L’utilisation de l’équipement réseau existant.</li>
+				</ul>
+			</p>
+			<p>
+				Les besoins ne sont pas statiques, il faut donc prendre en compte :
+				<ul>
+					<li>L’accès au réseau changeant en fonction du temps (Période de pointe).</li>
+					<li>Les différences liées au type de trafic (Sensibilité aux paquets abandonnés, exigence en bande passante).</li>
+					<li>La nature aléatoire du trafic réseau (les heures d’utilisation peuvent changer).</li>
+				</ul>
+			</p>
+			<p>
+				Ensuite, il reste à effectuer un test de sensibilité en brisant des liaisons stables et à observer le résultat. On peut utiliser une de ces deux méthodes : 
+				<ul>
+					<li>
+						<strong>Supprimer une interface active : </strong>
+						Observation de la redirection du trafic, d’une probable perte de connectivité. 
+					</li>
+					<li>
+						<strong>Modifier la charge réseau :</strong>
+						Observation du comportement du réseau lors de la saturation du réseau.
+					</li>
+				</ul>
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Modèle de réseau hiérarchique </h2>
+			<p>
+				Il existe deux structures de modèle de réseau :
+				<ul>
+					<li>
+						<strong>Hiérarchique :</strong>
+						<ul>
+							<li>Réseau divisé en couches.</li>
+							<li>Fonction(s) précise(s) associée(s) à chaque couche. </li>
+						</ul>
+					</li>
+					<li>
+						<strong>Maillée : </strong>
+						<ul>
+							<li>Topologie linéaire.</li>
+							<li>Tous les dispositifs ont les mêmes fonctions.</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>
+				L’intérêt d’utiliser un modèle de réseau hiérarchique lors de la conception est de :
+				<ul>
+					<li>Faciliter les modifications et la compréhension du réseau (Réseau modulaire).</li>
+					<li>Limiter les coûts et la complexité des mises à niveau du réseau (appliquées à un sous-ensemble uniquement).</li>
+					<li>Limiter les coûts de construction et d’élaboration du réseau.</li>
+					<li>Faciliter l’identification des points de défaillance. </li>
+				</ul>
+			</p>
+			<p>
+				L’utilisation d’un modèle hiérarchique procure des avantages tels que : 
+				<ul>
+					<li>Évolutivité.</li>
+					<li>Facilité de mise en œuvre.</li>
+					<li>Facilité de dépannage.</li>
+					<li>Prévisibilité.</li>
+					<li>Prise en charge de protocoles.</li>
+					<li>Facilité de gestion.</li>
+				</ul>
+			</p>
+			<p>
+				Les couches, dans un modèle de conception, sont séparées par des dispositifs de couche 3 du modèle OSI, qui séparent le réseau en domaines de broadcast. 
+			</p>
+
+			<ol>
+				<h3><li>Modèle à 3 couche</li></h3>
+
+				<figure>
+					<img src="../../images/cours4/image13.PNG" alt="Image non disponible">
+					<figcaption>Description du modèle à 3 couche</figcaption>
+				</figure>
+
+				<p>
+					Les couches de ce modèle sont :
+					<ul>
+						<li>
+							<strong>Couche principale (Centrale) :</strong>
+							 Assure l’optimisation du transport entre les sites.
+						</li>
+						<li>
+							<strong>Couche de distribution : </strong>
+							Assure une connectivité fondée sur les politiques.
+						</li>
+						<li>
+							<strong>Couche d’accès : </strong>
+							Permet aux utilisateurs et aux groupes de travail d’accéder au réseau. 
+						</li>
+					</ul>
+				</p>
+				<p>
+					<strong>La couche principale : </strong>
+					<ul>
+						<li>Assure la communication (la plus rapide possible) entre les sites éloignés.</li>
+						<li>Comporte habituellement des liaisons point-à-point.</li>
+						<li>Aucun hôte présent, que des unités de communication.</li>
+						<li>Services présents (Frame Relay, T1/E1, SMDS) loués auprès d’un fournisseur de services.</li>
+						<li>Ne s’occupe pas du filtrage ou de la sécurité.</li>
+						<li>Exigence de chemins redondants pour la continuité de service en cas de panne.</li>
+						<li>Fonctionnalités des protocoles de routage très importantes (Partage de charge, convergence rapide).</li>
+						<li>Utilisation efficace de la bande passante reste une préoccupation principale. </li>
+					</ul>
+				</p>
+				<p>
+					<strong>La couche distribution :</strong>
+					<ul>
+						<li>Fournit des services à plusieurs LAN au sein d’un WAN (Backbone de campus).</li>
+						<li>C’est l’emplacement du backbone du WAN (de type Fast Ethernet).</li>
+						<li>Sert à interconnecter des immeubles.</li>
+						<li>Emplacement des serveurs d’entreprise (DNS, messagerie centralisée).</li>
+						<li>A pour rôle de définir les frontières (sous la forme de politiques).</li>
+						<li>Prend en charge le filtrage (ACL), le routage des VLAN. </li>
+					</ul>
+				</p>
+				<p>
+					<strong>La couche d’accès : </strong>
+					<ul>
+						<li>Partie LAN du réseau.</li>
+						<li>Emplacement des hôtes (Utilisateurs).</li>
+						<li>Emplacement des serveurs de groupe de travail (Stockage des fichiers, impression).</li>
+						<li>Possibilité d’utiliser des ACL afin de déterminer les besoins précis d’un groupe d’utilisateur.</li>
+						<li>Partage et/ou commutation de la bande passante, micro segmentation et VLAN.</li>
+						<li>Regroupement des utilisateurs selon leur fonction, leurs besoins.</li>
+						<li>Isolation du trafic de broadcast destiné à un groupe de travail ou à un LAN. </li>
+					</ul>
+				</p>
+
+				<h3><li>Modèle à 2 couche</li></h3>
+
+				<figure>
+					<img src="../../images/cours4/image14.PNG" alt="Image non disponible">
+					<figcaption>Description du modèle à 2 couche</figcaption>
+				</figure>
+
+				<p>
+					Dans un modèle à 2 couches, les sites distincts sont interconnectés directement par l’intermédiaire de liaisons WAN, représentant la couche principale. Chaque site peut contenir plusieurs LAN.
+				</p>
+				
+				<h3><li>Modèle à 1 couche</li></h3>
+
+				<figure>
+					<img src="../../images/cours4/image15.PNG" alt="Image non disponible">
+					<figcaption>Description du modèle à 2 couche</figcaption>
+				</figure>
+
+				<p>
+					Un réseau à une couche (Modèle linéaire) est mis en œuvre si l’entreprise n’a pas beaucoup d’emplacements éloignés, et si l’accès aux applications se fait principalement à l’intérieur du LAN. 
+				</p>
+
+			</ol>
+
+		</section>
+
+	</ol>
+
+
+
+
+
+
+</body>
+</html>

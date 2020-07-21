@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA4 Chapitre2</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+	<header>
+		<h1>Chapitre2 : Protocole DHCP</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Introduction</h2>
+			<p>
+				<strong>DHCP</strong> (Dynamic Host Configuration Protocol) est un protocole fonctionnant en mode Client – Serveur. Il fournit aux clients une configuration de couche 3 : principalement une adresse (IP), mais aussi des adresses  de passerelle ou de serveur DNS, NETBIOS, noms de domaines, … 
+			</p>
+			<p>
+				Ce protocole permet une gestion dynamique de l’adressage de niveau 3. Il allège ainsi grandement les tâches de l’administrateur réseau.  
+			</p>
+			<p>
+				Les <strong>clients DHCP</strong> sont fournis aux utilisateurs sur la plupart des systèmes d’exploitation. Grâce à l’envoi d’une requête au serveur, ceux-ci peuvent se voir attribuer une adresse de couche 3. Seuls les équipements utilisateurs doivent bénéficier de ce service, les serveurs et équipements réseaux devant être adressés de façon 
+			</p>
+			<p>
+				Le DHCP fonctionne sur un principe de location ou bail. Le serveur attribue une adresse à un client pour une durée prédéterminée (en jours, minutes, secondes). Le client doit donc effectuer à nouveau une demande pour voir son bail reconduit.
+			</p>
+			<p>
+				Il existe trois types d’allocation d’adresse : 
+				<ul>
+					<li>
+						<strong>Automatique :</strong> une adresse IP permanente est attribuée automatiquement au client. Un  mappage statique (mac – IP) permet de retrouver la même adresse lors d’une déconnexion / reconnexion. 
+					</li>
+					<li>
+						<strong>Manuelle :</strong> l’attribution est faite manuellement par l’administrateur réseau (mappage statique). Le protocole DHCP se charge d’envoyer ces informations au client lors d’une demande. 
+					</li>
+					<li>
+						<strong>Dynamique :</strong> l’attribution se fait à la volée. Une IP libre est attribuée à un client en faisant la  demande, pour une durée déterminée.
+					</li>
+				</ul>
+			</p>
+			<p>
+				Les serveurs <strong>DHCP</strong> sont généralement gérés par des serveurs d’entreprise (service généralement assuré par l’OS), mais ils peuvent également être configurés sur les routeurs. 
+			</p>
+
+			<ol>
+				<h3><li>Comparatif entre BOOTP et DHCP</li></h3>
+				<p>
+					BOOTP (Bootstrap Protocol) est l’ancêtre du protocole DHCP. Son but était d’attribuer une configuration de couche 3 aux stations de travail fonctionnant sans disque dur. DHCP reprend plusieurs de ses caractéristiques :
+					<ul>
+						<li>Fonctionne en mode client - serveur</li>
+						<li>Utilise les ports UDP 67 (serveur) et 68 (client), appelés ports BOOTP</li>
+						<li>Attribue une adresse IP</li>
+						<li>Attribue un masque de sous-réseau</li>
+						<li>Attribue une adresse de passerelle</li>
+						<li>Attribue une adresse de serveur DNS</li>
+					</ul>
+				</p>
+				<p>
+					Le protocole BOOTP alloue les adresses de façon statique : le serveur BOOTP doit posséder au préalable une table de correspondance mac – IP pour attribuer une IP. BOOTP n’a pas de notion de bail et fait donc une liaison permanente entre un hôte et l’adresse IP qu’il lui donnera.  
+				</p>
+				<p>
+					Enfin, le protocole DHCP peut fournir jusqu’à 30 options de configuration, contre 4 seulement pour BOOTP (IP, masque, adresse de passerelle, adresse du DNS). 
+				</p>
+
+
+				<h3><li>Opération DHCP</li></h3>
+				<p>
+					La configuration d’un client avec le protocole DHCP se fait en 4 étapes : 
+					<ul>
+						<li>
+							<strong>DHCP DISCOVER : </strong>
+							<ul>
+								<li>Lorsqu’une configuration DHCP cliente est présente sur un poste utilisateur, celui-ci envoie une requête en broadcast aux serveurs DHCP, appelée DHCP DISCOVER.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>DHCP OFFER : </strong>
+							<ul>
+								<li>Les serveurs DHCP recevant le broadcast et pouvant répondre à la demande, envoient une requête en unicast au client. Ce DHCP OFFER contient toutes les informations nécessaires au client (IP, adresse de passerelle, durée du bail, serveur DNS, WINS, etc.). </li>
+							</ul>
+						</li>
+						<li>
+							<strong>DHCP REQUEST : </strong>
+							<ul>
+								<li>Le client émet ensuite une requête en broadcast afin de confirmer l’offre qu’il a sélectionnée (celle qui lui est arrivée en premier).</li>
+								<li>S’il y avait plusieurs serveurs DHCP, tous sont alors au courant et peuvent libérer leur offre en conséquence.</li>
+								<li>S’il s’agit d’un renouvellement de bail, le client propose au serveur l’IP qu’il veut se voir réattribuer.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>DHCP ACK : </strong>
+							<ul>
+								<li>Cette confirmation est envoyée en unicast par le serveur DHCP au client. Une fois le DHCP ACK reçu, le client peut alors utiliser l’adresse IP ainsi que le reste de la configuration attribuée.</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+
+				<figure>
+					<img src="../../images/cours4/image2.PNG" alt="Image non disponible">
+					<figcaption>Principe du fonctionnement du protocole DHCP.</figcaption>
+				</figure>
+
+				<p>
+					Il existe trois autres requêtes DHCP :
+					<ul>
+						<li>
+							<strong>DHCP DECLINE : </strong>
+							Si le client détecte l’IP qu’on lui a proposée sur le même segment réseau, il envoie cette requête au serveur. Le processus redémarre alors. 
+						</li>
+						<li>
+							<strong>DHCP NACK : </strong>
+							Lorsqu’un serveur détecte que l’IP pour laquelle il doit renvoyer un ACK est déjà présente sur le réseau, il envoie un DHCP NACK. Le processus doit alors redémarrer pour le client concerné. 
+						</li>
+						<li>
+							<strong>DHCP RELEASE : </strong>
+							Lorsqu’un client veut annuler le bail (arrêt du système, commande ipconfig /release sous Windows), cette requête est envoyée au serveur afin qu’il libère la réservation d’adresse. 
+						</li>
+					</ul>
+				</p>
+
+				<h3><li>Relais DHCP</li></h3>
+				<p>
+					Les serveurs DHCP font partie des serveurs d’entreprise. Il est très courant que ces serveurs soient placés sur un sous-réseau différent de celui des utilisateurs. 
+				</p>
+				<p>
+					Un problème se pose donc : les requêtes clientes étant envoyées au serveur DHCP en broadcast, un routeur segmentant le réseau arrêtera également ces broadcast. Il en va de même pour les services DNS, TFTP, TACACS (service d’authentification), etc.
+				</p>
+				<p>
+					Il est possible d’éviter ce problème en appliquant la commande ip helper-address sur l’interface d’un routeur. Celle-ci permet de relayer les broadcast UDP vers une adresse unicast définie. Ce relais ce fait au niveau des services UDP suivants : 
+					<ul>
+						<li>Protocole Time </li>
+						<li>TACACS </li>
+						<li>Le protocole DNS </li>
+						<li>Le service BOOTP/DHCP</li>
+						<li>TFTP </li>
+						<li>Le service NetBIOS</li>
+					</ul>
+				</p>
+
+				<figure>
+					<img src="../../images/cours4/image3.PNG" alt="Image non disponible">
+					<figcaption>Appliquant la commande ip helper-address sur l’interface d’un routeur</figcaption>
+				</figure>
+
+			</ol>
+
+		</section>
+
+		<section>
+			<h2><li>Configuration</h2>
+				<p>
+					Comme pour le NAT, la configuration DHCP nécessite la définition de groupe(s) de plages d’adresses attribuables.
+				</p>
+
+				<ol>
+					<h3><li>Commandes</li></h3>
+					<ul>
+						<li>
+							<strong>ip dhcp pool {nom_groupe}</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Passe en mode de configuration DHCP</li>
+								<li>Spécifie et nomme un groupe d’adresses</li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip dhcp excluded-address {prefix} [prefix2]</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Spécifie l’adresse ou la plage d’adresses à exclure du DHCP </li>
+							</ul>
+						</li>
+						<li>
+							<strong>[no] service dhcp</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Active/désactive le service DHCP</li>
+								<li>Actif par défaut </li>
+							</ul>
+						</li>
+						<li>
+							<strong>network {prefix} {masque}</strong>
+							<ul>
+								<li>Mode de configuration DHCP</li>
+								<li>Spécifie la plage d’adresses attribuables</li>
+							</ul>
+						</li>
+						<li>
+							<strong>default-router {prefix}</strong>
+							<ul>
+								<li>Mode de configuration DHCP</li>
+								<li>Spécifie la passerelle par défaut </li>
+							</ul>
+						</li>
+						<li>
+							<strong>dns-server {prefix} [prefix2, prefix3, …]</strong>
+							<ul>
+								<li>Mode de configuration DHCP</li>
+								<li>Spécifie le(s) serveur(s) DNS </li>
+							</ul>
+						</li>
+						<li>
+							<strong>netbios-name-server {prefix}</strong>
+							<ul>
+								<li>Mode de configuration DHCP</li>
+								<li>Spécifie l’adresse du serveur NETBIOS WINS </li>
+							</ul>
+						</li>
+						<li>
+							<strong>domain-name {nom}</strong>
+							<ul>
+								<li>Mode de configuration DHCP</li>
+								<li>Spécifie le nom du domaine</li>
+							</ul>
+						</li>
+						<li>
+							<strong>lease {infinite | jours [heures] [minutes]}</strong>
+							<ul>
+								<li>Mode de configuration DHCP</li>
+								<li>Spécifie la durée du bail</li>
+								<li>Valeur par défaut : 1 jour </li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip helper-address {prefix}</strong>
+							<ul>
+								<li>Mode de configuration d’interface</li>
+								<li>Relaye les broadcast UDP (reçus sur l’interface) vers l’adresse unicast spécifiée.</li>
+							</ul>
+						</li>
+					</ul>
+
+					<h3><li>Procédure de configuration</li></h3>
+					<p>
+						Voici la procédure permettant de configurer le service DHCP sur un routeur Cisco :
+						<ul>
+							<li>Définir le nom du groupe d’adresses (commande ip dhcp pool)</li>
+							<li>Définir les plages d’adresses attribuables (commande network)</li>
+							<li>Spécifier la passerelle par défaut (commande default-router)</li>
+							<li>Exclure les adresses IP statiques (commande ip dhcp excluded-address) </li>
+						</ul>
+					</p>
+					<p>
+						Commandes optionnelles :
+						<ul>
+							<li>Spécifier l’adresse du serveur DNS (commande dns-server)</li>
+							<li>Spécifier la durée du bail (commande lease)</li>
+							<li>Spécifier l’adresse du serveur NETBIOS (commande netbios-name-server)</li>
+							<li>Spécifier le nom de domaine (commande domain-name)</li>
+							<li>Relayer les broadcast vers le serveur concerné (commande ip helper-address)</li>
+						</ul>
+					</p>
+
+					<h3><li>Vérification</li></h3>
+					<p>
+						Deux commandes show permettent de vérifier le bon fonctionnement du protocole DHCP : 
+						<ul>
+							<li>
+								show ip dhcp binding
+								<ul>
+									<li>Mode privilégié</li>
+									<li>Affiche les liaisons créées par DHCP (mac – IP)</li>
+									<li>Affiche la date de fin du bail</li>
+									<li>Affiche le type d’allocation d’adresse (Automatique, Manuel, Dynamique)</li>
+								</ul>
+							</li>
+							<li>
+								show ip dhcp server statistics
+								<ul>
+									<li>Mode privilégié</li>
+									<li>Affiche les requêtes DHCP envoyées et reçues</li>
+									
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+				</ol>
+
+		</section>
+
+	</ol>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA3 Chapitre2</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+	<header>
+		<h1>Chapitre2 : Protocole RIPv2</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Rappels sur RIPv1</li></h2>
+
+			<p>
+				RIPv1 est un protocole de routage intérieur classful, à vecteur de distance qui base ses décisions d'acheminement sur une métrique qui emploie essentiellement le nombre de saut. Le nombre maximum de saut est de 15. 
+			</p>
+			<p>
+				Il transmet des mises à jour de routage complètes toutes les 30 secondes. D'autre part, il lui faut entre 3 et 5 minutes pour converger. Les points suivants récapitulent les principales caractéristiques de RIPv.1:
+				<ul>	
+					<li>RIPv1 est un protocole de routage intérieur (IGP). </li>
+					<li>C'est est un protocole de routage à vecteur de distance.</li>
+					<li>Il utilise une métrique basée sur le nombre de saut. </li>
+					<li>Toutes les 30 secondes, il diffuse sa mise à jour de routage par broadcast. </li>
+					<li>RIPv1 a une convergence lente.</li>
+					<li>Il utilise une métrique de mesure infini (maximum hop count), le split horizon ainsi que des compteurs de retenue (hold down timers) mais aussi le route poisoning  pour limiter les effets des boucles de routage.</li>
+					<li>RIPv1 est un protocole de routage classful et par conséquent ne supporte pas VLSM et CIDR.</li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Spécifications de RIPv2</li></h2>
+
+			<p>
+				RIPv2 est une version améliorée de son prédécesseur et partage donc certaines caractéristiques : 
+				<ul>
+					<li>Tous deux sont des IGP (Interior Gateway Protocol). </li>
+					<li>RIPv1 et RIPv2 sont des protocoles de routage à vecteur de distance. </li>
+					<li>Ils utilisent une métrique basée sur le nombre de saut. </li>
+					<li>Ils emploient un nombre maximum de saut, des compteurs de retenue d'on la valeur est fixé à 180s par défaut, ainsi que le split horizon et le route poisoning pour limiter les effets de boucles de routage. </li>
+					<li>Leur configuration est aisée. </li>
+				</ul>
+			</p>
+			<p>
+				RIPv2 apporte également des fonctionnalités supplémentaires tels que : 
+				<ul>
+					<li>Le support du routage classless. </li>
+					<li>La diffusion du masque réseau dans les mises à jour de routage.</li>
+					<li>Le support de VLSM. </li>
+					<li>La diffusion des mises à jour de routage par multicast avec l'adresse de classe D 224.0.0.9. </li>
+					<li>L'authentification de la source de la mise à jour de routage par un texte en clair <strong>(actif par défaut)</strong>, ou un texte crypté suivant l'algorithme MD5 (Message-Digest 5). </li>
+					<li>L'utilisation d'indicateurs de route externe <strong>(route tag)</strong> afin de pouvoir différencier les routes apprises d'autre protocole de routage et redistribué dans RIP. </li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Configuration </h2>
+
+				<ol>
+					
+					<h3><li>Commandes générales </li></h3>
+					<ul>
+						<li>
+							<strong>router rip</strong>
+							<ul>
+								<li>Mode de configuration globale</li>
+								<li>Active le protocole RIP. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>version 2 </strong>
+							<ul>
+								<li>Mode de configuration du protocole de routage </li>
+								<li>Permet d’utiliser RIPv2 à la place de RIPv1.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>network {adresse réseau}</strong>
+							<ul>
+								<li>Mode de configuration du protocole de routage </li>
+								<li>Permet d'indiquer les réseaux directement connectés au routeur.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip default-network {adresse réseau} </strong>
+							<ul>
+								<li>Mode de configuration du protocole de routage </li>
+								<li>Permet de spécifier une route par défaut. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>default-information originate </strong>
+							<ul>
+								<li>Mode de configuration du protocole de routage </li>
+								<li>Permet de propager la route par défaut dans les mises à jour de routage.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>no auto-summary </strong>
+							<ul>
+								<li>Mode de configuration du protocole de routage</li>
+								<li>Désactive l'auto-agrégation. </li>
+							</ul>
+						</li>
+					</ul>
+
+					<h3><li>Authentification</li></h3>
+					<ul>
+						<li>
+							<strong>key-chain {nom}</strong>
+							<ul>
+								<li>Mode de configuration globale </li>
+								<li>Permet d'identifier un groupe de clef d'authentification. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>key {id} </strong>
+							<ul>
+								<li>Mode de configuration de clé </li>
+								<li>Permet de créer une clef dans un groupe de clef. L'identifiant de clef peut prendre une valeur de 0 à 2147483647. L'identifiant de clef peut ne pas être consécutif. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>key-string {mot de passe} </strong>
+							<ul>
+								<li>Mode de configuration de clé </li>
+								<li>Permet de définir un mot de passe pour une clef. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip rip authentication key-chain {nom} </strong>
+							<ul>
+								<li>Mode de configuration d’interface </li>
+								<li>Active l'authentification RIP sur une interface</li>
+							</ul>
+						</li>
+						<li>
+							<strong>ip authentication mode {text | md5}</strong>
+							<ul>
+								<li>Mode de configuration d’interface </li>
+								<li>Permet de spécifier le type d'authentification en clair ou crypté.</li>
+							</ul>
+						</li>
+					</ul>
+
+				</ol>
+
+		</section>
+
+	</ol>
+
+</body>
+</html>

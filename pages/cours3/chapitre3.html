@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA3 Chapitre3</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+	<header>
+		<h1>Chapitre3 : Design de LAN</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Présentation</li></h2>
+
+			<p>
+				La conception d’un réseau est un des facteurs les plus importants pour en assurer la stabilité. Les objectifs de cette conception incluent des facteurs tels que :
+				<ul>
+					<li>
+						<strong>La fonctionnalité </strong>
+						<ul>
+							<li>Un réseau doit apporter aux utilisateurs les fonctionnalités suffisantes et nécessaires à leurs besoins</li>
+						</ul>
+					</li>
+					<li>
+						<strong>L’évolutivité </strong>
+						<ul>
+							<li>Un réseau doit pouvoir prendre en charge de nouvelles fonctionnalités sans pour autant devoir reconsidérer la structure initiale</li>
+						</ul>
+					</li>
+					<li>
+						<strong>L’adaptabilité</strong>
+						<ul>
+							<li>Un réseau doit pouvoir s’adapter sans nécessiter de trop complexes configurations </li>
+						</ul>
+					</li>
+					<li>
+						<strong>La facilité de gestion </strong>
+						<ul>
+							<li>Un réseau doit être relativement simple à administrer</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>
+				Au cours de ce chapitre, nous allons analyser les différents points à observer lors de la conception d’un réseau local. L’analyse portera sur les points suivants : 
+				<ul>
+					<li>Fonctions et emplacements des serveurs </li>
+					<li>Détection des collisions (couche 2) </li>
+					<li>Segmentation (couche 2 et 3) </li>
+					<li>Domaines de broadcast (couche 3)</li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Méthodologie de conception </li></h2>
+
+			<p>
+				Pour qu'un réseau local soit efficace et réponde aux besoins des utilisateurs, il doit être mis en œuvre selon une suite d'étapes systématiquement planifiées, comprenant notamment les étapes suivantes : 
+				<ul>
+					<li>Le regroupement des besoins et des attentes des utilisateurs </li>
+					<li>L'analyse des besoins </li>
+					<li>La conception de la structure LAN des couches 1 à 3 </li>
+					<li>La création de documents sur la mise en œuvre logique et physique du réseau </li>
+				</ul>
+			</p>
+			<p>
+				La première étape de conception d'un réseau consiste à recueillir des données sur la structure de l'organisation. Ces informations comprennent : 
+				<ul>
+					<li>L'historique et l'état en cours de l'organisation</li>
+					<li>La croissance prévue </li>
+					<li>Les politiques d'exploitation et les procédures de gestion</li>
+					<li>Les procédures et les systèmes administratifs ainsi que les points de vue des futurs utilisateurs du réseau local. </li>
+				</ul>
+			</p>
+			<p>
+				Un réseau local est un outil qui sera utilisé par les différents membres de l'entreprise. Le niveau de compétence de ces derniers ainsi que l'utilisation qu'ils comptent faire du réseau sont des éléments déterminants dans la conception. 
+			</p>
+			<p>
+				Ces informations contribuent à identifier et à clarifier les problèmes. Vous devez également déterminer s'il existe des documents sur les politiques déjà en place. Le bon sens et une étude approfondie des besoins des utilisateurs sont les clefs d'un réseau efficace. 
+			</p>
+			<p>
+				Il est également vital de prévoir le rôle des personnes qui vont participer à l'administration du réseau (adressage, maintenance, etc..). Par exemple, la présence d'une tierce entreprise utilisée pour la maintenance est un élément important. 
+			</p>
+			<p>
+				Les ressources d'une organisation pouvant affecter la mise en œuvre d'un nouveau réseau local sont classées en deux catégories : les ressources matérielles/logicielles et les ressources humaines. 
+			</p>
+			<p>
+				Le matériel informatique et les logiciels existants de l'organisation doivent être répertoriés par écrit, et les besoins futurs dans ce domaine doivent être définis. Un rapport écrit sur ces besoins permet d'évaluer les coûts et d'établir un budget pour la mise en place du réseau local. Un schéma présentant la topologie logique du réseau est également un élément important qui permet de bien visualiser le réseau dans son intégralité. 
+			</p>
+			<p>
+				Un schéma logique représente le modèle de la topologie du réseau sans les détails relatifs au parcours d'installation précis des câbles. Il s'agit du plan de base du réseau local. La topologie logique comprend les éléments suivants :
+				<ul>
+					<li>L'emplacement exact des locaux techniques du répartiteur principal MDF et des répartiteurs intermédiaires IDF. </li>
+					<li>Le type et le nombre de câbles utilisés pour interconnecter le répartiteur principal MDF et les répartiteurs intermédiaires IDF ainsi que le nombre de câbles de réserve disponibles pour accroître la bande passante entre les locaux techniques. </li>
+					<li>Un document décrivant en détail tous les parcours de câbles, les numéros d'identification et le port de l'interconnexion horizontale ou verticale auquel aboutissent les câbles. </li>
+				</ul>
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Fonction et emplacements des serveurs </li></h2>
+			<p>
+				On distingue 2 types de serveurs : 
+				<ul>
+					<li>
+						Les serveurs d’entreprise : 
+						<ul>
+							<li>Serveurs dédiés à une application </li>
+							<li>Prennent en charge tous les utilisateurs du réseau (Exemple : DNS, messagerie) </li>
+							<li>Doivent être installés dans le répartiteur principal (MDF) </li>
+						</ul>
+					</li>
+					<li>
+						Les serveurs de groupes de travail : 
+						<ul>
+							<li>Offrent des services tels que l’impression ou encore le partage de fichiers </li>
+							<li>Prennent en charge un ensemble spécifique d’utilisateurs </li>
+							<li>Doivent être installés dans les répartiteurs intermédiaires (IDF)</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>
+				Dans le répartiteur principal MDF et les répartiteurs intermédiaires IDF, les commutateurs LAN de couche 2 liés à ces serveurs doivent avoir un débit minimal de 100 Mbits/s. 
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Conception de couche 1 </li></h2>
+			<p>
+				Le câblage physique est l'un des éléments les plus importants à prendre en considération lors de la conception d'un réseau. Les questions relatives à la conception comprennent le type de câble à utiliser (généralement, des câbles de cuivre ou à fibre optique) ainsi que la structure globale du câblage. 
+			</p>
+			<p>
+				Les médias de câblage de couche 1 comprennent le câble à paires torsadées blindées (ou non) de catégorie 5 et le câble à fibre optique, avec la norme TIA/EIA-568-A pour la disposition et la connexion des méthodes de câblage.
+			</p>
+			<p>
+				En plus des limites de distance, vous devez évaluer avec soin les points forts et les points faibles des diverses topologies, car l'efficacité d'un réseau est directement liée au câblage sous-jacent. Si vous prévoyez d'apporter des modifications importantes à un réseau, il est essentiel d'effectuer une vérification complète des câbles pour identifier les zones qui nécessitent une mise à niveau ou une réinstallation. 
+			</p>
+			<p>
+				Qu'il s'agisse de la conception d'un nouveau réseau ou de la réinstallation du câblage d'un réseau existant, vous devez utiliser des câbles à fibre optique dans le réseau de backbone et le câblage vertical, avec des câbles à paires torsadées blindées (ou non) de catégorie 5 pour le câblage horizontal.  
+			</p>
+			<p>
+				La mise à niveau des câbles doit être prioritaire sur toutes les autres modifications à apporter. En outre, il est impératif de s'assurer, sans exception, que ces systèmes sont conformes aux normes en vigueur. 
+			</p>
+			<p>
+				Dans une topologie en étoile simple comportant un seul local technique, le répartiteur principal MDF comprend un ou plusieurs tableaux d'interconnexions horizontales. Les câbles d'interconnexion horizontale servent à relier le câblage horizontal de la couche 1 aux ports du commutateur LAN de la couche 2.
+			</p>
+			<p>
+				Le port uplink du commutateur LAN qui, selon le modèle, diffère des autres ports parce qu'il n'est pas interconnecté, est connecté au port Ethernet du routeur de la couche 3 via un câble de raccordement. À ce stade, l'hôte d'extrémité est doté d'une connexion physique complète au port du routeur. 
+			</p>
+			<p>
+				Lorsque des hôtes de grands réseaux dépassent la limite des 100 mètres fixée pour le câble à paires torsadées non blindées de catégorie 5, il n'est pas rare d'installer plusieurs locaux techniques. 
+			</p>
+			<p>
+				La création de plusieurs locaux techniques entraîne la création de plusieurs zones d'interconnexion de réseaux (IDF). 
+			</p>
+			<p>
+				Les normes TIA/EIA568-A précisent que les répartiteurs intermédiaires IDF doivent être connectés au répartiteur principal MDF par le biais d'un câblage vertical appelé câblage de backbone. Une interconnexion verticale permet d'interconnecter les divers répartiteurs intermédiaires IDF au répartiteur principal (MDF). 
+			</p>
+			<p>
+				Comme les câbles verticaux sont en général plus longs que la limite des 100 mètres imposée pour les câbles à paires torsadées non blindées de catégorie 5, le câble à fibre optique est habituellement utilisée. 
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Conception de couche 2</li></h2>
+
+			<p>
+				L'objectif des équipements de couche 2 est d'assurer la commutation ainsi que la détection des erreurs et la réduction des congestions du réseau. Les deux équipements de couche 2 les plus courants (autres que la carte réseau dont chaque hôte du réseau doit être doté) sont les ponts et les commutateurs LAN. Les équipements de cette couche déterminent la taille des domaines de collision et de broadcast.
+			</p>
+			<p>
+				Les collisions et la taille du domaine de collision sont deux facteurs qui nuisent aux performances d'un réseau. La commutation LAN permet de micro segmenter le réseau afin d'éliminer les collisions et de réduire la taille des domaines de collision.
+			</p>
+			<p>
+				Grâce à une autre caractéristique importante, un commutateur LAN peut attribuer la bande passante par port, ce qui laisse davantage de bande passante aux câbles verticaux, aux liaisons montantes (uplinks) et aux serveurs. 
+			</p>
+			<p>
+				Si vous installez un commutateur LAN au répartiteur principal MDF et aux répartiteurs intermédiaires IDF ainsi qu'un câble vertical entre le répartiteur principal et les répartiteurs intermédiaires, le câble vertical acheminera tout le trafic de données entre le répartiteur principal et les répartiteurs intermédiaires.  
+			</p>
+			<p>
+				La capacité de ce parcours doit être supérieure à celle des parcours reliant les répartiteurs intermédiaires IDF et les stations de travail. Les câbles horizontaux utilisent des paires torsadées non blindées de catégorie 5 et aucun branchement de câble ne doit dépasser 100 mètres de longueur de façon à obtenir des liaisons à des débits de 10 Mbits/s ou de 100 Mbits/s. Dans un environnement normal, un débit de 10 Mbits/s convient pour le câble de branchement horizontal.  
+			</p>
+			<p>
+				Comme les commutateurs LAN asymétriques permettent de combiner des ports à 10 Mbits/s et à 100 Mbits/s sur un même commutateur, l'étape suivante consiste à déterminer le nombre de ports à 10 Mbits/s et à 100 Mbits/s nécessaires pour le répartiteur principal MDF et pour chacun des répartiteurs intermédiaires IDF. 
+			</p>
+			<p>
+				Vous pouvez déterminer ce nombre en consultant les besoins des utilisateurs spécifiant le nombre de câbles de branchement horizontaux par salle dans chaque zone d'interconnexion de réseaux ainsi que le nombre de câbles verticaux. 
+			</p>
+			<p>
+				L'autre méthode permettant de mettre en œuvre une commutation LAN consiste à installer des concentrateurs LAN partagés sur les ports du commutateur et de connecter plusieurs hôtes à un seul port du commutateur.  Tous les hôtes connectés au concentrateur LAN partagé partagent le même domaine de collision et la même bande passante.
+			</p>
+			<p>
+				Les concentrateurs à média partagé sont généralement utilisés dans un environnement de commutateurs LAN pour créer davantage de points de connexion à l'extrémité des câbles horizontaux. 
+			</p>
+			<p>
+				Cette solution est acceptable, mais vous devez vous assurer que la taille des domaines de collision n'augmente pas et que les besoins de l'hôte en matière de bande passante respectent les spécifications définies à l'étape des besoins du processus de conception du réseau. 
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Conception de couche 3</li></h2>
+
+			<p>
+				Les équipements de couche 3, tels que les routeurs, peuvent être utilisés pour créer des segments LAN uniques et permettre la communication entre les segments sur la base de l'adressage de couche 3, tel que l'adressage IP. La mise en œuvre des équipements de couche 3, tels que les routeurs, permettent de segmenter le réseau local en réseaux physiques et logiques uniques. 
+			</p>
+			<p>
+				Les routeurs fournissent également la connectivité aux réseaux WAN tels qu'Internet. Le routage de couche 3 détermine également le flux du trafic entre les segments physiques uniques du réseau en fonction de l'adressage de couche 3 (par exemple, un réseau IP ou un sous-réseau). 
+			</p>
+			<p>
+				Le nombre total de broadcasts, tels que les requêtes ARP, est une question importante dans un réseau. Grâce aux VLAN, vous pouvez limiter le trafic de broadcast au sein de chaque VLAN et, par conséquent, créer des domaines de broadcast plus petits.  
+			</p>
+			<p>
+				Les VLAN permettent également de sécuriser le réseau en créant des groupes de VLAN selon leur fonction. Une association à un port physique est utilisée pour mettre en œuvre l'attribution de VLAN statiques. Comme le routeur détermine si le réseau VLAN 1 peut communiquer avec le réseau VLAN 2, vous pouvez créer un système de sécurité fondé sur l'attribution des VLAN. 
+			</p>
+			<p>
+				Les routeurs fournissent une évolutivité au réseau parce qu'ils servent de pare-feu vis-à-vis des broadcasts. De plus, comme les adresses de couche 3 ont généralement une structure, ils accroissent l'évolutivité en divisant les réseaux et les sous-réseaux, ce qui renforce la structure de ces adresses.  
+			</p>
+			<p>
+				Une fois les réseaux divisés en sous-réseaux, l'étape finale consiste à développer et à expliquer par écrit le système d'adressage IP à utiliser. La technologie de routage filtre les broadcasts et les multicasts de liaison de données. En ajoutant des ports de routeur ainsi que des adresses réseau ou de sous-réseau, vous pouvez, si nécessaire, segmenter l'inter réseau. 
+			</p>
+			<p>
+				Les routeurs permettent de créer des sous-réseaux IP pour renforcer la structure des adresses. Avec des ponts et des commutateurs, toutes les adresses inconnues encombrant chaque port doivent être évacuées. 
+			</p>
+			<p>
+				Avec des routeurs, les hôtes utilisant des protocoles d'adressage de couche réseau peuvent résoudre la recherche d'hôtes sans provoquer d'encombrement réseau : 
+				<ul>
+					<li>Si l'adresse de destination est locale, l'hôte émetteur peut encapsuler le paquet dans un en-tête de liaison de données et transmettre une trame d'unicast directement à la station. Le routeur ne voit pas la trame et, bien sûr, n'a pas besoin de la traiter. L'hôte émetteur peut utiliser une requête ARP. Dans ce cas, un broadcast est généré. Cependant, comme il s'agit d'un broadcast local, le routeur ne le transmet pas. </li>
+					<li>Si la destination n'est pas locale, la station émettrice transmet le paquet au routeur. Le routeur envoie la trame à destination ou au saut suivant en fonction de sa table de routage.</li>
+				</ul>
+			</p>
+			<p>
+				En raison de cette fonctionnalité de routage, il est évident que les grands réseaux locaux évolutifs doivent comporter quelques routeurs.
+			</p>
+		</section>
+
+	</ol>
+
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA3 Chapitre4</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+	<header>
+		<h1>Chapitre4 : Commutation</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Concepts et fonctionnement </li></h2>
+
+			<p>
+				Au début des LAN, les équipements de réseau utilisaient un seul bus électrique. En effet, tous les équipements du LAN partageaient la bande passante d'un seul bus. C'est le cas des normes Ethernet 10Base2, 10Base5 et 10Base-T. 
+			</p>
+			<p>
+				Dans une réunion, quand plusieurs personnes prennent la parole en même temps, cela crée une cacophonie et il devient très difficile, voire impossible de comprendre les interlocuteurs. Il faut donc appliquer une convention afin qu'il n'y ait qu'une personne à la fois qui prenne la parole. 
+			</p>
+			<p>
+				La même problématique se retrouve dans les LAN où les équipements du réseau se partagent le même espace de « discussion ». Quand 2 hôtes envoient un signal en même temps, ceux-ci se chevauchent rendant impossible leur interprétation : on parle de collision. 
+			</p>
+			<p>
+				Pour résoudre ce problème, l'algorithme <strong>CSMA/CD</strong> (Carrier Sense Multiple Access with Collision Detection) est appliqué et définit de quelle façon accéder au bus. Malgré l'apport de CSMA/CD l'utilisation du réseau n'était pas optimale.  Les LAN étaient confrontés aux problèmes de collisions, congestions, latence et de remise de données de type broadcast. 
+			</p>
+			<p>
+				Les ponts transparents, puis les commutateurs (ou <strong>switch</strong>) dans un second temps permirent de résoudre ces  phénomènes. 
+			</p>
+			<p>
+				Les ponts offrent principalement les avantages suivants: 
+				<ul>
+					<li>La réduction de la taille des domaines de collisions par la segmentation. </li>
+					<li>L'augmentation de la bande passante (due à la réduction de la taille des domaines de collision). </li>
+				</ul>
+			</p>
+			<p>
+				Les ponts et les commutateurs ont la même logique de fonctionnement, d'ailleurs un commutateur est un pont multiport.  
+			</p>
+			<p>
+				Contrairement à un concentrateur qui se contente de régénérer, resynchroniser et retransmettre les bits sur le média, le pont est capable de prendre des décisions d'acheminement. Pour cela, il utilise les adresses MAC (Media Access Control). De ce fait, les ponts, comme les commutateurs, sont des équipements de couche 2 du modèle OSI.
+			</p>
+			<p>
+				Quand un pont reçoit une trame, il examine l'adresse MAC (Media Access Control) de destination et détermine s'il doit filtrer ou transmettre la trame. Les décisions d'acheminements se fondent sur une table de pontage où le pont inscrit toutes les adresses MAC et le port par lequel elles sont arrivées. 
+			</p>
+			<p>
+				Quand une trame arrive à un port, le pont va consulter sa table de pontage pour connaître le port par lequel la trame doit être envoyée à l’adresse MAC de destination. Dans ce cas, si :
+				<ul>
+					<li>Le port de destination est le même que celui qui a reçu la trame, la trame ne sera pas transmise sur d’autres ports : c’est le <strong>filtrage</strong>. </li>
+					<li>Le port de destination est un port différent de celui par lequel la trame a été reçue, le pont transmet cette trame sur le port correspondant : c’est la <strong>commutation</strong>. </li>
+				</ul>
+			</p>
+
+			<figure>
+				<img src="../../images/cours3/image4.PNG" alt="Image non disponible">
+				<figcaption>Concepts de fonctionnement de l'algorithme CSMA/CD.</figcaption>
+			</figure>
+
+			<p>
+				Le fonctionnement du commutateur est identique. L'apprentissage des adresses MAC se déroule comme suit :
+				<ul>
+					<li>Lorsque le commutateur reçoit une trame par un de ses ports, il inscrit dans sa table de pontage la correspondance entre l'adresse MAC source et le port associé. </li>
+					<li>Supposons que la table de pontage soit déjà créée et complète. Le commutateur examine l'adresse physique de destination de la trame reçue et cherche dans sa table l'entrée associée à l'adresse.</li>
+					<li>Une fois le port de destination identifié, le commutateur commute la trame sur le port correspondant. </li>
+				</ul>
+			</p>
+			<p>
+				S'il n'y a pas d'entrée dans la table de pontage, le commutateur crée une entrée correspondante et transmet les données par tous ses ports excepté le port source. Quand le destinataire répondra à l'émetteur, le commutateur pourra inscrire l'entrée correspondante. 
+			</p>
+			<p>
+				L'IEEE a définit trois catégories d'adresses MAC :
+				<ul>
+					<li>Adresse <strong>unicast</strong> : adresse physique identifiant une seule carte réseau. </li>
+					<li>Adresse de <strong>broadcast</strong> : avec cette adresse tous les noeuds du LAN doivent traiter la trame. L'adresse de broadcast a pour valeur FFFF.FFFF.FFFF</li>
+					<li>Adresse <strong>multicast</strong> : Permet à un ensemble de noeuds de communiquer entre eux. L'adresse multicast a pour valeur 0100.5Exx.xxxx où x peut prendre n'importe quelle valeur.</li>
+				</ul>
+			</p>
+			<p>
+				En transmettant les trames reçues à un autre port, le commutateur crée un bus unique entre la source et la destination (micro segmentation). L'utilisation de la bande passante est optimale, 100% de la bande passante est utilisée. 
+			</p>
+			<p>
+				L'algorithme CSMA/CD n'est plus employé car il n'y a pas de collision. On peut alors utiliser le mode de fonctionnement full-duplex, c'est-à-dire que la source et la destination peuvent émettre et recevoir en même temps. 
+			</p>
+
+		</section>
+
+		<section>
+			<h2><li>Commutateurs </h2>
+
+				<ol>
+					<h3><li>Présentation</li></h3>
+					<p>
+						Un commutateur est un équipement réseau de couche 2. Il en existe une grande variété avec des caractéristiques différentes : 
+						<ul>
+							<li>Nombre de ports </li>
+							<li>Type de port (10/100 Mbits, gigabit) </li>
+							<li>Type de commutation (Strore and Forward, Cut Through)</li>
+							<li>Facilité d'installation en armoire etc… </li>
+						</ul>
+					</p>
+					<p>
+						Les différents types de commutation : 
+						<ul>
+							<li>
+								<strong>Store and forward:</strong> Le commutateur attend d’avoir reçu toute la trame avant de la transmettre. Cette méthode offre une grande vérification d’erreur car le commutateur a le temps de vérifier la valeur FCS. Cependant ce traitement augmente la latence réseau. 
+							</li>
+							<li>
+								<strong>Cut Through:</strong> Dès que l’adresse de destination est connue, la trame commence à être commutée. Ce mode est plus rapide que le précédent. Il existe différentes variantes de ce type de commutation:
+								<ul>
+									<li><strong>Fragment Free:</strong> Filtrage des fragments de collision (inférieur à 64 octets). Le commutateur attend d'avoir reçu les 64 premiers octets avant de commencer à transmettre la trame. La détection des collisions subies doit être détectée au niveau des 64 premiers octets.</li>
+									<li><strong>Fast Forward:</strong> Pas de vérification d’erreurs. La trame est transmise dès que l'adresse de destination est identifiée.</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+					<h3><li>Démarrage</li></h3>
+					<p>
+						Avant le démarrage du système d'exploitation une procédure POST (Power On Self Test) est lancée pour tester le bon état du matériel.
+					</p>
+					<p>
+						Le voyant indique l'échec ou la réussite du POST : une lumière ambre indique l'échec, alors qu'une couleur verte indique que la procédure s'est terminée avec succès. 
+					</p>
+
+					<h3><li>Configuration de base </li></h3>
+					<p>
+						Pour configurer un commutateur il convient de se connecter via le port console à l'aide d'un câble du même nom. Une fois la connexion lancée, ont se retrouve sur une interface de ligne de commande : la CLI (Command-Line Interface). 
+					</p>
+					<p>
+						A l'instar de l'IOS des routeurs, il existe différents modes de configuration : le mode utilisateur, le mode privilégié et le mode de configuration globale. Les mêmes commandes sont utilisées pour accéder à ces différents modes. 
+					</p>
+
+					<h3><li>Voyants d’un commutateur </li></h3>
+					<table>
+						<caption>Tableau des états des voyants d'un commutateur.</caption>
+						<tr><th>Voyant</th><th>Etat et signification</th></tr>
+						<tr><td rowspan="3">Système</td><td>Voyant éteint : le système est hors tension.</td></tr>
+						<tr><td >Voyant vert : le système est sous-tension.</td></tr>
+						<tr><td >Voyant ambre : problème suite au POST.</td></tr>
+						<tr><td>RPS (Remote Power Supply)</td><td>Ce voyant indique si l'alimentation de sécurité est utilisée. </td></tr>
+						<tr><td>Port</td><td>Chaque port a son voyant qui donne des indications sur l'état du port selon le mode choisi. </td></tr>
+						<tr></tr>
+						<tr><td>Bouton mode </td><td>Permet de choisir entre les 4 modes: Stat, Util, Duplex et Speed.</td></tr>
+					</table>
+					<p>
+						Les 4 modes du voyant <strong>Bouton mode sont les suivants :</strong>
+						<ul>
+							<li>
+								<strong>Stat :</strong> Donne des informations sur l'état des ports. Une lumière verte indique que le port est opérationnel. Quand elle clignote elle témoigne d'une activité. Si la lumière est éteinte le port est non opérationnel. 
+							</li>
+							<li>
+								<strong>Util :</strong> Ce mode utilise l'ensemble des voyants de ports pour donner des informations sur l'utilisation générale du commutateur. 
+							</li>
+							<li>
+								<strong>Duplex :</strong> Quand le voyant est allumé le port fonctionne en mode full duplex. Eteint, c'est le mode half duplex qui est employé. 
+							</li>
+							<li>
+								<strong>Speed :</strong> Un voyant allumé indique un débit de 100 Mbits, un voyant éteint un débit de 10Mbits. 
+							</li>
+						</ul>
+					</p>
+
+					<figure>
+						<img src="../../images/cours3/image5.PNG" alt="Image non disponible">
+						<figcaption>Face avant et arrière d'un commutateur Cisco Catalyst 2950.</figcaption>
+					</figure>
+
+					<h3><li>Commandes </li></h3>
+					<ul>
+						<li>
+							<strong>enable</strong>
+							<ul>
+								<li>Depuis le mode utilisateur permet d'accéder au mode privilégié.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>configure terminal </strong>
+							<ul>
+								<li>Depuis le mode privilégié permet d'accéder au mode de configuration globale. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>show version </strong>
+							<ul>
+								<li>Permet de vérifier la version de l'IOS et la valeur du registre de configuration. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>show running-config </strong>
+							<ul>
+								<li>Permet d'afficher le fichier de configuration actif. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>show interface FastEthernet [numéro de l'interface]</strong>
+							<ul>
+								<li>Affiche le statut de l'interface, le débit, l'auto négociation et les statistiques de l'interface. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>show flash ou dir:flash</strong>
+							<ul>
+								<li>Affiche la version de l'image de l'IOS contenue dans la mémoire flash, la taille de la mémoire et la mémoire utilisée. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>show interface status </strong>
+							<ul>
+								<li>Affiche le mode opérationnel du port. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>show controllers ethernet-controller </strong>
+							<ul>
+								<li>Affiche les statistiques sur les données reçues et envoyées au niveau matériel.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>show post </strong>
+							<ul>
+								<li>Indique si le routeur a effectué le POST. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>reload </strong>
+							<ul>
+								<li>Redémarre le commutateur. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>erase startup-config </strong>
+							<ul>
+								<li>Efface le fichier de configuration de sauvegarde.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>delete flash:vlan.dat </strong>
+							<ul>
+								<li>Supprime la base de donnée de VLAN. Sûr les Catalyst 1900 c'est la commande delete nvram qui est employée.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>show mac-address-table</strong>
+							<ul>
+								<li>Permet d'afficher les adresses MAC apprises par le commutateur. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>clear mac-address-table </strong>
+							<ul>
+								<li>Permet d'effacer les entrées de tables configurées par l'administrateur. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>mac-address table static [adresse MAC de l'hôte] interface Fast Ethernet [numéro de l'interface] vlan [numéro du vlan]</strong>
+							<ul>
+								<li>Permet d'attribuer une adresse MAC statique à une interface.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>show port security </strong>
+							<ul>
+								<li>Permet de vérifier le statut de sécurité appliqué aux ports. </li>
+							</ul>
+						</li>
+						<li>
+							<strong>interface [type] [numéro/sous numéro] </strong>
+							<ul>
+								<li>Permet de passer dans le mode configuration de l'interface.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>interface range [type] [numéro/premier numéro – dernier numéro] </strong>
+							<ul>
+								<li>Permet de passer dans le mode de configuration de plusieurs interfaces.</li>
+							</ul>
+						</li>
+					</ul>
+
+					<h3><li>Procédure de récupération des mots de passe</li></h3>
+					<ul>
+						<li>Appuyez sur le bouton mode en même temps que la mise sous tension du commutateur. </li>
+						<li>Pour initialiser la flash tapez <strong>flash_init</strong>, puis <strong>load_helper</strong> et enfin <strong>dir:flash</strong>.</li>
+						<li>Ensuite renommez le fichier de configuration avec la commande <strong>rename flash: config.txt flash: config.old</strong>.</li>
+					</ul>
+					<p>
+						Le fichier de configuration ne sera pas chargé au prochain démarrage du commutateur. Pour des raisons d’espace, pensez à supprimer le fichier config.old avec la commande : <strong>delete flash: config.old</strong>. 
+					</p>
+
+				</ol>
+		</section>
+
+		<section>
+			<h2><li>Protocole Spanning-Tree</h2>
+			<p>
+				Les topologies redondantes sont mises en place pour palier à des liaisons interrompues. En effet, plusieurs chemins peuvent permettre d'accéder au même lien. 
+			</p>
+			<p>
+				Mais si ces chemins redondants ne sont pas correctement gérés, les trames peuvent boucler indéfiniment. Le protocole Spanning-Tree permet d'y remédier. 
+			</p>
+			<ol>
+				<h3><li>Théorie concernant Spanning-Tree</li></h3>
+				<p>
+					Les commutateurs implémentent le protocole <strong>IEEE 802.1D Spanning-Tree</strong>. Il apporte une réponse au problème de bouclage. Pour ce faire, <strong>STP</strong> (Spanning-Tree Protocol) empêche certains ports de transmettre en mettant les ports dans un état de blocage ou dans un état de transmission, afin qu'il n'y ait qu'un seul chemin possible entre deux segments de LAN. 
+				</p>
+				<p>
+					Un port bloqué ne peut ni recevoir ni émettre et inversement en mode de transmission. En premier lieu, des <strong>BPDUs (Bridge Protocol Data Unit)</strong> sont envoyés toutes les 2 secondes sur tous les ports. 
+				</p>
+				<p>
+					Le commutateur qui détient l'identifiant de pont le plus bas (Bridge ID) est élu racine. Le Bridge ID de 8 octets est composé d'une priorité sur 2 octets (32768 par défaut), suivi par l'adresse MAC du port émetteur. Tous les ports du commutateur racine sont placés en état de transmission par le protocole STP. 
+				</p>
+				<p>
+					Le commutateur racine transmet par tous ses ports des BPDUs. Ces messages sont transmis par les commutateurs non racine. A chaque réception de BPDU, le champ du coût est incrémenté, ce qui permet aux commutateurs non racine de connaître la valeur de l'itinéraire jusqu'à la racine.  
+				</p>
+				<p>
+					Le port de chaque commutateur qui reçoit le BPDU comportant le coût le plus bas (donc le plus proche du commutateur racine) est élu port racine pour le segment de LAN auquel il est connecté. 
+				</p>
+				<p>
+					Le calcul de la route se base sur la vitesse. Plus elle est grande, plus le coût est bas. Le port par lequel arrivent les BPDU portant le moindre coût vers la racine est mis en état de transmission. Les autres ports sont mis en état de blocage, pour éliminer toute route redondante et ainsi éviter qu'il y ait des boucles actives. 
+				</p>
+				<p>
+					Les ports prennent d'autres états. Voici un tableau récapitulatif des états appliqués aux ports : 
+				</p>
+				<table>
+					<caption>Tableau décrivant les états du protocole Spanning-Tree.</caption>
+					<tr><th>Etat</th><th>Description</th></tr>
+					<tr><td>Transmission</td><td>Le port émet et reçoit les trames.</td></tr>
+					<tr><td>Ecoute</td><td>Le port écoute les BPDU pour s'assurer qu'il n'y ait pas de boucle. Ce processus a une durée de vie de 15 secondes.</td></tr>
+					<tr><td>Apprentissage</td><td>Le port écoute les BPDU pour découvrir les adresses MAC. Ce processus a une durée de vie de 15 secondes également.</td></tr>
+					<tr><td>Désactivé</td><td>Le port n'est pas utilisé pour des raisons administratives.</td></tr>
+					<tr><td>Blocage</td><td>Le port ne peut ni émettre ni recevoir les trames.</td></tr>
+				</table>
+				<p>
+					Un réseau interconnecté est dit convergent lorsque tous les ports ont pris un état de blocage ou de transmission. Le processus de convergence prend 15 secondes pour le processus d'écoute, plus 15 secondes pour le processus de découverte et 20 secondes pour bloquer les ports ou les mettre dans l'état de transmission.
+				</p>
+				<p>
+					Lorsqu'une modification topologique est détectée l'arbre est recalculé et le trafic ne reprend totalement qu’après le temps de convergence nécessaire. 
+				</p>
+
+				<h3><li>Théorie concernant Rapid Spanning-Tree </li></h3>
+				<p>
+					Le protocole RSTP (Rapid Spanning Tree Protocol) est défini par le standard IEEE 802.1w. Il diffère principalement de STP de part sa convergence plus rapide. En effet, RSTP offre une convergence au minimum 5 fois plus rapide que STP. RSTP prend moins de 10 secondes pour converger. 
+				</p>
+				<p>
+					RSTP et STP partagent certaines similitudes: 
+					<ul>
+						<li>Election d'un commutateur racine suivant le même processus.</li>
+						<li>Ils élisent le port racine des commutateurs non racine de la même manière.</li>
+						<li>Ils élisent le port désigné pour un segment de LAN de la même façon. </li>
+						<li>Ils placent tous les ports dans un état de blocage ou de transmission, à la différence que RSTP utilise l'appellation discarding pour l'état de blocage. </li>
+					</ul>
+				</p>
+				<p>
+					RSTP définit aussi des types de liaisons et de bordures. Les liaisons sont les connections physique entre les commutateurs et les bordures les connections physiques entre un commutateur et un hôte ou un concentrateur. On distingue: 
+					<ul>
+						<li>Les liaisons point-à-point, c'est-à-dire entre deux commutateurs.</li>
+						<li>Les liaisons partagées, c'est-à-dire entre un et plusieurs commutateurs.</li>
+						<li>Les bordures point-à-point, entre un hôte et un commutateur.</li>
+						<li>Les bordures partagées, entre un concentrateur et un commutateur.</li>
+					</ul>
+				</p>
+				<p>
+					Les ports des liaisons point-à-point et des bordures point-à-point sont immédiatement placés dans l'état de transmission. Ce qui permet d'améliorer la vitesse de convergence des commutateurs.  
+				</p>
+
+				<h3><li>Commandes et configuration de Spanning-Tree</li></h3>
+				<ul>
+					<li>
+						<strong>spanning-tree {identifiant de vlan} root</strong>
+						<ul>
+							<li>Depuis le mode de configuration globale, permet de désigner le commutateur racine. A l'issue de cette commande la priorité du commutateur sera modifiée pour être plus basse que le commutateur qui devrait être racine.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>spanning-tree {identifiant de vlan} [priority priorité] </strong>
+						<ul>
+							<li>Depuis le mode de configuration globale, permet de changer le niveau de priorité.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>spanning-tree cost {coût}</strong>
+						<ul>
+							<li>Depuis le mode de configuration spécifique de l'interface, permet de modifier le coût STP.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>channel-group {numéro du groupe de canal} mode [auto | desirable | on]</strong>
+						<ul>
+							<li>Active l' Etherchannel (agrégation de liens) de l'interface.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>show spanning-tree</strong>
+						<ul>
+							<li>Affiche des informations détaillées sur le protocole STP en cours ainsi que l'état de chaque port.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>show spanning-tree interface {interface}</strong>
+						<ul>
+							<li>Affiche les informations Spanning-tree du port spécifié. </li>
+						</ul>
+					</li>
+					<li>
+						<strong>show spanning-tree vlan {vlan id}</strong>
+						<ul>
+							<li>Affiche les informations Spanning-tree du VLAN spécifié. </li>
+						</ul>
+					</li>
+					<li>
+						<strong>debug spanning-tree  </strong>
+						<ul>
+							<li>Affiche les informations de changement topologique STP.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>show etherchannel {numéro de groupe de canal} [brief | detail | port | port-channel | summary] </strong>
+						<ul>
+							<li>Affiche les informations sur le statut des EtherChannels sur le commutateur.</li>
+						</ul>
+					</li>
+				</ul>
+
+			</ol>
+		</section>
+
+		<section>
+			<h2><li>VLAN</li></h2>
+
+			<ol>
+				<h3><li>Concepts </li></h3>
+				<p>
+					Un LAN virtuel est un ensemble d’unités regroupées en domaine de broadcast quelque soit l’emplacement de leur segment physique. 
+				</p>
+				<p>
+					Les principales différences entre la commutation traditionnelle et les LAN virtuels sont: 
+					<ul>
+						<li>Les LAN virtuels fonctionnent au niveau des couches 2 et 3 du modèle OSI.</li>
+						<li>La communication inter LAN virtuels est assurée par le routage de couche 3. </li>
+						<li>Les LAN virtuels fournissent une méthode de contrôle des broadcasts. </li>
+						<li>
+							Les LAN virtuels permettent d’effectuer une segmentation selon certains critères:
+							<ul>
+								<li>Des collègues travaillant dans le même service.</li>
+								<li>Une équipe partageant le même applicatif. </li>
+							</ul>
+						</li>
+						<li>Les LAN virtuels peuvent assurer la sécurité des réseaux en définissant quels nœuds réseaux peuvent communiquer entre eux.</li>
+					</ul>
+				</p>
+
+				<figure>
+					<img src="../../images/cours3/image6.PNG" alt="Image non disponible">
+					<figcaption>Segmentation traditionnelle et Segmentation avec VLAN.</figcaption>
+				</figure>
+
+				<p>
+					Il est donc possible de segmenter le réseau en plusieurs domaines de broadcast afin d’en améliorer les performances. 
+				</p>
+				<p>
+					On distingue 2 méthodes de création pour les LAN virtuels : 
+					<ul>
+						<li>
+							<strong>LAN statiques : </strong>ces VLAN sont dits accès sur les ports. L’appartenance à un VLAN est en effet fonction du port sur lequel est connecté un utilisateur (corrélation de couche 1 : port <-> VLAN). La configuration des commutateurs se fait donc en attribuant un port à un VLAN. 
+						</li>
+						<li>
+							<strong>LAN dynamiques : </strong>dans cette configuration, l’appartenance à un VLAN est déterminée par une information de couche supérieure : 2 ou plus (corrélation de couche>=2 <-> VLAN).  Typiquement, on peut baser l’appartenance à un VLAN en fonction de l’adresse MAC de l’utilisateur. Cette configuration nécessite un logiciel d’administration réseau (ex : CiscoWorks 2000) basé sur un serveur. Lors de la connexion d’un hôte au commutateur, ce dernier enverra une requête au serveur lui indiquant, par exemple, l’adresse MAC du nouvel hôte connecté. Le serveur, grâce à une base de donnée liant MAC et VLAN (remplie par l’administrateur), renverra alors le VLAN d’appartenance au commutateur. 
+						</li>
+					</ul>
+				</p>
+
+				<h3><li>Commandes générales</li></h3>
+				<ul>
+					<li>
+						<strong>vlan database </strong>
+						<ul>
+							<li>Mode privilégié</li>
+							<li>Permet d'accéder au mode de configuration de VLAN.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>vlan vlan_id [name { nom du vlan }]</strong>
+						<ul>
+							<li>Mode de configuration des VLAN (vlan database)</li>
+							<li>Permet de créer et nommer les VLANs.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>switchport mode {access | dynamic {auto | desirable} | trunk}</strong>
+						<ul>
+							<li>Mode de configuration d’interface</li>
+							<li>Permet de configurer une interface pour le trunking ou pour un VLAN.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>switchport access vlan vlan-id </strong>
+						<ul>
+							<li>Mode de configuration d’interface</li>
+							<li>Permet de configurer un VLAN statique sur une interface. </li>
+						</ul>
+					</li>
+				</ul>
+
+				<h3><li>Commandes show associées </li></h3>
+				<ul>
+					<li>
+						<strong>show interfaces [interface-id | vlan vlan-id] [switchport | trunk]</strong>
+						<ul>
+							<li>Affiche les statuts du trunking.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>show vlan [brief | id vlan-id | name vlan-name | summary]</strong>
+						<ul>
+							<li>Liste les informations sur le VLAN.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>show vlan [vlan]</strong>
+						<ul>
+							<li>Affiche des informations sur le VLAN.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>show spanning-tree vlan vlan-id</strong>
+						<ul>
+							<li>Affiche les informations spanning-tree pour le VLAN spécifié.</li>
+						</ul>
+					</li>
+				</ul>
+
+				<h3><li>Configuration</li></h3>
+				<ul>
+					<li>
+						<strong>Configurer un VLAN statique </strong>
+						<ul>
+							<li>Entrez dans le mode de configuration de VLAN à l'aide de la commande <strong>vlan database</strong>.</li>
+							<li>Créez le VLAN avec la commande <strong>vlan</strong> {vlan number}.</li>
+							<li>Entrez dans le mode de l'interface que vous souhaitez associer au VLAN. </li>
+							<li>Spécifiez le mode du port pour un VLAN : <strong>switchport mode access</strong>. </li>
+							<li>Spécifiez le VLAN avec la commande <strong>switchport access vlan</strong> vlan-id.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Sauvegarder la configuration VLAN </strong>
+						<ul>
+							<li>Les configurations de VLAN sont automatiquement sauvegardées dans la flash dans le fichier <strong>vlan.dat</strong>. </li>
+						</ul>
+					</li>
+				</ul>
+
+			</ol>
+
+		</section>
+
+		<section>
+			<h2><li>Trunking</h2>
+
+			<figure>
+				<img src="../../images/cours3/image7.PNG" alt="Image non disponible">
+				<figcaption>Principe de fonctionnement du Trunking.</figcaption>
+			</figure>
+
+			<p>
+				Le trunking permet, dans des réseaux comportant plusieurs commutateurs, de transmettre à un autre commutateur via un seul port, le trafic de plusieurs VLAN (dont les membres sont dispatchés sur plusieurs commutateurs). Le problème étant que différents trafics isolés (de différents VLAN) doivent emprunter un seul câble.  
+			</p>
+			<p>
+				On a donc plusieurs trafics logiques sur une liaison physique : on appelle cette notion un trunk. Afin d’identifier l’appartenance des trames aux VLAN, on utilise un système d’étiquetage (ou encapsulation) sur ce lien. 
+			</p>
+			<p>
+				Il en existe deux protocoles : 
+				<ul>
+					<li>
+						<strong>ISL</strong> (Inter Switch Link) qui est un protocole propriétaire Cisco. 
+					</li>
+					<li>
+						<strong>802.1q</strong> qui est un standard de l’IEEE.
+					</li>
+				</ul>
+			</p>
+
+			<ol>
+				<h3><li>Protocole ISL</li></h3>
+				<p>
+					Cisco avait développé bien avant l'IEEE son protocole ISL. Comme ISL est un protocole propriétaire Cisco, il ne peut être appliqué qu'à des commutateurs Cisco. 
+				</p>
+				<p>
+					Avec l'emploie d'ISL, la trame originelle est encapsulée entre un en-tête de 26 octets et un en-queue de 4 octets. 
+				</p>
+				<p>
+					<strong>Trame ISL</strong>
+				</p>
+				<table>
+					<caption>Trame ISL</caption>
+					<tr><td>En-tête ISL 26 octets</td><td>Trame Ethernet encapsulée</td><td>FCS 4 octets</td></tr>
+				</table>
+				<p>
+					<strong>Composition de l'en-tête ISL</strong>
+				</p>
+				<table>
+					<caption>Composition de l'en-tête ISL</caption>
+					<tr><th>DA</th><th>Type</th><th>Util.</th><th>SA</th><th>LEN</th><th>AAAA03</th><th>HSA</th><th>VLAN</th><th>BPDU</th><th>INDEX</th><th>RES</th></tr>
+					<tr><td>40 bits</td><td>4 bits</td><td>4 bits</td><td>48 bits</td><td>16 bits</td><td>24 bits</td><td>24 bits</td><td>16 bits</td><td>1 bits</td><td>16 bits</td><td>16 bits</td></tr>
+				</table>
+
+				<h3><li>Protocole 802.1q</li></h3>
+				<p>
+					Contrairement à ISL le protocole développé par L'IEEE 802.1q n'encapsule pas la trame Ethernet originale, mais insère un en-tête additionnel de 4 octets qui contient un champ d'identification du VLAN.
+				</p>
+				<p>
+					Le champ de contrôle de trame (FCS) doit être recalculé à cause de l'ajout de l'en-tête additionnel. 
+				</p>
+				<p>
+					<strong>Trame Ethernet avec 802.1q </strong>
+				</p>
+				<table>
+					<caption>Trame Ethernet avec 802.1q</caption>
+					<tr><td>Dest</td><td>Src</td><td>Etype</td><td>Tag</td><td>Long/Type Ether</td><td>Données</td><td>FCS</td></tr>
+				</table>
+				
+
+
+			</ol>
+
+		</section>
+
+		<section>
+			<h2><li>VTP</h2>
+				<ol>
+					
+					<h3><li>Théorie sur le protocole VTP </li></h3>
+					<p>
+						<strong>VTP (Virtual Trunking Protocol)</strong>, protocole propriétaire Cisco permet, aux commutateurs et routeurs qui l’implémentent, d'échanger des informations de configuration des VLAN. 
+					</p>
+					<p>
+						Il permet donc de redistribuer une configuration à d'autres commutateurs, évitant par la même occasion à l'administrateur de faire des erreurs, en se trompant par exemple de nom de VLAN. VTP diffuse ses mises à jour au sein du domaine VTP toutes les 5 min ou lorsqu'une modification a lieu. 
+					</p>
+
+					<figure>
+						<img src="../../images/cours3/image8.PNG" alt="Image non disponible">
+						<figcaption>Description du protocole VTP</figcaption>
+					</figure>
+
+					<p>
+						Les mises à jour VTP comportent: 
+						<ul>
+							<li>Un numéro de révision <strong>(Revision Number)</strong> qui est incrémenté à chaque nouvelle diffusion. Cela permet aux commutateurs de savoir s'ils sont à jour.</li>
+							<li>Les noms et numéro de VLAN.</li>
+						</ul>
+					</p>
+					<p>
+						Dans un domaine VTP, on distingue une hiérarchie comprenant trois modes de fonctionnement : 
+						<ul>
+							<li>VTP <strong>serveur</strong></li>
+							<li>VTP <strong>client</strong></li>
+							<li>VTP <strong>transparent</strong></li>
+						</ul>
+					</p>
+					<p>
+						Les commutateurs qui font office de serveur VTP peuvent créer, modifier, supprimer les VLAN et d'autres paramètres de configuration. Ce sont eux qui transmettront cette configuration aux commutateurs en mode client (ou serveur) dans leur domaine VTP. 
+					</p>
+					<p>
+						Les commutateurs fonctionnant en mode client ne peuvent que recevoir et transmettre les mises à jour de configuration.
+					</p>
+					<p>
+						Le mode transparent, lui, permet aux commutateurs de ne pas tenir compte des mises à jour VTP. Ils sont autonomes dans le domaine VTP et ne peuvent configurer que leurs VLAN (connectés localement). Cependant, ils transmettent aux autres commutateurs les mises à jour qu’ils reçoivent. 
+					</p>
+					<p>
+						Les commutateurs en mode serveur et client mettent à jour leur base de données VLAN, si et seulement si, ils reçoivent une mise à jour VTP concernant leur domaine et contenant un numéro de révision supérieur à celui déjà présent dans leur base. 
+					</p>
+					<table>
+						<caption>Tableau des fonctions du protocole VTP.</caption>
+						<tr><th>Fonction</th><th>Mode Serveur</th><th>Mode Client</th><th>Mode Transparent </th></tr>
+						<tr><td>Envoi de messages VTP</td><td>OUI</td><td>NON </td><td>NON </td></tr>
+						<tr><td>Réception des messages VTP ; Synchronisation VLAN </td><td>OUI</td><td>OUI</td><td>NON </td></tr>
+						<tr><td>Transmission des messages VTP reçus</td><td>OUI</td><td>OUI</td><td>OUI</td></tr>
+						<tr><td>Sauvegarde de configuration VLAN (en NVRAM ou Flash)</td><td>OUI</td><td>NON </td><td>OUI</td></tr>
+						<tr><td>Edition des VLANs (création, modification, suppression)</td><td>OUI</td><td>NON </td><td>OUI</td></tr>
+					</table>
+					<p>
+						Lorsqu’un hôte d’un VLAN envoie un broadcast, celui-ci est transmit à tous les commutateurs du domaine VTP. Il peut arriver que dans ce domaine, des commutateurs n’ait pas le VLAN concerné sur un de leur port.  
+					</p>
+					<p>
+						Ce broadcast leur est alors destiné sans aucune utilité. Le <strong>VTP pruning</strong> empêche la propagation de ces trafics de broadcast aux commutateurs qui ne sont pas concernés. 
+					</p>
+
+					<h3><li>Commandes associées </li></h3>
+					<ul>
+						<li>
+							<strong>vlan database</strong>
+							<ul>
+								<li>Mode privilégié</li>
+								<li>Permet d'accéder au mode de configuration de VLAN.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>vlan vlan_id [name { nom du vlan }]</strong>
+							<ul>
+								<li>Mode de configuration de VLAN</li>
+								<li>Permet de créer et nommer les VLANs.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>vtp domain nom de domaine { password mot de passe | pruning | v2-mode | {server | client | transparent}}</strong>
+							<ul>
+								<li>Mode de configuration de VLAN</li>
+								<li>Spécifie les paramètres VTP.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>show vtp status</strong>
+							<ul>
+								<li>Mode privilégié</li>
+								<li>Affiche la configuration VTP et le statut du processus.</li>
+							</ul>
+						</li>
+
+					</ul>
+
+				</ol>
+		</section>
+
+	</ol>
+
+</body>
+</html>

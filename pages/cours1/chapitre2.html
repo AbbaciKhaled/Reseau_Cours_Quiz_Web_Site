@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CCNA1 Chapitre2</title>
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Chapitre2 : Modèles OSI et TCP/IP</h1>
+	</header>
+
+	<ol>
+		
+		<section>
+			<h2><li>Modèle OSI</h2>
+			<p>
+				La première évolution des réseaux informatiques a été des plus anarchiques, chaque constructeur développant sa propre technologie. Le résultat fut une quasi-impossibilité de connecter différents réseaux entre eux. 
+			</p>
+			<p>
+				Pour palier à ce problème d’interconnections, l’ISO (International Standards Organisation) décida de mettre en place un modèle de référence théorique décrivant le fonctionnement des communications réseaux.
+			</p>
+			<p>
+				Ainsi fût créé le modèle OSI, à partir des structures réseau prédominantes de l’époque : DECNet (Digital Equipment Corporation's Networking développé par digital) et SNA (System Network Architecture développé par IBM).Ce modèle a permis aux différents constructeurs de concevoir des réseaux interconnectables.
+			</p>
+			<p>
+				Le modèle OSI est un modèle conceptuel. Il a pour but d’analyser la communication en découpant les différentes étapes en 7 couches, chacune de ces couches remplissant une tâche bien spécifique : 
+				<ul>
+					<li>Quelles sont les informations qui circulent ? </li>
+					<li>Sous quelle forme circulent-elles ? </li>
+					<li>Quels chemins empruntent-elles ? </li>
+					<li>Quelles règles s’appliquent aux flux d’informations ? </li>
+				</ul>
+			</p>
+			<p>
+				Les 7 couches du modèle OSI sont les suivantes : 
+				<ul>
+					<li>
+						<strong> Couche 1 : Couche physique</strong>
+						<br> La couche physique définit les spécifications du média (câblage, connecteur, voltage, bande passante…). 
+					</li>
+					<li>
+						<strong>Couche 2 : Couche liaison de donnée</strong> 
+						<br> La couche liaison de donnée s’occupe de l’envoi de la donnée sur le média. Cette couche est divisée en deux sous-couches : 
+						<ul>
+							<li>La sous-couche MAC (Média Access Control) est chargée du contrôle de l’accès au média. C’est au niveau de cette couche que l’on retrouve les adresses de liaison de donnée (MAC, DLCI). </li>
+							<li>La sous-couche LLC (Layer Link Control) s’occupe de la gestion des communications entre les stations et interagit avec la couche réseau.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Couche 3 : Couche réseau</strong> 
+						<br>Cette couche gère l’adressage de niveau trois, la sélection du chemin et l’acheminement des paquets au travers du réseau. 
+					</li>
+					<li>
+						<strong>Couche 4 : Couche transport</strong> 
+						<br>La couche transport assure la qualité de la transmission en permettant la retransmission des segments en cas d’erreurs éventuelles de transmission. Elle assure également le contrôle du flux d’envoi des données. 
+					</li>
+					<li>
+						<strong>Couche 5 : Couche session</strong>
+						<br>La couche session établit, gère et ferme les sessions de communications entre les applications.
+					</li>
+					<li>
+						<strong>Couche 6 : Couche présentation</strong> 
+						<br>La couche présentation spécifie les formats des données des applications (encodage MIME, compression, encryptions).
+					</li>
+					<li>
+						<strong>Couche 7 : Couche application</strong> 
+						<br>Cette couche assure l’interface avec les applications, c’est la couche la plus proche de l’utilisateur.
+					</li>
+				</ul>
+			</p>
+			<p>
+				Les avantages de ce modèle sont : 
+				<ul>
+					<li>Une division de la communication réseau en éléments plus petits et plus simples pour une meilleure compréhension </li>
+					<li>L’uniformisation des éléments afin de permettre le développement multi constructeur</li>
+					<li>La possibilité de modifier un aspect de la communication réseau sans modifier le reste (Exemple : un nouveau média) </li>
+				</ul>
+			</p>
+			<p>
+				Pour communiquer entre les couches et entre les hôtes d’un réseau, OSI a recourt au principe d’encapsulation. 
+			</p>
+			<p>
+				Encapsulation : processus de conditionnement des données consistant à ajouter un en-tête de protocole déterminé avant que les données ne soient transmises à la couche inférieure : 
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image2.PNG" alt="Image non disponible">
+				<figcaption>Description du prcessus d'encapsulation.</figcaption>
+			</figure>
+
+			<br>
+
+			<p>
+				Lorsque 2 hôtes communiquent, on parle de communication d’égal à égal, c'est-à-dire que la couche N de la source communique avec la couche N du destinataire. 
+			</p>
+			<p>
+				Lorsqu’une couche de l’émetteur construit des données, elle encapsule ces dernières avec ses informations puis les passe à la couche inférieure. Le mécanisme inverse a lieu au niveau du destinataire ou une couche réceptionne les données de la couche inférieure, enlève les informations la concernant, puis transmet les informations restantes à la couche supérieure. Les données transitant à la couche N de la source sont donc les mêmes que les données transitant à la couche N du destinataire
+			</p>
+			<p>
+				Pour identifier les données lors de leur passage au travers d’une couche, l’appellation PDU (Unité de données de protocole) est utilisée. 
+			</p>
+		</section>
+
+		<section>
+			<h2><li>Modèle TCP/IP</li></h2>
+			<p>
+				La forme actuelle de TCP/IP résulte du rôle historique que ce système de protocoles a joué dans le parachèvement de ce qui allait devenir Internet. À l'instar des nombreux développements de ces dernières années, Internet est issu des recherches lancées par le DOD (Department Of Defense), département de la défense américaine.
+			</p>
+			<p>
+				À la fin des années 60, les officiels du DOD se rendirent compte que les militaires du département de la défense possédaient une grande quantité de matériel informatique très divers, mais ces machines travaillaient pour la plupart de manière isolée ou encore en réseaux de taille très modeste avec des protocoles incompatibles entre eux, ceci rendant une interconnexion impossible. 
+			</p>
+			<p>
+				Les autorités militaires se sont alors demandées s'il était possible, pour ces machines aux profils très différents, de traiter des informations mises en commun. Habitués aux problèmes de sécurité, les responsables de la défense ont immédiatement réalisés qu'un réseau de grande ampleur deviendrait une cible idéale en cas de conflit. La caractéristique principale de ce réseau, s'il devait exister, était d'être non centralisée. 
+			</p>
+			<p>
+				Ses fonctions essentielles ne devaient en aucun cas se trouver en un seul point, ce qui le rendrait trop vulnérable. C'est alors que fut mis en place le projet ARPANet (Advanced Research Projects Agency Network du DOD), qui allait devenir par la suite le système d'interconnexion de réseau qui régit ce que l'on appelle aujourd'hui Internet : TCP/IP.
+			</p>
+			<p>
+				TCP/IP est un modèle comprenant 4 couches : 
+			</p>
+
+			<figure>
+				<img src="../../images/cours1/image3.PNG" alt="Image non disponible">
+				<figcaption>Description du modèle TCP/IP.</figcaption>
+			</figure>
+
+			<br>
+
+		</section>
+
+		<section>
+			<h2><li>Comparaison entre le modèle TCP/IP et le modèle OSI</li></h2>
+			<p>
+				Ces deux modèles sont très similaires, dans la mesure où les 2 sont des modèles de communication à couche et utilisent l’encapsulation de données. 
+			</p>
+			<p>
+				On remarque cependant deux différences majeures : 
+				<ul>
+					<li>TCP/IP regroupe certaines couches du modèle OSI dans des couches plus générales. </li>
+					<li>TCP/IP est plus qu’un modèle de conception théorique, c’est sur lui que repose le réseau Internet actuel.</li>
+				</ul>
+			</p>
+			<table>
+				<caption>Modèle OSI.</caption>
+				<tr><th>Couche</th><th>Désignation</th></tr>
+				<tr><td>Application</td><td rowspan="3">Couche Application</td></tr>
+				<tr><td>Présentation</td></tr>
+				<tr><td>Session </td></tr>
+				<tr><td>Transport</td><td rowspan="4">Couches flux de données </td></tr>
+				<tr><td>Réseau</td></tr>
+				<tr><td>Liaison de données</td></tr>
+				<tr><td>Physique </td></tr>
+			</table>
+			<br>
+			<table>
+				<caption>Modèle TCP/IP.</caption>
+				<tr><th>Couche</th><th>Désignation</th></tr>
+				<tr><td>Application </td><td rowspan="2">Protocoles</td></tr>
+				<tr><td>Transport</td></tr>
+				<tr><td>Internet </td><td rowspan="2">Réseaux</td></tr>
+				<tr><td>Accès Réseau</td></tr>
+			</table>
+		</section>
+
+	</ol>
+
+</body>
+</html>
